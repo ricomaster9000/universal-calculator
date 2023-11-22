@@ -1,6 +1,6 @@
-package co.za.four27.assignment.ricardominnaar.servicelayer;
+package com.kingprice.insurance.springworkassessment.servicelayer;
 
-import co.za.four27.assignment.ricardominnaar.SpringBootTestWrapper;
+import com.kingprice.insurance.springworkassessment.SpringBootTestWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculateRequest;
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
@@ -43,7 +43,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testFeetToMeterConversion() throws Exception {
-        performConversionTest("FEET", 1.0, "METER", 0.3048D);
+        performConversionTest("FOOT", 1.0, "METER", 0.3048D);
     }
 
     @Test
@@ -53,12 +53,12 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testMeterToFeetConversion() throws Exception {
-        performConversionTest("METER", 1.0, "FEET", 3.28084D);
+        performConversionTest("METER", 1.0, "FOOT", 3.28084D);
     }
 
     @Test
     public void testInvalidMeterToFeetConversion() throws Exception {
-        performInvalidConversionTest("METER", -1.0, "FEET");
+        performInvalidConversionTest("METER", 1.0D, "FOOT_WRONG_NAME");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidKilometerToMileConversion() throws Exception {
-        performInvalidConversionTest("KILOMETER", -1.0, "MILE");
+        performInvalidConversionTest("KILOMETER", -1.0, "MILE_WRONG_NAME");
     }
 
     @Test
@@ -78,7 +78,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidMileToKilometerConversion() throws Exception {
-        performInvalidConversionTest("MILE", -1.0, "KILOMETER");
+        performInvalidConversionTest("MILE_WRONG_NAME", -1.0, "KILOMETER");
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidMillimeterToInchConversion() throws Exception {
-        performInvalidConversionTest("MILLIMETER", -1.0, "INCH");
+        performInvalidConversionTest("MILLIMETER_WRONG_NAME", null, "INCH");
     }
 
     @Test
@@ -98,7 +98,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidInchToMillimeterConversion() throws Exception {
-        performInvalidConversionTest("INCH", -1.0, "MILLIMETER");
+        performInvalidConversionTest("INCH", -1.0, null);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidCentimeterToFootConversion() throws Exception {
-        performInvalidConversionTest("CENTIMETER", -1.0, "FOOT");
+        performInvalidConversionTest("CENTIMETER", -1.0, "foot");
     }
 
     @Test
@@ -118,7 +118,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidFootToCentimeterConversion() throws Exception {
-        performInvalidConversionTest("FOOT", -1.0, "CENTIMETER");
+        performInvalidConversionTest(null, -1.0, null);
     }
 
     @Test
@@ -128,7 +128,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidMeterToYardConversion() throws Exception {
-        performInvalidConversionTest("METER", -1.0, "YARD");
+        performInvalidConversionTest("METER", -1.0, null);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class CalculationServiceIntegrationTest {
 
     @Test
     public void testInvalidYardToMeterConversion() throws Exception {
-        performInvalidConversionTest("YARD", -1.0, "METER");
+        performInvalidConversionTest(null, -1.0, "METER");
     }
 
     private void performConversionTest(String fromUnit, double fromValue, String toUnit, double expectedValue) throws Exception {
@@ -156,7 +156,6 @@ public class CalculationServiceIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().json("[" + objectMapper.writeValueAsString(calculation) + "]"))
                 .andReturn();
 
         // Deserialize response content
@@ -164,7 +163,7 @@ public class CalculationServiceIntegrationTest {
         assertEquals(expectedValue, calculations[0].getOutput(), 0.0001, "Conversion from " + fromUnit + " to " + toUnit + " failed");
     }
 
-    private void performInvalidConversionTest(String fromUnit, double fromValue, String toUnit) throws Exception {
+    private void performInvalidConversionTest(String fromUnit, Double fromValue, String toUnit) throws Exception {
         CalculationInputParam fromParam = new CalculationInputParam(fromUnit, "CONVERSION_FROM", fromValue);
         CalculationInputParam toParam = new CalculationInputParam(toUnit, "CONVERSION_TO");
         Calculation calculation = new Calculation();

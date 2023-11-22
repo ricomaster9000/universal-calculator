@@ -53,6 +53,14 @@ public class CalculationInputParam extends BaseEntity {
         this.id = id;
     }
 
+    public String getPossibleFormulaParameterName() {
+        return possibleFormulaParameterName;
+    }
+
+    public void setPossibleFormulaParameterName(String possibleFormulaParameterName) {
+        this.possibleFormulaParameterName = possibleFormulaParameterName;
+    }
+
     public String getPlaceholderName() {
         return placeholderName;
     }

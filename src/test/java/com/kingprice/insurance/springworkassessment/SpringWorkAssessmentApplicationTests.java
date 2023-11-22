@@ -1,4 +1,4 @@
-package co.za.four27.assignment.ricardominnaar;
+package com.kingprice.insurance.springworkassessment;
 
 import org.junit.jupiter.api.Test;
 

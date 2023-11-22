@@ -8,9 +8,11 @@ import com.kingprice.insurance.springworkassessment.domain.formula.FormulaParame
 import com.kingprice.insurance.springworkassessment.domain.formula.FormulaType;
 import com.kingprice.insurance.springworkassessment.domain.formula.PossibleFormulaParameter;
 import com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula;
+import com.kingprice.insurance.springworkassessment.service.calculation.FormulaCalculator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -70,7 +72,13 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 
 	public abstract FormulaType getFormulaType();
 
-	public abstract Class<? extends FormulaCalculator> getFormulaCalculator();
+	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
+
+	public FormulaCalculator getFormulaCalculator(ApplicationContext applicationContext) {
+		FormulaCalculator result = applicationContext.getBean(getFormulaCalculatorClass());
+		result.setLinkedFormula(this);
+		return result;
+	}
 
 	public Formula() {
 	}
@@ -140,12 +148,24 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		this.description = description;
 	}
 
-	public String getFormulaTypeName() {
-		return getFormulaType().getName();
-	}
-
 	public void setFormulaType(FormulaType formulaType) {
 		this.formulaType = formulaType;
+	}
+
+	public List<FormulaParameterInputSpecification> getFormulaParameterUsageInfo() {
+		return formulaParameterUsageInfo;
+	}
+
+	public void setFormulaParameterUsageInfo(List<FormulaParameterInputSpecification> formulaParameterUsageInfo) {
+		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
+	}
+
+	public List<T> getPossibleFormulaParameters() {
+		return possibleFormulaParameters;
+	}
+
+	public void setPossibleFormulaParameters(List<T> possibleFormulaParameters) {
+		this.possibleFormulaParameters = possibleFormulaParameters;
 	}
 }
 

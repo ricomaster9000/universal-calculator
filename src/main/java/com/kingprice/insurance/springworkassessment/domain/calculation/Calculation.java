@@ -22,17 +22,17 @@ public class Calculation extends BaseEntity {
     @Column(name = "name")
     @Size(min = 3, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
-    private String name;
+    private String name = "NO_NAME";
 
     @Column(name = "description")
     @Size(min = 3, max = GlobalConstants.LONG_DB_TEXT_MAX_CHAR_SIZE)
     @NotNull
-    private String description;
+    private String description = "NO_DESCRIPTION";
 
     @Transient // too many complications arise from ensuring bi-directional relationship, all I need it for is to do the appropriate
     private Formula<?,?> formula;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "calculation_to_calculation_input_params",
             joinColumns = @JoinColumn(name = "calculation_id"),
@@ -40,7 +40,7 @@ public class Calculation extends BaseEntity {
     )
     private List<CalculationInputParam> calculationInputParams;
 
-    @Column(name="output")
+    @Column(name="output_value")
     private Double output;
 
     public Calculation() {}

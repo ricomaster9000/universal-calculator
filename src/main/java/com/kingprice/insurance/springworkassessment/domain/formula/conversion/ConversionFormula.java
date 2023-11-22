@@ -6,6 +6,7 @@ import com.kingprice.insurance.springworkassessment.domain.formula.FormulaType;
 import com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit;
 import com.kingprice.insurance.springworkassessment.domain.formula.base.Formula;
 import com.kingprice.insurance.springworkassessment.repository.ConversionFormulaRepository;
+import com.kingprice.insurance.springworkassessment.service.calculation.ConversionFormulaCalculator;
 import jakarta.persistence.Entity;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula
     }
 
     @Override
-    public Class<ConversionFormulaCalculator> getFormulaCalculator() {
+    public Class<ConversionFormulaCalculator> getFormulaCalculatorClass() {
         return ConversionFormulaCalculator.class;
     }
 }

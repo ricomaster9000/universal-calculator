@@ -2,7 +2,7 @@ package com.kingprice.insurance.springworkassessment.service;
 
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculateRequest;
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
-import com.kingprice.insurance.springworkassessment.domain.formula.base.FormulaCalculator;
+import com.kingprice.insurance.springworkassessment.service.calculation.FormulaCalculator;
 import com.kingprice.insurance.springworkassessment.exception.CalculationException;
 import com.kingprice.insurance.springworkassessment.repository.CalculationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ public class CalculationService {
 
     @Transactional()
     public Calculation createCalculation(Calculation calculation) throws CalculationException {
-        FormulaCalculator formulaCalculator = applicationContext.getBean(calculation.getFormula().getFormulaCalculator());
+        FormulaCalculator formulaCalculator = calculation.getFormula().getFormulaCalculator(applicationContext);
         Calculation performedCalculation = formulaCalculator.calculate(calculation);
         return calculationRepository.save(performedCalculation);
     }
 
     @Transactional()
     public List<Calculation> createCalculations(CalculateRequest calculateRequest) {
-        FormulaCalculator formulaCalculator = applicationContext.getBean(calculateRequest.getLinkedFormula().getFormulaCalculator());
+        FormulaCalculator formulaCalculator = calculateRequest.getLinkedFormula().getFormulaCalculator(applicationContext);
         List<Calculation> performedCalculations = formulaCalculator.calculate(calculateRequest.getCalculationsToPerform());
         return calculationRepository.saveAll(performedCalculations);
     }
