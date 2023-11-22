@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Wed Nov 22 17:19:18 SAST 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-018b-f79d-3b41-0000034364b8 
-on database directory memory:D:\projects\king-price-insurance-work-assessment\local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
-Loaded from file:/C:/Users/Ricardo/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
-java.vendor=Eclipse Adoptium
-java.runtime.version=17.0.6+10
-user.dir=D:\projects\king-price-insurance-work-assessment
-os.name=Windows 10
+Wed Nov 22 22:25:43 SAST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-018b-f8b5-c2a5-00000319ba78 
+on database directory memory:/home/ricardo/projects/king-price-insurance-assessment/local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902 
+Loaded from file:/home/ricardo/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=Amazon.com Inc.
+java.runtime.version=17.0.7+7-LTS
+user.dir=/home/ricardo/projects/king-price-insurance-assessment
+os.name=Linux
 os.arch=amd64
-os.version=10.0
+os.version=5.19.0-46-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
