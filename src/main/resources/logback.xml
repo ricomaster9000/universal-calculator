@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<logger name="com.greatgamesonly" level="DEBUG" />
-	<!-- to view SQL statements, change to DEBUG -->
+	<!--<logger name="com.greatgamesonly" level="DEBUG" />
+	to view SQL statements, change to DEBUG
 	<logger name="org.hibernate.SQL" level="WARN" />
 	<logger name="org.springframework" level="WARN" />
 	<logger name="org.springframework.transaction" level="WARN" />
-	<logger name="org.flywaydb" level="DEBUG"/>
+	<logger name="org.flywaydb" level="DEBUG"/>-->
 
 	<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/var/app/logs/app.log</file>
+		<file>/var/log/nginx/app.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>/var/app/logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/var/log/nginx/app.%d{yyyy-MM-dd}.log</fileNamePattern>
 
 			<!-- keep 30 days' worth of history capped at 3GB total size -->
-			<maxHistory>30</maxHistory>
-			<totalSizeCap>3GB</totalSizeCap>
+			<maxHistory>14</maxHistory>
+			<totalSizeCap>2GB</totalSizeCap>
 		</rollingPolicy>
 
 		<encoder>
