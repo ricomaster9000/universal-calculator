@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<logger name="com.greatgamesonly" level="DEBUG" />
-
 	<!-- to view SQL statements, change to DEBUG -->
 	<logger name="org.hibernate.SQL" level="WARN" />
-
 	<logger name="org.springframework" level="WARN" />
 	<logger name="org.springframework.transaction" level="WARN" />
-
 	<logger name="org.flywaydb" level="DEBUG"/>
 
-	<!-- in order to debug some marshalling issues, this needs to be TRACE -->
-	<logger name="org.springframework.web.servlet.mvc" level="WARN" />
-
 	<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<pattern>
-			web - %date [%thread] %-5level %logger{5} - %message%n%stack{5,1}
-		</pattern>
-		<file>logback/app.log</file>
+		<file>/var/app/logs/app.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logback/app.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>100</maxHistory>
+			<!-- daily rollover -->
+			<fileNamePattern>/var/app/logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
 		</rollingPolicy>
-		<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+
+		<encoder>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{5} - %message%n</pattern>
+		</encoder>
 	</appender>
-	<root level="DEBUG">
+
+	<!-- other loggers -->
+
+	<root level="INFO">
 		<appender-ref ref="STASH" />
 	</root>
-
 </configuration>
