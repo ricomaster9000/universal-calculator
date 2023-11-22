@@ -32,8 +32,8 @@ public class ConversionFormulaCalculator extends FormulaCalculator {
             );
 
             Double conversionFactor = measurementToMeasurementConversionFactRepo.findByFromMeasurementUnitNameAndToMeasurementUnitName(
-                    convertFromCalcInput.getLinkedFormulaInputParamName(),
-                    convertToCalcInput.getLinkedFormulaInputParamName()
+                    convertFromCalcInput.getPlaceholderName(),
+                    convertToCalcInput.getPlaceholderName()
             ).stream().findFirst().orElseThrow(() -> new CalculationException(CALCULATION_UNABLE_TO_FIND_CONVERSION_FACTOR)).getConversionFactor();
 
             calculation.setOutput(convertFromCalcInput.getNumericalInputValue() * conversionFactor);

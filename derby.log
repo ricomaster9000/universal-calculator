@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Wed Nov 22 11:17:23 SAST 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-018b-f651-e08f-00000201b950 
-on database directory /home/ricardo/projects/king-price-insurance-assessment/dbDirectory with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902 
+Wed Nov 22 13:04:10 SAST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-018b-f6b3-a483-0000035800e0 
+on database directory memory:/home/ricardo/projects/king-price-insurance-assessment/local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
 Loaded from file:/home/ricardo/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
 java.vendor=Amazon.com Inc.
 java.runtime.version=17.0.7+7-LTS

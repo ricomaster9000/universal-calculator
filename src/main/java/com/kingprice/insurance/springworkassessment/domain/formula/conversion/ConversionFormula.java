@@ -5,7 +5,6 @@ import com.kingprice.insurance.springworkassessment.domain.formula.FormulaParame
 import com.kingprice.insurance.springworkassessment.domain.formula.FormulaType;
 import com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit;
 import com.kingprice.insurance.springworkassessment.domain.formula.base.Formula;
-import com.kingprice.insurance.springworkassessment.domain.formula.base.FormulaCalculator;
 import com.kingprice.insurance.springworkassessment.repository.ConversionFormulaRepository;
 import jakarta.persistence.Entity;
 
@@ -18,8 +17,6 @@ import static com.kingprice.insurance.springworkassessment.domain.formula.Measur
 @Entity(name = "conversion_formula")
 @LinkedRepository(ConversionFormulaRepository.class)
 public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula> {
-
-    public static String CALC_PLACEHOLDER_CONVERSION_TO = "CONVERSION_TO";
 
     public static FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
             1L,
@@ -55,7 +52,7 @@ public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula
     }
 
     @Override
-    public FormulaCalculator getFormulaCalculator() {
-        return null;
+    public Class<ConversionFormulaCalculator> getFormulaCalculator() {
+        return ConversionFormulaCalculator.class;
     }
 }

@@ -1,11 +1,12 @@
 package com.kingprice.insurance.springworkassessment.domain.formula.base;
 
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
-import com.kingprice.insurance.springworkassessment.exception.CalculationException;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public abstract class FormulaCalculator {
 
     public Calculation calculate(Calculation calculation) {
