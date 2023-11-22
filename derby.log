@@ -1,0 +1,164 @@
+----------------------------------------------------------------
+Wed Nov 22 00:40:37 SAST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-018b-f40a-e606-000004752c98 
+on database directory D:\projects\king-price-insurance-work-assessment\dbDirectory with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Users/Ricardo/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=Eclipse Adoptium
+java.runtime.version=17.0.6+10
+user.dir=D:\projects\king-price-insurance-work-assessment
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Nov 22 00:41:07 SAST 2023:
+Shutting down instance a816c00e-018b-f40a-e606-000004752c98 on database directory D:\projects\king-price-insurance-work-assessment\dbDirectory with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Wed Nov 22 00:41:07 SAST 2023 Thread[Thread-18,5,main] Cleanup action starting
+ERROR XJ001: Java exception: 'java.security.PrivilegedActionException: '.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.plainWrapException(StandardException.java:574)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4099)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.security.PrivilegedActionException: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:573)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	... 12 more
+Caused by: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	... 13 more
+============= begin nested exception, level (1) ===========
+java.security.PrivilegedActionException: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:573)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	... 13 more
+============= end nested exception, level (1) ===========
+============= begin nested exception, level (2) ===========
+ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+============= end nested exception, level (2) ===========
+Cleanup action completed
+Wed Nov 22 00:41:07 SAST 2023 Thread[Thread-18,5,main] Cleanup action starting
+ERROR XJ001: Java exception: 'java.security.PrivilegedActionException: '.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.plainWrapException(StandardException.java:574)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4099)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.security.PrivilegedActionException: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:573)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	... 12 more
+Caused by: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	... 13 more
+============= begin nested exception, level (1) ===========
+java.security.PrivilegedActionException: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:573)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	... 13 more
+============= end nested exception, level (1) ===========
+============= begin nested exception, level (2) ===========
+ERROR XBM0I: Directory directory:dbDirectory cannot be removed.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:294)
+	at org.apache.derby.iapi.services.monitor.Monitor.removePersistentService(Monitor.java:663)
+	at org.apache.derby.impl.jdbc.EmbedConnection$6.run(EmbedConnection.java:4092)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.impl.jdbc.EmbedConnection.removePersistentService(EmbedConnection.java:4086)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:625)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:405)
+	at org.apache.derby.iapi.jdbc.InternalDriver$LoginCallable.call(InternalDriver.java:381)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+============= end nested exception, level (2) ===========
+Cleanup action completed

@@ -1,9 +1,9 @@
 # Java Work Assessment
 
-For Java 21+
+For Java 17+
 
 make sure maven is installed on your local machine
-make sure JAVA_HOME path has been set to point to a Java 21 JDK
+make sure JAVA_HOME path has been set to point to a Java 17 JDK
 
 #### to test&run locally, run the following commands in console:
 
@@ -14,10 +14,8 @@ make sure JAVA_HOME path has been set to point to a Java 21 JDK
 
 - run: mvn clean install
 - run: cd target
-- run: java -jar app_1_0_0.jar
+- run: java -jar spring.work.assessment-1.0.0.jar
 
 #### post-run info
-
-after app is running, go to http://localhost:8081/calculate/conversion
 
 ##### logs are saved in logstash folder where the app is running
