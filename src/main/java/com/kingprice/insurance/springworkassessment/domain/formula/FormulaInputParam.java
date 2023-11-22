@@ -35,7 +35,8 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
 
     public FormulaInputParam() {}
 
-    public FormulaInputParam(String name, String description, InputParamSpecification inputParamSpecification) {
+    public FormulaInputParam(Long id, String name, String description, InputParamSpecification inputParamSpecification) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.inputParamSpecification = inputParamSpecification;
