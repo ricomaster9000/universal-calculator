@@ -6,5 +6,5 @@ import com.kingprice.insurance.springworkassessment.repository.base.BaseFormulaR
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FormulaRepository extends BaseFormulaRepository<Formula<?>> {
+public interface FormulaRepository extends BaseFormulaRepository<Formula<?,?>> {
 }

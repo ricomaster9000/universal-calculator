@@ -11,13 +11,13 @@ import com.kingprice.insurance.springworkassessment.domain.formula.conversion.Co
 public enum SupportedFormulas {
     CONVERSION_FORMULA(ConversionFormula.class);
 
-    private final Class<? extends Formula<?>> formulaClass;
+    private final Class<? extends Formula<?,?>> formulaClass;
 
-    SupportedFormulas(Class<? extends Formula<?>> formulaClass) {
+    SupportedFormulas(Class<? extends Formula<?,?>> formulaClass) {
         this.formulaClass = formulaClass;
     }
 
-    public Class<? extends Formula<?>> getFormulaClass() {
+    public Class<? extends Formula<?,?>> getFormulaClass() {
         return formulaClass;
     }
 }

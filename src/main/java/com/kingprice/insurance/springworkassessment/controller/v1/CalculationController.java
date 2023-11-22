@@ -2,7 +2,6 @@ package com.kingprice.insurance.springworkassessment.controller.v1;
 
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculateRequest;
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
-import com.kingprice.insurance.springworkassessment.exception.CalculationException;
 import com.kingprice.insurance.springworkassessment.service.CalculationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,7 @@ public class CalculationController {
 
     @PostMapping
     public List<Calculation> createCalculation(@Valid @RequestBody CalculateRequest calculateRequest) {
-        try {
-            return calculationService.createCalculations(calculateRequest);
-        } catch (CalculationException e) {
-            throw new RuntimeException(e);
-        }
+        return calculationService.createCalculations(calculateRequest);
     }
 
     @GetMapping("/{id}")

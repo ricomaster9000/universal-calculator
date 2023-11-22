@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.kingprice.insurance.springworkassessment.GlobalConstants;
 import com.kingprice.insurance.springworkassessment.domain.base.BaseEntity;
-import com.kingprice.insurance.springworkassessment.domain.formula.CalculationParamPlaceholder;
-import com.kingprice.insurance.springworkassessment.domain.formula.FormulaInputParam;
+import com.kingprice.insurance.springworkassessment.domain.formula.FormulaParameterInputSpecification;
 import com.kingprice.insurance.springworkassessment.domain.formula.FormulaType;
+import com.kingprice.insurance.springworkassessment.domain.formula.PossibleFormulaParameter;
 import com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula;
+import com.kingprice.insurance.springworkassessment.service.calculation.FormulaCalculator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ import static com.kingprice.insurance.springworkassessment.domain.formula.Formul
 		// Add other formula types here
 		// TODO find a way to add support for custom formula types added by users
 })
-public abstract class Formula<T extends FormulaInputParam> extends BaseEntity {
+public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.TABLE)
@@ -46,14 +48,19 @@ public abstract class Formula<T extends FormulaInputParam> extends BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
-			name = "formula_to_formula_input_params",
+			name = "formula_to_formula_param_usage_info",
 			joinColumns = @JoinColumn(name = "formula_id"),
-			inverseJoinColumns = @JoinColumn(name = "formula_input_param_id")
+			inverseJoinColumns = @JoinColumn(name = "formula_param_usage_id")
 	)
-	protected List<FormulaInputParam> formulaInputParameters;
+	protected List<FormulaParameterInputSpecification> formulaParameterUsageInfo;
 
-	@Transient
-	protected List<CalculationParamPlaceholder> calculationParamPlaceholder;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+			name = "formula_to_possible_formula_params",
+			joinColumns = @JoinColumn(name = "formula_id"),
+			inverseJoinColumns = @JoinColumn(name = "possible_formula_param_id")
+	)
+	protected List<T> possibleFormulaParameters;
 
 	@PrePersist
 	public void prePersist() {
@@ -65,9 +72,16 @@ public abstract class Formula<T extends FormulaInputParam> extends BaseEntity {
 
 	public abstract FormulaType getFormulaType();
 
-	public abstract FormulaCalculator getFormulaCalculator();
+	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
 
-	public Formula() {}
+	public FormulaCalculator getFormulaCalculator(ApplicationContext applicationContext) {
+		FormulaCalculator result = applicationContext.getBean(getFormulaCalculatorClass());
+		result.setLinkedFormula(this);
+		return result;
+	}
+
+	public Formula() {
+	}
 
 	public Formula(Long id,
 				   String name,
@@ -80,12 +94,34 @@ public abstract class Formula<T extends FormulaInputParam> extends BaseEntity {
 		this.formulaType = formulaType;
 	}
 
-	public List<FormulaInputParam> getFormulaParameters() {
-		return formulaInputParameters;
+	public TYPE withId(Long id) {
+		this.id = id;
+		return (TYPE) this;
 	}
 
-	public void setFormulaParameters(List<FormulaInputParam> formulaInputParameters) {
-		this.formulaInputParameters = formulaInputParameters;
+	public TYPE withName(String name) {
+		this.name = name;
+		return (TYPE) this;
+	}
+
+	public TYPE withDescription(String description) {
+		this.description = description;
+		return (TYPE) this;
+	}
+
+	public TYPE withFormulaType(FormulaType formulaType) {
+		this.formulaType = formulaType;
+		return (TYPE) this;
+	}
+
+	public TYPE withFormulaParameterUsageInfo(List<FormulaParameterInputSpecification> formulaParameterUsageInfo) {
+		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
+		return (TYPE) this;
+	}
+
+	public TYPE withPossibleFormulaParams(List<T> possibleFormulaParameters) {
+		this.possibleFormulaParameters = possibleFormulaParameters;
+		return (TYPE) this;
 	}
 
 	public Long getId() {
@@ -112,20 +148,24 @@ public abstract class Formula<T extends FormulaInputParam> extends BaseEntity {
 		this.description = description;
 	}
 
-	public String getFormulaTypeName() {
-		return getFormulaType().getName();
-	}
-
 	public void setFormulaType(FormulaType formulaType) {
 		this.formulaType = formulaType;
 	}
 
-	public List<CalculationParamPlaceholder> getCalculationParamPlaceholder() {
-		return calculationParamPlaceholder;
+	public List<FormulaParameterInputSpecification> getFormulaParameterUsageInfo() {
+		return formulaParameterUsageInfo;
 	}
 
-	public void setCalculationParamPlaceholder(List<CalculationParamPlaceholder> calculationParamPlaceholder) {
-		this.calculationParamPlaceholder = calculationParamPlaceholder;
+	public void setFormulaParameterUsageInfo(List<FormulaParameterInputSpecification> formulaParameterUsageInfo) {
+		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
+	}
+
+	public List<T> getPossibleFormulaParameters() {
+		return possibleFormulaParameters;
+	}
+
+	public void setPossibleFormulaParameters(List<T> possibleFormulaParameters) {
+		this.possibleFormulaParameters = possibleFormulaParameters;
 	}
 }
 

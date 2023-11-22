@@ -18,25 +18,30 @@ public class CalculationInputParam extends BaseEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "possible_formula_parameter_name")
+    @Size(min=3,max=STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    @NotNull
+    private String possibleFormulaParameterName;
+
     @Column(name = "placeholder_name")
     @Size(min=3,max=STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
     private String placeholderName;
 
-    @Column(name = "linked_formula_input_param_name")
-    @Size(min=3,max=STANDARD_DB_STRING_MAX_CHAR_SIZE)
-    @NotNull
-    private String linkedFormulaInputParamName;
-
     @Column(name = "numerical_input_value")
     @Max(Long.MAX_VALUE)
-    @NotNull
     private Double numericalInputValue;
 
     public CalculationInputParam() {}
 
-    public CalculationInputParam(Long id, Double numericalInputValue) {
-        this.id = id;
+    public CalculationInputParam(String possibleFormulaParameterName, String placeholderName) {
+        this.possibleFormulaParameterName = possibleFormulaParameterName;
+        this.placeholderName = placeholderName;
+    }
+
+    public CalculationInputParam(String possibleFormulaParameterName, String placeholderName, Double numericalInputValue) {
+        this.possibleFormulaParameterName = possibleFormulaParameterName;
+        this.placeholderName = placeholderName;
         this.numericalInputValue = numericalInputValue;
     }
 
@@ -48,20 +53,20 @@ public class CalculationInputParam extends BaseEntity {
         this.id = id;
     }
 
+    public String getPossibleFormulaParameterName() {
+        return possibleFormulaParameterName;
+    }
+
+    public void setPossibleFormulaParameterName(String possibleFormulaParameterName) {
+        this.possibleFormulaParameterName = possibleFormulaParameterName;
+    }
+
     public String getPlaceholderName() {
         return placeholderName;
     }
 
     public void setPlaceholderName(String placeholderName) {
         this.placeholderName = placeholderName;
-    }
-
-    public String getLinkedFormulaInputParamName() {
-        return linkedFormulaInputParamName;
-    }
-
-    public void setLinkedFormulaInputParamName(String linkedFormulaInputParamName) {
-        this.linkedFormulaInputParamName = linkedFormulaInputParamName;
     }
 
     public Double getNumericalInputValue() {
