@@ -12,19 +12,19 @@ import java.io.Serializable;
 
 @Entity(name="numerical_input_param_specification")
 @LinkedRepository(NumberInputParamSpecRepository.class)
-public class NumberInputParamSpecification extends BaseEntity implements Serializable {
+public class InputParamSpecification extends BaseEntity implements Serializable {
 
-    public static final NumberInputParamSpecification GENERIC_NUMBER_DECIMAL_INPUT_PARAM = new NumberInputParamSpecification()
+    public static final InputParamSpecification GENERIC_NUMBER_DECIMAL_INPUT_PARAM = new InputParamSpecification()
             .withStepSizeAllowed(0.00000000001D);
 
-    public static final NumberInputParamSpecification GENERIC_INTEGER_INPUT_PARAM = new NumberInputParamSpecification()
+    public static final InputParamSpecification GENERIC_INTEGER_INPUT_PARAM = new InputParamSpecification()
             .withStepSizeAllowed(1.00D);
 
-    public static final NumberInputParamSpecification INTEGER_POSITIVE_INPUT_PARAM = new NumberInputParamSpecification()
+    public static final InputParamSpecification INTEGER_POSITIVE_INPUT_PARAM = new InputParamSpecification()
             .withMinValueAllowed(0.00D)
             .withStepSizeAllowed(1.00D);
 
-    public static final NumberInputParamSpecification INTEGER_NEGATIVE_INPUT_PARAM = new NumberInputParamSpecification()
+    public static final InputParamSpecification INTEGER_NEGATIVE_INPUT_PARAM = new InputParamSpecification()
             .withMaxValueAllowed(0.00D)
             .withStepSizeAllowed(1.00D);
 
@@ -50,27 +50,27 @@ public class NumberInputParamSpecification extends BaseEntity implements Seriali
                                               max value where this value can divide in with no remainder
                                             */
 
-    public NumberInputParamSpecification() {}
+    public InputParamSpecification() {}
 
-    public NumberInputParamSpecification withMinValueAllowed(Double minValueAllowed) {
+    public InputParamSpecification withMinValueAllowed(Double minValueAllowed) {
         this.minValueAllowed = minValueAllowed;
         return this;
     }
 
-    public NumberInputParamSpecification withMaxValueAllowed(Double maxValueAllowed) {
+    public InputParamSpecification withMaxValueAllowed(Double maxValueAllowed) {
         this.maxValueAllowed = maxValueAllowed;
         return this;
     }
 
-    public NumberInputParamSpecification withStepSizeAllowed(Double stepSizeAllowed) {
+    public InputParamSpecification withStepSizeAllowed(Double stepSizeAllowed) {
         this.stepSizeAllowed = stepSizeAllowed;
         return this;
     }
 
-    public NumberInputParamSpecification(Long id,
-                                         Double minValueAllowed,
-                                         Double maxValueAllowed,
-                                         Double stepSizeAllowed) {
+    public InputParamSpecification(Long id,
+                                   Double minValueAllowed,
+                                   Double maxValueAllowed,
+                                   Double stepSizeAllowed) {
         this.id = id;
         this.minValueAllowed = minValueAllowed;
         this.maxValueAllowed = maxValueAllowed;

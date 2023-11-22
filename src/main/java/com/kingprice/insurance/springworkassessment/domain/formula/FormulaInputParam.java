@@ -2,7 +2,7 @@ package com.kingprice.insurance.springworkassessment.domain.formula;
 
 import com.kingprice.insurance.springworkassessment.GlobalConstants;
 import com.kingprice.insurance.springworkassessment.domain.base.BaseEntity;
-import com.kingprice.insurance.springworkassessment.domain.shared.NumberInputParamSpecification;
+import com.kingprice.insurance.springworkassessment.domain.shared.InputParamSpecification;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,13 +31,14 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "number_input_param_specification_id")
     @NotNull
-    private NumberInputParamSpecification numberInputParamSpecification;
+    private InputParamSpecification inputParamSpecification;
 
     public FormulaInputParam() {}
 
-    public FormulaInputParam(String name, String description) {
+    public FormulaInputParam(String name, String description, InputParamSpecification inputParamSpecification) {
         this.name = name;
         this.description = description;
+        this.inputParamSpecification = inputParamSpecification;
     }
 
     public Long getId() {
@@ -64,11 +65,11 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
         this.description = description;
     }
 
-    public NumberInputParamSpecification getNumberInputParamSpecification() {
-        return numberInputParamSpecification;
+    public InputParamSpecification getNumberInputParamSpecification() {
+        return inputParamSpecification;
     }
 
-    public void setNumberInputParamSpecification(NumberInputParamSpecification numberInputParamSpecification) {
-        this.numberInputParamSpecification = numberInputParamSpecification;
+    public void setNumberInputParamSpecification(InputParamSpecification inputParamSpecification) {
+        this.inputParamSpecification = inputParamSpecification;
     }
 }
