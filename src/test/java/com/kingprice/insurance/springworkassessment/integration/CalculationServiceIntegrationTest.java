@@ -1,4 +1,4 @@
-package com.kingprice.insurance.springworkassessment.servicelayer;
+package com.kingprice.insurance.springworkassessment.integration;
 
 import com.kingprice.insurance.springworkassessment.SpringBootTestWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;

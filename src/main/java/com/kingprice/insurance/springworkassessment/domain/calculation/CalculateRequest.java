@@ -16,6 +16,11 @@ public class CalculateRequest implements Serializable {
 
     public CalculateRequest() {}
 
+    public CalculateRequest(Formula<?,?> linkedFormula, List<Calculation> calculationsToPerform) {
+        this.linkedFormula = linkedFormula;
+        this.calculationsToPerform = calculationsToPerform;
+    }
+
     public Formula<?,?> getLinkedFormula() {
         return linkedFormula;
     }
