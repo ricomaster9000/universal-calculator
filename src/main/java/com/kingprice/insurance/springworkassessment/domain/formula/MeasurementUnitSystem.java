@@ -14,8 +14,9 @@ import static com.kingprice.insurance.springworkassessment.GlobalConstants.STAND
 @Entity(name = "measurement_unit_system")
 @LinkedRepository(MeasurementUnitSystemRepository.class)
 public class MeasurementUnitSystem extends BaseEntity implements Serializable {
-    public static final MeasurementUnitSystem IMPERIAL_SYSTEM = new MeasurementUnitSystem(1L,"IMPERIAL_SYSTEM");
-    public static final MeasurementUnitSystem METRIC_SYSTEM = new MeasurementUnitSystem(2L,"METRIC_SYSTEM");
+    public static final MeasurementUnitSystem EITHER_OR_BOTH = new MeasurementUnitSystem(1L,"EITHER_OR_BOTH");
+    public static final MeasurementUnitSystem IMPERIAL_SYSTEM = new MeasurementUnitSystem(2L,"IMPERIAL_SYSTEM");
+    public static final MeasurementUnitSystem METRIC_SYSTEM = new MeasurementUnitSystem(3L,"METRIC_SYSTEM");
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

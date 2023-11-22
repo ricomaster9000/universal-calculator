@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class FormulaInputParam extends BaseEntity implements Serializable {
+public abstract class PossibleFormulaParameter extends BaseEntity implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -23,7 +23,7 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
     @NotNull
     private String name;
 
-    @Column(name = "description", nullable=true)
+    @Column(name = "description")
     @Size(max = GlobalConstants.SHORT_DB_TEXT_MAX_CHAR_SIZE)
     @NotNull
     private String description;
@@ -33,9 +33,14 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
     @NotNull
     private InputParamSpecification inputParamSpecification;
 
-    public FormulaInputParam() {}
+    public PossibleFormulaParameter() {}
 
-    public FormulaInputParam(Long id, String name, String description, InputParamSpecification inputParamSpecification) {
+    public PossibleFormulaParameter(
+            Long id,
+            String name,
+            String description,
+            InputParamSpecification inputParamSpecification
+    ) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -66,11 +71,11 @@ public abstract class FormulaInputParam extends BaseEntity implements Serializab
         this.description = description;
     }
 
-    public InputParamSpecification getNumberInputParamSpecification() {
+    public InputParamSpecification getInputParamSpecification() {
         return inputParamSpecification;
     }
 
-    public void setNumberInputParamSpecification(InputParamSpecification inputParamSpecification) {
+    public void setInputParamSpecification(InputParamSpecification inputParamSpecification) {
         this.inputParamSpecification = inputParamSpecification;
     }
 }

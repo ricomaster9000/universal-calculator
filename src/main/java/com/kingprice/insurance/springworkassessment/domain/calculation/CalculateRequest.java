@@ -9,18 +9,18 @@ import java.util.List;
 public class CalculateRequest implements Serializable {
 
     @NotNull
-    private Formula<?> linkedFormula;
+    private Formula<?,?> linkedFormula;
 
     @NotNull
     private List<Calculation> calculationsToPerform;
 
     public CalculateRequest() {}
 
-    public Formula<?> getLinkedFormula() {
+    public Formula<?,?> getLinkedFormula() {
         return linkedFormula;
     }
 
-    public void setLinkedFormula(Formula<?> linkedFormula) {
+    public void setLinkedFormula(Formula<?,?> linkedFormula) {
         this.linkedFormula = linkedFormula;
     }
 

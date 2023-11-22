@@ -30,7 +30,7 @@ public class Calculation extends BaseEntity {
     private String description;
 
     @Transient // too many complications arise from ensuring bi-directional relationship, all I need it for is to do the appropriate
-    private Formula<?> formula;
+    private Formula<?,?> formula;
 
     @OneToMany
     @JoinTable(
@@ -69,11 +69,11 @@ public class Calculation extends BaseEntity {
         this.description = description;
     }
 
-    public Formula<?> getFormula() {
+    public Formula<?,?> getFormula() {
         return formula;
     }
 
-    public void setFormula(Formula<?> formula) {
+    public void setFormula(Formula<?,?> formula) {
         this.formula = formula;
     }
 
