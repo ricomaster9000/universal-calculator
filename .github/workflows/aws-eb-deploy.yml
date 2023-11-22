@@ -28,7 +28,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: "king-price-insurance-back-end"
-          environment_name: "King-price-insurance-back-end-env"
+          environment_name: "King-price-insurance-back-end-env-1"
           version_label: "deploy-${{ github.sha }}"
           region: "eu-west-1"
           deployment_package: "target/spring.work.assessment-1.0.0.zip"
