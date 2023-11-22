@@ -6,12 +6,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication()
 @ComponentScan({
-		"com.kingprice.insurance.springworkassessment.model",
+		"com.kingprice.insurance.springworkassessment.domain",
 		"com.kingprice.insurance.springworkassessment.exception",
-		"com.kingprice.insurance.springworkassessment.repositories",
-		"com.kingprice.insurance.springworkassessment.services",
-		"com.kingprice.insurance.springworkassessment.controllers",
-		"com.kingprice.insurance.springworkassessment.configuration"
+		"com.kingprice.insurance.springworkassessment.repository",
+		"com.kingprice.insurance.springworkassessment.service",
+		"com.kingprice.insurance.springworkassessment.controller",
+		"com.kingprice.insurance.springworkassessment.configuration",
+		"com.kingprice.insurance.springworkassessment.annotation"
 })
 public class SpringWorkAssessmentApplication {
 
