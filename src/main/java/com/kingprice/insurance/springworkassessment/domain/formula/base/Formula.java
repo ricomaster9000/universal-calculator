@@ -25,7 +25,7 @@ import static com.kingprice.insurance.springworkassessment.domain.formula.Formul
 @JsonSubTypes({
 		@JsonSubTypes.Type(value = ConversionFormula.class, name = CONVERSION_FORMULA_TYPE_NAME)
 		// Add other formula types here
-		// TODO find a way to add support for custom formula types added by users
+		// TODO find a better way to add support for custom formula types added by users
 })
 public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
 	@Id
