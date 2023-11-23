@@ -8,15 +8,17 @@ import com.kingprice.insurance.springworkassessment.repository.FormulaTypeReposi
 import com.kingprice.insurance.springworkassessment.repository.base.BaseFormulaRepository;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import static com.kingprice.insurance.springworkassessment.GlobalConstants.CACHED_FORMULA_SUBCLASSES;
 import static com.kingprice.insurance.springworkassessment.exception.FormulaException.FormulaError.*;
 
 @Service
@@ -42,11 +44,23 @@ public class FormulaService {
                 .orElseThrow(() -> new FormulaException(FORMULA_NOT_FOUND));
     }
 
+    @EventListener(ApplicationReadyEvent.class)
+    public void cacheFormulaSubTypeClasses() throws ClassNotFoundException {
+        Reflections reflections = new Reflections();
+
+        /*
+         I tried pinpointing the Reflections object instance to target the web app package name, but
+         then it does not find the Formula subclasses, I have a feeling Spring is behind this, but
+         if I set the Reflections to scan everything it will find but it is very slow
+         */
+        CACHED_FORMULA_SUBCLASSES.addAll(reflections.getSubTypesOf(Class.forName(Formula.class.getName())));
+    }
+
     @Transactional(readOnly = true)
     public List<Formula<?,?>> getAllFormulas() {
         List<Formula<?,?>> result = new ArrayList<>();
 
-        Reflections reflections = new Reflections("com.kingprice.insurance.springworkassessment");
+        Reflections reflections = new Reflections();
 
         Class<?> clazz = null;
         try {
@@ -55,9 +69,7 @@ public class FormulaService {
             throw new RuntimeException(e);
         }
 
-        Set<Class<?>> allFormulaClasses = (Set<Class<?>>) reflections.getSubTypesOf(clazz);
-
-        for(Class<?> formulaClass : allFormulaClasses) {
+        for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
             try {
                 result.addAll(getFormulaRepositoryGeneric((Formula<?, ?>) formulaClass.getConstructor().newInstance()).findAll());
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
