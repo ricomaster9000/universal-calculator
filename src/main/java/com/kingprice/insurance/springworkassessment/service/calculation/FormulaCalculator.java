@@ -64,10 +64,6 @@ public abstract class FormulaCalculator {
                 if (supportedFormulaParam == null) {
                     // throw exception
                 }
-
-                if (!calculationInputParameterMeetsSpecification(calculationInputParam, ALL_MEASUREMENT_UNITS.getInputParamSpecification())) {
-                    // throw exception
-                }
             }
         }
     }

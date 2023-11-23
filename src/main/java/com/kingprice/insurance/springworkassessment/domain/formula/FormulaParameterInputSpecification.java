@@ -14,18 +14,6 @@ import java.io.Serializable;
 @LinkedRepository(FormulaParameterInputSpecificationRepo.class)
 public class FormulaParameterInputSpecification extends BaseEntity implements Serializable {
 
-    public static FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
-            1L,
-            "CONVERSION_FROM",
-            "the measurement unit to convert from"
-    );
-
-    public static FormulaParameterInputSpecification CONVERSION_TO_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
-            2L,
-            "CONVERSION_TO",
-            "the measurement unit to convert to"
-    );
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.TABLE)
