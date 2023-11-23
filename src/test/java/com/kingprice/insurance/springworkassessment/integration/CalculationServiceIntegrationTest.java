@@ -160,7 +160,7 @@ public class CalculationServiceIntegrationTest {
 
         // Deserialize response content
         Calculation[] calculations = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Calculation[].class);
-        assertEquals(expectedValue, calculations[0].getOutput(), 0.0001, "Conversion from " + fromUnit + " to " + toUnit + " failed");
+        assertEquals(expectedValue, calculations[0].getOutput().doubleValue(), 0.0001, "Conversion from " + fromUnit + " to " + toUnit + " failed");
     }
 
     private void performInvalidConversionTest(String fromUnit, Double fromValue, String toUnit) throws Exception {
