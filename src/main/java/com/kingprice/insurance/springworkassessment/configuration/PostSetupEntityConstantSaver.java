@@ -51,11 +51,6 @@ public class PostSetupEntityConstantSaver {
             for(Class<?> clazz : possibleEntityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
             }
-
-            final Metamodel mm = em.getMetamodel();
-            for (final ManagedType<?> managedType : mm.getManagedTypes()) {
-                aveConstantEntities(managedType.getJavaType(),ctx);
-            }
         } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
                 ClassNotFoundException | NoSuchMethodException e){
             throw new RuntimeException(e);
