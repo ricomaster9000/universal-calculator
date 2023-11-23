@@ -1,7 +1,9 @@
 package com.kingprice.insurance.springworkassessment.domain.formula;
 
 import com.kingprice.insurance.springworkassessment.GlobalConstants;
+import com.kingprice.insurance.springworkassessment.annotation.LinkedRepository;
 import com.kingprice.insurance.springworkassessment.domain.base.BaseEntity;
+import com.kingprice.insurance.springworkassessment.repository.FormulaParameterInputSpecificationRepo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity(name = "formula_parameter_input_specification")
+@LinkedRepository(FormulaParameterInputSpecificationRepo.class)
 public class FormulaParameterInputSpecification extends BaseEntity implements Serializable {
 
     public static FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
