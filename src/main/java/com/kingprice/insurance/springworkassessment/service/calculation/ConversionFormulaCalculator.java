@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kingprice.insurance.springworkassessment.domain.formula.FormulaParameterInputSpecification.CONVERSION_FROM_PARAM_INPUT_SPEC;
+import static com.kingprice.insurance.springworkassessment.domain.formula.FormulaParameterInputSpecification.CONVERSION_TO_PARAM_INPUT_SPEC;
 import static com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit.ALL_MEASUREMENT_UNITS;
-import static com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula.CONVERSION_FROM_PARAM_INPUT_SPEC;
-import static com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula.CONVERSION_TO_PARAM_INPUT_SPEC;
 import static com.kingprice.insurance.springworkassessment.exception.CalculationException.CalculationError.CALCULATION_UNABLE_TO_FIND_CONVERSION_FACTOR;
 
 @Component
