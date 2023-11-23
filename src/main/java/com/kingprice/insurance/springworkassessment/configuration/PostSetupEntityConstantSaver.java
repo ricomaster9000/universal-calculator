@@ -47,7 +47,11 @@ public class PostSetupEntityConstantSaver {
             Object repoBean = ctx.getBean(linkedRepository.value());
             Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
             logger.info("found a constant entity fields to persist to database");
-            saveAllMethod.invoke(repoBean, new ArrayList<>(List.of(constantEntityValue)));
+            try {
+                saveAllMethod.invoke(repoBean, new ArrayList<>(List.of(constantEntityValue)));
+            } catch(Exception e) {
+                logger.info("dsfsdfsdf");
+            }
         }
     }
 

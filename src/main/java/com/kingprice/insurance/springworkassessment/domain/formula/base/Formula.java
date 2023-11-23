@@ -70,7 +70,9 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		}
 	}
 
-	public abstract FormulaType getFormulaType();
+	public FormulaType getFormulaType() {
+		return formulaType;
+	}
 
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
 
