@@ -5,7 +5,6 @@ import com.kingprice.insurance.springworkassessment.SpringBootTestWrapper;
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculateRequest;
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculationInputParam;
-import com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit.FOOT;
-import static com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit.METER;
+import static com.kingprice.insurance.springworkassessment.domain.ConstantEntities.*;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -122,7 +120,7 @@ public class CalculationCRUDTest {
 
         calculation.setOutput(3.28084);
 
-        return new CalculateRequest(ConversionFormula.GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
+        return new CalculateRequest(GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
     }
 
     private Calculation createAndPostTestCalculation() throws Exception {
