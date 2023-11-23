@@ -74,25 +74,31 @@ public class PostSetupEntityConstantSaver {
                     .filter(constantVal -> constantVal.getClass().isAnnotationPresent(Entity.class) && clazz.isAssignableFrom(constantVal.getClass()))
                     .toList();
 
-            // also retrieve entity value types of methods
-            constantEntityValues.addAll(getGetterMethods(clazz).stream().filter(getter -> {
-                        if(getter.getReturnType() != null) {
-                            Class<?> methodReturnType = getter.getReturnType();
-                            if(getter.getReturnType().equals(List.class)) {
-                                ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
-                                methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
-                            }
-                            return (methodReturnType.isAnnotationPresent(Entity.class)) ? true : false;
-                        } else {
-                            return false;
-                        }
-                    }
-            ).toList());
-
             List<Field> constantEntityFields = List.of(getClassFields(clazz));
+
+            // also retrieve entity value types of methods
+            List<Class<?>> getterMethodReturnTypes = constantEntityFields.addAll(getGetterMethods(clazz).stream().filter(getter -> {
+                if(getter.getReturnType() != null) {
+                    Class<?> methodReturnType = getter.getReturnType();
+                    if(getter.getReturnType().equals(List.class)) {
+                        ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
+                        methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
+                    }
+                    return (methodReturnType.isAnnotationPresent(Entity.class)) ? true : false;
+                } else {
+                    return false;
+                }
+            }).toList());
             
-            logger.info("found " + constantEntityFields.size() + " constant entity fields to persist to database");
-            
+            logger.info("found " + (constantEntityFields.size()+getterMethodReturnTypes.size()) + " constant entity fields to persist to database");
+
+            for(Class<?> getterMethodReturnType : getterMethodReturnTypes) {
+                if(!getterMethodReturnType.equals(clazz)) {
+                    saveConstantEntities(getterMethodReturnType, ctx);
+                }
+            }
+
+
             for(Field field : constantEntityFields) {
                 if(!field.getType().equals(clazz)) {
                     saveConstantEntities(field.getType(), ctx);
