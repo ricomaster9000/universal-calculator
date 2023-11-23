@@ -8,8 +8,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
+import java.beans.IntrospectionException;
+import java.lang.reflect.*;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -24,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +51,7 @@ public class PostSetupEntityConstantSaver {
                 saveConstantEntities(clazz,ctx);
             }
         } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
-                ClassNotFoundException | NoSuchMethodException e){
+                ClassNotFoundException | NoSuchMethodException | IntrospectionException e){
             throw new RuntimeException(e);
         }
     }
@@ -65,7 +63,7 @@ public class PostSetupEntityConstantSaver {
           .collect(Collectors.toList());
     }
 
-    private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
+    private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, IntrospectionException {
         logger.info("checking class " + clazz.getSimpleName());
         if (clazz.isAnnotationPresent(LinkedRepository.class)) {
             logger.info("checking if entity class " + clazz.getSimpleName() + " has any constant entity fields to persist");
@@ -76,9 +74,24 @@ public class PostSetupEntityConstantSaver {
                     .filter(constantVal -> constantVal.getClass().isAnnotationPresent(Entity.class) && clazz.isAssignableFrom(constantVal.getClass()))
                     .toList();
 
+            // also retrieve entity value types of methods
+            constantEntityValues.addAll(getGetterMethods(clazz).stream().filter(getter -> {
+                        if(getter.getReturnType() != null) {
+                            Class<?> methodReturnType = getter.getReturnType();
+                            if(getter.getReturnType().equals(List.class)) {
+                                ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
+                                methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
+                            }
+                            return (methodReturnType.isAnnotationPresent(Entity.class)) ? true : false;
+                        } else {
+                            return false;
+                        }
+                    }
+            ).toList());
+
             List<Field> constantEntityFields = List.of(getClassFields(clazz));
             
-            logger.info("found " + constantEntityFields.size() + " constant entity fields to persist to datavase");
+            logger.info("found " + constantEntityFields.size() + " constant entity fields to persist to database");
             
             for(Field field : constantEntityFields) {
                 if(!field.getType().equals(clazz)) {
