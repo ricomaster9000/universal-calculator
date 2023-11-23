@@ -7,17 +7,21 @@
 	<logger name="org.springframework.transaction" level="WARN" />
 	<logger name="org.flywaydb" level="DEBUG"/>
 
-	<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<!--<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/var/app/logs/app.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
 			<fileNamePattern>/var/app/logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
 
-			<!-- keep 30 days' worth of history capped at 3GB total size -->
 			<maxHistory>30</maxHistory>
 			<totalSizeCap>3GB</totalSizeCap>
 		</rollingPolicy>
 
+		<encoder>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{5} - %message%n</pattern>
+		</encoder>
+	</appender>-->
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%date{ISO8601} [%thread] %-5level %logger{5} - %message%n</pattern>
 		</encoder>
@@ -26,6 +30,7 @@
 	<!-- other loggers -->
 
 	<root level="INFO">
-		<appender-ref ref="STASH" />
+		<!--<appender-ref ref="STASH" />-->
+		<appender-ref ref="STDOUT"/>
 	</root>
 </configuration>
