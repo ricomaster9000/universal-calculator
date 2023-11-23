@@ -1,11 +1,10 @@
 package com.kingprice.insurance.springworkassessment.integration;
 
-import com.kingprice.insurance.springworkassessment.SpringBootTestWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kingprice.insurance.springworkassessment.SpringBootTestWrapper;
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculateRequest;
 import com.kingprice.insurance.springworkassessment.domain.calculation.Calculation;
 import com.kingprice.insurance.springworkassessment.domain.calculation.CalculationInputParam;
-import com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.kingprice.insurance.springworkassessment.domain.ConstantEntities.GENERIC_SIMPLE_CONVERSION_FORMULA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -148,7 +148,7 @@ public class CalculationServiceIntegrationTest {
         calculation.setCalculationInputParams(Arrays.asList(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConversionFormula.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(GENERIC_SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(Arrays.asList(calculation));
 
         MvcResult mvcResult = mockMvc.perform(post("/api/v1/calculation").
@@ -170,7 +170,7 @@ public class CalculationServiceIntegrationTest {
         calculation.setCalculationInputParams(List.of(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConversionFormula.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(GENERIC_SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(List.of(calculation));
 
         String calculateRequestJson = objectMapper.writeValueAsString(calculateRequest);
