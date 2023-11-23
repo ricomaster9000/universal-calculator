@@ -9,6 +9,7 @@ import com.kingprice.insurance.springworkassessment.domain.formula.FormulaParame
 import com.kingprice.insurance.springworkassessment.domain.formula.FormulaType;
 import com.kingprice.insurance.springworkassessment.domain.formula.PossibleFormulaParameter;
 import com.kingprice.insurance.springworkassessment.domain.formula.conversion.ConversionFormula;
+import com.kingprice.insurance.springworkassessment.repository.base.BaseFormulaRepository;
 import com.kingprice.insurance.springworkassessment.service.calculation.FormulaCalculator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -77,6 +78,9 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 
 	@JsonIgnore
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
+
+	@JsonIgnore
+	public abstract Class<? extends BaseFormulaRepository<? extends Formula<?,?>>> getFormulaRepositoryClass();
 
 	public FormulaCalculator getFormulaCalculator(ApplicationContext applicationContext) {
 		FormulaCalculator result = applicationContext.getBean(getFormulaCalculatorClass());
