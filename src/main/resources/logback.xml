@@ -10,7 +10,7 @@
 	<!--<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/var/app/logs/app.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/var/app/logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/var/nginx/logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
 
 			<maxHistory>30</maxHistory>
 			<totalSizeCap>3GB</totalSizeCap>
