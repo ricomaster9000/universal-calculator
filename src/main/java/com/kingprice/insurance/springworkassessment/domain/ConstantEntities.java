@@ -10,13 +10,13 @@ import java.util.List;
 import static com.kingprice.insurance.springworkassessment.domain.formula.FormulaType.CONVERSION_FORMULA_TYPE_NAME;
 
 public class ConstantEntities {
-    public static FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
+    public static final FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
             1L,
             "CONVERSION_FROM",
             "the measurement unit to convert from"
     );
 
-    public static FormulaParameterInputSpecification CONVERSION_TO_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
+    public static final FormulaParameterInputSpecification CONVERSION_TO_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
             2L,
             "CONVERSION_TO",
             "the measurement unit to convert to"
@@ -136,7 +136,7 @@ public class ConstantEntities {
             .withConversionFactor(30.48D);
     public static final FormulaType CONVERSION_FORMULA_TYPE = new FormulaType(1L,CONVERSION_FORMULA_TYPE_NAME);
 
-    public static ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
+    public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
             .withId(1L)
             .withName("Generic Simple Conversion Formula")
             .withDescription("Takes a CONVERSION_FROM measurement unit input param and " +
