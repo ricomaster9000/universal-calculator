@@ -33,8 +33,7 @@ public class PostSetupEntityConstantSaver {
         ApplicationContext ctx = event.getApplicationContext();
 
         try {
-            List<Class<?>> possibleEntityDomainClasses = getClasses("com.kingprice.insurance.springworkassessment");
-            possibleEntityDomainClasses.addAll(findAllClassesInPackage("com.kingprice.insurance.springworkassessment"));
+            List<Class<?>> possibleEntityDomainClasses = findAllClassesInPackage("com.kingprice.insurance.springworkassessment");
 
             logger.info("will look at " + possibleEntityDomainClasses.size() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
             
