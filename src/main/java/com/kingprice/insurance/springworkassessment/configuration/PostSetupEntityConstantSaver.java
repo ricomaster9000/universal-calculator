@@ -24,21 +24,30 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 
 import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.metamodel.ManagedType;
+import javax.persistence.metamodel.Metamodel;
+
 @Component
 public class PostSetupEntityConstantSaver {
     private static final Logger logger = LoggerFactory.getLogger(PostSetupEntityConstantSaver.class);
+
+    @PersistenceContext
+    private EntityManager em;
     
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext ctx = event.getApplicationContext();
 
-        try {
-            List<Class<?>> possibleEntityDomainClasses = findAllClassesInPackage("com.kingprice.insurance.springworkassessment");
-
-            logger.info("will look at " + possibleEntityDomainClasses.size() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
-            
+        try {            
             for(Class<?> clazz : possibleEntityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
+            }
+
+            final Metamodel mm = em.getMetamodel();
+            for (final ManagedType<?> managedType : mm.getManagedTypes()) {
+                aveConstantEntities(managedType.getJavaType(),ctx);
             }
         } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
                 ClassNotFoundException | NoSuchMethodException e){
