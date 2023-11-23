@@ -13,7 +13,6 @@ import static com.kingprice.insurance.springworkassessment.GlobalConstants.STAND
 @LinkedRepository(FormulaTypeRepository.class)
 public class FormulaType extends BaseEntity {
     public static final String CONVERSION_FORMULA_TYPE_NAME = "CONVERSION_FORMULA_TYPE";
-    public static final FormulaType CONVERSION_FORMULA_TYPE = new FormulaType(1L,CONVERSION_FORMULA_TYPE_NAME);
 
     @Column(name="id")
     @Id
