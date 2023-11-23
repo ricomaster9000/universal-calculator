@@ -1,6 +1,10 @@
 package com.kingprice.insurance.springworkassessment;
 
+import com.kingprice.insurance.springworkassessment.repository.base.BaseFormulaRepository;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class GlobalConstants {
@@ -11,4 +15,5 @@ public class GlobalConstants {
     public static final int LONG_DB_TEXT_MAX_CHAR_SIZE = 15000;
 
     public static final Set<Class<?>> CACHED_FORMULA_SUBCLASSES = new HashSet<Class<?>>();
+    public static final Map<Class<?>,BaseFormulaRepository<?>> CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES = new HashMap<>();
 }

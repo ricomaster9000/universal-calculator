@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.kingprice.insurance.springworkassessment.GlobalConstants.CACHED_FORMULA_SUBCLASSES;
+import static com.kingprice.insurance.springworkassessment.GlobalConstants.CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES;
 import static com.kingprice.insurance.springworkassessment.exception.FormulaException.FormulaError.*;
 
 @Service
@@ -54,27 +55,25 @@ public class FormulaService {
          if I set the Reflections to scan everything it will find but it is very slow
          */
         CACHED_FORMULA_SUBCLASSES.addAll(reflections.getSubTypesOf(Class.forName(Formula.class.getName())));
+
+        for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
+            try {
+                CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.put(
+                        formulaClass,
+                        getFormulaRepositoryGeneric((Formula<?, ?>) formulaClass.getConstructor().newInstance())
+                );
+            } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+
+            }
+        }
     }
 
     @Transactional(readOnly = true)
     public List<Formula<?,?>> getAllFormulas() {
         List<Formula<?,?>> result = new ArrayList<>();
 
-        Reflections reflections = new Reflections();
-
-        Class<?> clazz = null;
-        try {
-            clazz = Class.forName(Formula.class.getName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
         for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
-            try {
-                result.addAll(getFormulaRepositoryGeneric((Formula<?, ?>) formulaClass.getConstructor().newInstance()).findAll());
-            } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-
-            }
+            result.addAll(CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(formulaClass).findAll());
         }
 
         return result;
