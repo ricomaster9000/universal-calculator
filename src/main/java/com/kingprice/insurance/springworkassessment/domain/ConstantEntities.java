@@ -142,6 +142,7 @@ public class ConstantEntities {
             .withDescription("Takes a CONVERSION_FROM measurement unit input param and " +
                     "a CONVERSION_TO measurement unit input param, " +
                     "then gets the relevant conversion ratio and applies it.")
+            .withFormulaType(CONVERSION_FORMULA_TYPE)
             .withFormulaParameterUsageInfo(new ArrayList<>(List.of(
                     CONVERSION_FROM_PARAM_INPUT_SPEC,
                     CONVERSION_TO_PARAM_INPUT_SPEC

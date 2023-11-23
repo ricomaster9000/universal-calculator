@@ -17,11 +17,6 @@ public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula
     public ConversionFormula() {}
 
     @Override
-    public FormulaType getFormulaType() {
-        return CONVERSION_FORMULA_TYPE;
-    }
-
-    @Override
     public Class<ConversionFormulaCalculator> getFormulaCalculatorClass() {
         return ConversionFormulaCalculator.class;
     }
