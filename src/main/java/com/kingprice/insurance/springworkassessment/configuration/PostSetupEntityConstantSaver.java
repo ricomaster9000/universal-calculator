@@ -72,12 +72,12 @@ public class PostSetupEntityConstantSaver {
             Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
             List<Object> constantEntityValues = getAllConstantValuesInClass(clazz).stream()
                     .filter(constantVal -> constantVal.getClass().isAnnotationPresent(Entity.class) && clazz.isAssignableFrom(constantVal.getClass()))
-                    .toList();
+                    .collect();
 
             List<Field> constantEntityFields = List.of(getClassFields(clazz));
 
             // also retrieve entity value types of methods
-            List<Class<?>> getterMethodReturnTypes = constantEntityFields.addAll(getGetterMethods(clazz).stream().filter(getter -> {
+            List<Class<?>> getterMethodReturnTypes = getGetterMethods(clazz).stream().filter(getter -> {
                 if(getter.getReturnType() != null) {
                     Class<?> methodReturnType = getter.getReturnType();
                     if(getter.getReturnType().equals(List.class)) {
@@ -95,7 +95,7 @@ public class PostSetupEntityConstantSaver {
                     methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
                 }
                 return methodReturnType;
-            }).toList());
+            }).collect(Collectors.toList());
             
             logger.info("found " + (constantEntityFields.size()+getterMethodReturnTypes.size()) + " constant entity fields to persist to database");
 
