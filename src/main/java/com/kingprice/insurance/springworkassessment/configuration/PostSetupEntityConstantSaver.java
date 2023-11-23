@@ -9,8 +9,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.beans.IntrospectionException;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,29 +22,30 @@ public class PostSetupEntityConstantSaver {
     
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        ApplicationContext ctx = event.getApplicationContext();
-
         try {
+            ApplicationContext ctx = event.getApplicationContext();
+
             List<Object> constantEntities = getAllConstantValuesInClass(ConstantEntities.class);
-            
-            for(Object constantVal : constantEntities) {
-                if(constantVal != null) {
+
+            for (Object constantVal : constantEntities) {
+                if (constantVal != null) {
                     saveConstantEntity(constantVal, ctx);
                 }
             }
-        } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
-                ClassNotFoundException | NoSuchMethodException | IntrospectionException e){
+        } catch (Exception e) {
+            logger.error("unable to setup constant entities, " + e.getMessage(), e);
             throw new RuntimeException(e);
         }
+
     }
 
-    private void saveConstantEntity(Object constantEntityValue, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, IntrospectionException {
+    private void saveConstantEntity(Object constantEntityValue, ApplicationContext ctx) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         logger.info("checking class " + constantEntityValue.getClass().getSimpleName());
         if (constantEntityValue.getClass().isAnnotationPresent(LinkedRepository.class)) {
             LinkedRepository linkedRepository = constantEntityValue.getClass().getAnnotation(LinkedRepository.class);
             Object repoBean = ctx.getBean(linkedRepository.value());
             Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
-            logger.info("found a constant entity fields to persist to database");
+            logger.info("found a constant entity field to persist to database");
             saveAllMethod.invoke(repoBean, new ArrayList<>(List.of(constantEntityValue)));
         }
     }

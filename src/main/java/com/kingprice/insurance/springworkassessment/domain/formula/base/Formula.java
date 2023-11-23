@@ -1,5 +1,6 @@
 package com.kingprice.insurance.springworkassessment.domain.formula.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.kingprice.insurance.springworkassessment.GlobalConstants;
@@ -74,6 +75,7 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		return formulaType;
 	}
 
+	@JsonIgnore
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
 
 	public FormulaCalculator getFormulaCalculator(ApplicationContext applicationContext) {

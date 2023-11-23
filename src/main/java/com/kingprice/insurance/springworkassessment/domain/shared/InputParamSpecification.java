@@ -19,12 +19,12 @@ public class InputParamSpecification extends BaseEntity implements Serializable 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="min_value") // null implies "infinite"
+    @Column(name="min_value")
     @Max(Long.MAX_VALUE)
     @NotNull
     private Double minValueAllowed = 0.0D;
 
-    @Column(name="max_value") // null implies "infinite"
+    @Column(name="max_value")
     @Max(Long.MAX_VALUE)
     @NotNull
     private Double maxValueAllowed = (double) Long.MAX_VALUE;
