@@ -72,7 +72,7 @@ public class PostSetupEntityConstantSaver {
             Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
             List<Object> constantEntityValues = getAllConstantValuesInClass(clazz).stream()
                     .filter(constantVal -> constantVal.getClass().isAnnotationPresent(Entity.class) && clazz.isAssignableFrom(constantVal.getClass()))
-                    .collect();
+                    .collect(Collectors.toList());
 
             List<Field> constantEntityFields = List.of(getClassFields(clazz));
 
