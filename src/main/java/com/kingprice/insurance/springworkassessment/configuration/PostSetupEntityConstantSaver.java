@@ -42,6 +42,7 @@ public class PostSetupEntityConstantSaver {
     }
 
     private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
+        logger.info("checking class " + clazz.getSimpleName());
         if (clazz.isAnnotationPresent(LinkedRepository.class)) {
             logger.info("checking if entity class " + clazz.getSimpleName() + " has any constant entity fields to persist");
             LinkedRepository linkedRepository = clazz.getAnnotation(LinkedRepository.class);
