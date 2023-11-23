@@ -24,23 +24,18 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 
 import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.metamodel.ManagedType;
-import javax.persistence.metamodel.Metamodel;
-
 @Component
 public class PostSetupEntityConstantSaver {
     private static final Logger logger = LoggerFactory.getLogger(PostSetupEntityConstantSaver.class);
-
-    @PersistenceContext
-    private EntityManager em;
     
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext ctx = event.getApplicationContext();
 
-        try {            
+        try {
+
+            List<Class<?>> possibleEntityDomainClasses = findAllClassesUsingReflectionsLibrary("com.kingprice.insurance.springworkassessment")
+            
             for(Class<?> clazz : possibleEntityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
             }
@@ -55,18 +50,11 @@ public class PostSetupEntityConstantSaver {
         }
     }
 
-    public List<Class<?>> findAllClassesInPackage(String packageName) {
-        final List<Class<?>> result = new ArrayList<Class<?>>();
-        final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(
-                true, new StandardServletEnvironment());
-        for (BeanDefinition beanDefinition : provider.findCandidateComponents(packageName)) {
-            try {
-                result.add(Class.forName(beanDefinition.getBeanClassName()));
-            } catch (ClassNotFoundException e) {
-                logger.warn("Could not resolve class object for bean definition", e);
-            }
-        }
-        return result;
+    public List<Class<?>> findAllClassesUsingReflectionsLibrary(String packageName) {
+        Reflections reflections = new Reflections(packageName, new SubTypesScanner(false));
+        return reflections.getSubTypesOf(Object.class)
+          .stream()
+          .collect(Collectors.toList());
     }
 
     private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {

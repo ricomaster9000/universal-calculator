@@ -127,6 +127,11 @@
 			<artifactId>Java-Reflection-Utils</artifactId>
 			<version>1.0.82</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.reflections</groupId>
+		    <artifactId>reflections</artifactId> 
+		    <version>0.9.12</version>
+		</dependency>
 
 	</dependencies>
 
