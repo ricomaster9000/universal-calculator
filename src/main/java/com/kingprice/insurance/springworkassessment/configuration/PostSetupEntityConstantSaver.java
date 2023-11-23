@@ -88,6 +88,13 @@ public class PostSetupEntityConstantSaver {
                 } else {
                     return false;
                 }
+            }).map(getter -> {
+                Class<?> methodReturnType = getter.getReturnType();
+                if(getter.getReturnType().equals(List.class)) {
+                    ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
+                    methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
+                }
+                return methodReturnType;
             }).toList());
             
             logger.info("found " + (constantEntityFields.size()+getterMethodReturnTypes.size()) + " constant entity fields to persist to database");
