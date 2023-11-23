@@ -15,7 +15,12 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.web.context.support.StandardServletEnvironment;
 
 import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.*;
 
@@ -28,7 +33,8 @@ public class PostSetupEntityConstantSaver {
         ApplicationContext ctx = event.getApplicationContext();
 
         try {
-            List<Class<?>> entityDomainClasses = getClasses("com.kingprice.insurance.springworkassessment");
+            List<Class<?>> possibleEntityDomainClasses = getClasses("com.kingprice.insurance.springworkassessment");
+            possibleEntityDomainClasses.addAll(findAllClassesInPackage("com.kingprice.insurance.springworkassessment"));
 
             logger.info("will look at " + entityDomainClasses.size() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
             
@@ -39,6 +45,20 @@ public class PostSetupEntityConstantSaver {
                 ClassNotFoundException | NoSuchMethodException e){
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Class<?>> findAllClassesInPackage(String packageName) {
+        final List<Class<?>> result = new ArrayList<Class<?>>();
+        final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(
+                true, new StandardServletEnvironment());
+        for (BeanDefinition beanDefinition : provider.findCandidateComponents(packageName)) {
+            try {
+                result.add(Class.forName(beanDefinition.getBeanClassName()));
+            } catch (ClassNotFoundException e) {
+                logger.warn("Could not resolve class object for bean definition", e);
+            }
+        }
+        return result;
     }
 
     private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
