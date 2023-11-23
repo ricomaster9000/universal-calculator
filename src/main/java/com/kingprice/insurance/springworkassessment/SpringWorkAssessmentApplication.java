@@ -4,9 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import static com.kingprice.insurance.springworkassessment.GlobalConstants.DOMAIN_MODEL_PACKAGE_NAME;
+
 @SpringBootApplication()
 @ComponentScan({
-		"com.kingprice.insurance.springworkassessment.domain",
+		DOMAIN_MODEL_PACKAGE_NAME,
 		"com.kingprice.insurance.springworkassessment.exception",
 		"com.kingprice.insurance.springworkassessment.repository",
 		"com.kingprice.insurance.springworkassessment.service",

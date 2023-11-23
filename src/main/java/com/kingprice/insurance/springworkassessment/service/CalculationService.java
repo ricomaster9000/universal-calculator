@@ -45,6 +45,7 @@ public class CalculationService {
         return calculationRepository.findAll();
     }
 
+    @Transactional()
     public Calculation updateCalculation(Long id, Calculation calculation) {
         Calculation existingCalculation = getCalculationById(id);
         existingCalculation.setName(calculation.getName());
@@ -52,6 +53,7 @@ public class CalculationService {
         return calculationRepository.save(existingCalculation);
     }
 
+    @Transactional()
     public void deleteCalculation(Long id) {
         Calculation existingCalculation = getCalculationById(id);
         calculationRepository.delete(existingCalculation);
