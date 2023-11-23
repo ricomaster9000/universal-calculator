@@ -30,7 +30,7 @@ public class PostSetupEntityConstantSaver {
         try {
             List<Class<?>> entityDomainClasses = getClasses("com.kingprice.insurance.springworkassessment");
 
-            logger.info("will look at " + entityDomainClasses.getSize() " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
+            logger.info("will look at " + entityDomainClasses.getSize() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
             
             for(Class<?> clazz : entityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
