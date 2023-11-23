@@ -134,7 +134,7 @@ public class ConstantEntities {
             .withFromMeasurementUnit(FOOT)
             .withToMeasurementUnit(CENTIMETER)
             .withConversionFactor(30.48D);
-    public static final FormulaType CONVERSION_FORMULA_TYPE = new FormulaType(1L,CONVERSION_FORMULA_TYPE_NAME);
+    public static final FormulaType CONVERSION_FORMULA_TYPE = new FormulaType(1L,CONVERSION_FORMULA_TYPE_NAME,ConversionFormula.class.getName());
 
     public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
             .withId(1L)
