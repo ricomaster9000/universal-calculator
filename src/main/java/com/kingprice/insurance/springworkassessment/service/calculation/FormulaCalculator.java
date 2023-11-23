@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit.ALL_MEASUREMENT_UNITS;
 
 @Component
 public abstract class FormulaCalculator {
