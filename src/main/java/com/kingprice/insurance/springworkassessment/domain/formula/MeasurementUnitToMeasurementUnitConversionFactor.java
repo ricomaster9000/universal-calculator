@@ -93,12 +93,12 @@ public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "from_measurement_unit_id")
     @NotNull
     private MeasurementUnit fromMeasurementUnit;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "to_measurement_unit_id")
     @NotNull
     private MeasurementUnit toMeasurementUnit;

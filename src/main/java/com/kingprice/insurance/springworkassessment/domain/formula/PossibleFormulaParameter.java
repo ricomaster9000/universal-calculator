@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 
 @MappedSuperclass
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class PossibleFormulaParameter extends BaseEntity implements Serializable {
 
     @Id
