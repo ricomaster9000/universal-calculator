@@ -46,7 +46,7 @@ public class PostSetupEntityConstantSaver {
 
         try {
 
-            List<Class<?>> possibleEntityDomainClasses = findAllClassesUsingReflectionsLibrary("com.kingprice.insurance.springworkassessment")
+            List<Class<?>> possibleEntityDomainClasses = findAllClassesUsingReflectionsLibrary("com.kingprice.insurance.springworkassessment");
             
             for(Class<?> clazz : possibleEntityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
