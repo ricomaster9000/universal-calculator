@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.kingprice.insurance.springworkassessment.GlobalConstants.DOMAIN_MODEL_PACKAGE_NAME;
 import static com.kingprice.insurance.springworkassessment.exception.FormulaException.FormulaError.*;
 
 @Service
@@ -47,7 +46,7 @@ public class FormulaService {
     public List<Formula<?,?>> getAllFormulas() {
         List<Formula<?,?>> result = new ArrayList<>();
 
-        Reflections reflections = new Reflections(DOMAIN_MODEL_PACKAGE_NAME);
+        Reflections reflections = new Reflections();
 
         Class<?> clazz = null;
         try {
