@@ -10,83 +10,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
-import static com.kingprice.insurance.springworkassessment.domain.formula.MeasurementUnit.*;
 
 @Entity(name = "measurement_unit_to_measurement_unit_conv_factor")
 @LinkedRepository(MeasurementToMeasurementConversionFactRepo.class)
 public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity implements Serializable {
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(1L)
-            .withFromMeasurementUnit(METER)
-            .withToMeasurementUnit(FOOT)
-            .withConversionFactor(3.28084D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor FOOT_TO_METER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(2L)
-            .withFromMeasurementUnit(FOOT)
-            .withToMeasurementUnit(METER)
-            .withConversionFactor(0.3048D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor CENTIMETER_TO_INCH = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(3L)
-            .withFromMeasurementUnit(CENTIMETER)
-            .withToMeasurementUnit(INCH)
-            .withConversionFactor(0.393701D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor CENTIMETER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(4L)
-            .withFromMeasurementUnit(CENTIMETER)
-            .withToMeasurementUnit(FOOT)
-            .withConversionFactor(0.0328084D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor INCH_TO_CENTIMETER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(5L)
-            .withFromMeasurementUnit(INCH)
-            .withToMeasurementUnit(CENTIMETER)
-            .withConversionFactor(2.5400013716D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor INCH_TO_MILLIMETER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(6L)
-            .withFromMeasurementUnit(INCH)
-            .withToMeasurementUnit(MILLIMETER)
-            .withConversionFactor(25.4D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor MILLIMETER_TO_INCH = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(7L)
-            .withFromMeasurementUnit(MILLIMETER)
-            .withToMeasurementUnit(INCH)
-            .withConversionFactor(0.0393701D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor KILOMETER_TO_MILE = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(8L)
-            .withFromMeasurementUnit(KILOMETER)
-            .withToMeasurementUnit(MILE)
-            .withConversionFactor(0.6213715277778D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor MILE_TO_KILOMETER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(9L)
-            .withFromMeasurementUnit(MILE)
-            .withToMeasurementUnit(KILOMETER)
-            .withConversionFactor(1.6093448690458176387D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_YARD = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(10L)
-            .withFromMeasurementUnit(METER)
-            .withToMeasurementUnit(YARD)
-            .withConversionFactor(1.09361D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor YARD_TO_METER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(11L)
-            .withFromMeasurementUnit(YARD)
-            .withToMeasurementUnit(METER)
-            .withConversionFactor(0.9144D);
-
-    public static final MeasurementUnitToMeasurementUnitConversionFactor FOOT_TO_CENTIMETER = new MeasurementUnitToMeasurementUnitConversionFactor()
-            .withId(12L)
-            .withFromMeasurementUnit(FOOT)
-            .withToMeasurementUnit(CENTIMETER)
-            .withConversionFactor(30.48D);
 
     @Column(name="id")
     @Id

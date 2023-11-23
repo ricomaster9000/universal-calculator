@@ -1,39 +1,24 @@
 package com.kingprice.insurance.springworkassessment.configuration;
 
 import com.kingprice.insurance.springworkassessment.annotation.LinkedRepository;
+import com.kingprice.insurance.springworkassessment.domain.ConstantEntities;
 import jakarta.persistence.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.IntrospectionException;
-import java.lang.reflect.*;
-
-import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.scanners.MethodParameterScanner;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.Scanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.web.context.support.StandardServletEnvironment;
-
-import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.*;
+import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.getAllConstantValuesInClass;
+import static org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils.getClassFields;
 
 @Component
 public class PostSetupEntityConstantSaver {
@@ -44,23 +29,15 @@ public class PostSetupEntityConstantSaver {
         ApplicationContext ctx = event.getApplicationContext();
 
         try {
-
-            List<Class<?>> possibleEntityDomainClasses = findAllClassesUsingReflectionsLibrary("com.kingprice.insurance.springworkassessment");
+            List<? extends Class<?>> constantEntities = getAllConstantValuesInClass(ConstantEntities.class).stream().map(constantEntity -> constantEntity.getClass()).toList();
             
-            for(Class<?> clazz : possibleEntityDomainClasses) {
+            for(Class<?> clazz : constantEntities) {
                 saveConstantEntities(clazz,ctx);
             }
         } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
                 ClassNotFoundException | NoSuchMethodException | IntrospectionException e){
             throw new RuntimeException(e);
         }
-    }
-
-    public List<Class<?>> findAllClassesUsingReflectionsLibrary(String packageName) {
-        Reflections reflections = new Reflections(packageName, new SubTypesScanner(false));
-        return reflections.getSubTypesOf(Object.class)
-          .stream()
-          .collect(Collectors.toList());
     }
 
     private void saveConstantEntities(Class<?> clazz, ApplicationContext ctx) throws NoSuchMethodException, IOException, NoSuchFieldException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, IntrospectionException {
@@ -72,39 +49,11 @@ public class PostSetupEntityConstantSaver {
             Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
             List<Object> constantEntityValues = getAllConstantValuesInClass(clazz).stream()
                     .filter(constantVal -> constantVal.getClass().isAnnotationPresent(Entity.class) && clazz.isAssignableFrom(constantVal.getClass()))
-                    .collect(Collectors.toList());
+                    .toList();
 
             List<Field> constantEntityFields = List.of(getClassFields(clazz));
-
-            // also retrieve entity value types of methods
-            List<Class<?>> getterMethodReturnTypes = getGetterMethods(clazz).stream().filter(getter -> {
-                if(getter.getReturnType() != null) {
-                    Class<?> methodReturnType = getter.getReturnType();
-                    if(getter.getReturnType().equals(List.class)) {
-                        ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
-                        methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
-                    }
-                    return (methodReturnType.isAnnotationPresent(Entity.class)) ? true : false;
-                } else {
-                    return false;
-                }
-            }).map(getter -> {
-                Class<?> methodReturnType = getter.getReturnType();
-                if(getter.getReturnType().equals(List.class)) {
-                    ParameterizedType stringListType = (ParameterizedType) getter.getGenericReturnType();
-                    methodReturnType = (Class<?>) stringListType.getActualTypeArguments()[0];
-                }
-                return methodReturnType;
-            }).collect(Collectors.toList());
             
-            logger.info("found " + (constantEntityFields.size()+getterMethodReturnTypes.size()) + " constant entity fields to persist to database");
-
-            for(Class<?> getterMethodReturnType : getterMethodReturnTypes) {
-                if(!getterMethodReturnType.equals(clazz)) {
-                    saveConstantEntities(getterMethodReturnType, ctx);
-                }
-            }
-
+            logger.info("found " + constantEntityFields.size() + " constant entity fields to persist to database");
 
             for(Field field : constantEntityFields) {
                 if(!field.getType().equals(clazz)) {

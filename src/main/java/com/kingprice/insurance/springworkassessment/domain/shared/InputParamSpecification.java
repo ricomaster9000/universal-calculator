@@ -14,24 +14,6 @@ import java.io.Serializable;
 @LinkedRepository(NumberInputParamSpecRepository.class)
 public class InputParamSpecification extends BaseEntity implements Serializable {
 
-    public static final InputParamSpecification GENERIC_NUMBER_DECIMAL_INPUT_PARAM = new InputParamSpecification()
-            .withId(1L)
-            .withStepSizeAllowed(0.00000000001D);
-
-    public static final InputParamSpecification GENERIC_INTEGER_INPUT_PARAM = new InputParamSpecification()
-            .withId(2L)
-            .withStepSizeAllowed(1.00D);
-
-    public static final InputParamSpecification INTEGER_POSITIVE_INPUT_PARAM = new InputParamSpecification()
-            .withId(3L)
-            .withMinValueAllowed(0.00D)
-            .withStepSizeAllowed(1.00D);
-
-    public static final InputParamSpecification INTEGER_NEGATIVE_INPUT_PARAM = new InputParamSpecification()
-            .withId(4L)
-            .withMaxValueAllowed(0.00D)
-            .withStepSizeAllowed(1.00D);
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
