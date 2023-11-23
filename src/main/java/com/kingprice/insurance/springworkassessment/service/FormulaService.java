@@ -46,7 +46,7 @@ public class FormulaService {
     public List<Formula<?,?>> getAllFormulas() {
         List<Formula<?,?>> result = new ArrayList<>();
 
-        Reflections reflections = new Reflections();
+        Reflections reflections = new Reflections("com.kingprice.insurance.springworkassessment");
 
         Class<?> clazz = null;
         try {
