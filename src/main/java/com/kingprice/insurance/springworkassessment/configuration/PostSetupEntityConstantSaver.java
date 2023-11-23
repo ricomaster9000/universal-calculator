@@ -36,9 +36,9 @@ public class PostSetupEntityConstantSaver {
             List<Class<?>> possibleEntityDomainClasses = getClasses("com.kingprice.insurance.springworkassessment");
             possibleEntityDomainClasses.addAll(findAllClassesInPackage("com.kingprice.insurance.springworkassessment"));
 
-            logger.info("will look at " + entityDomainClasses.size() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
+            logger.info("will look at " + possibleEntityDomainClasses.size() + " classes that might have @LinkedRepository annotation for constant entity class fields to persist");
             
-            for(Class<?> clazz : entityDomainClasses) {
+            for(Class<?> clazz : possibleEntityDomainClasses) {
                 saveConstantEntities(clazz,ctx);
             }
         } catch(IllegalAccessException | InvocationTargetException | IOException | NoSuchFieldException |
