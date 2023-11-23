@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -118,7 +119,7 @@ public class CalculationCRUDTest {
         );
         calculation.setCalculationInputParams(Arrays.asList(inputParamFrom, inputParamTo));
 
-        calculation.setOutput(3.28084);
+        calculation.setOutput(BigDecimal.valueOf(3.28084));
 
         return new CalculateRequest(GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
     }

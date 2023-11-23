@@ -7,6 +7,7 @@ import com.kingprice.insurance.springworkassessment.repository.MeasurementToMeas
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ConversionFormulaCalculator extends FormulaCalculator {
                     convertToCalcInput.getPossibleFormulaParameterName()
             ).stream().findFirst().orElseThrow(() -> new CalculationException(CALCULATION_UNABLE_TO_FIND_CONVERSION_FACTOR)).getConversionFactor();
 
-            calculation.setOutput(convertFromCalcInput.getNumericalInputValue() * conversionFactor);
+            calculation.setOutput(BigDecimal.valueOf(convertFromCalcInput.getNumericalInputValue() * conversionFactor));
         }
         return new ArrayList<>(List.of(calculations));
     }

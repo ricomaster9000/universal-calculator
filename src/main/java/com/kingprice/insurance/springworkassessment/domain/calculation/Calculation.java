@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Entity(name = "calculation")
@@ -41,7 +43,7 @@ public class Calculation extends BaseEntity {
     private List<CalculationInputParam> calculationInputParams;
 
     @Column(name="output_value")
-    private Double output;
+    private BigDecimal output;
 
     public Calculation() {}
 
@@ -92,11 +94,11 @@ public class Calculation extends BaseEntity {
         this.calculationInputParams = calculationInputParams;
     }
 
-    public Double getOutput() {
+    public BigDecimal getOutput() {
         return output;
     }
 
-    public void setOutput(Double output) {
-        this.output = output;
+    public void setOutput(BigDecimal output) {
+        this.output = output != null ? output.setScale(8, RoundingMode.HALF_EVEN) : null;
     }
 }
