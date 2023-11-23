@@ -26,7 +26,7 @@ public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula
     );
 
     public static FormulaParameterInputSpecification CONVERSION_TO_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
-            1L,
+            2L,
             "CONVERSION_TO",
             "the measurement unit to convert to"
     );

@@ -28,7 +28,7 @@ import static com.kingprice.insurance.springworkassessment.domain.formula.Formul
 public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "name")

@@ -9,13 +9,13 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 
-@Entity
+@MappedSuperclass
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class PossibleFormulaParameter extends BaseEntity implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
