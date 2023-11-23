@@ -49,11 +49,18 @@ public class FormulaService {
 
         Reflections reflections = new Reflections(DOMAIN_MODEL_PACKAGE_NAME);
 
-        Set<Class<? extends Formula>> allFormulaClasses = reflections.getSubTypesOf(Formula.class);
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(Formula.class.getName());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-        for(Class<? extends Formula> formulaClass : allFormulaClasses) {
+        Set<Class<?>> allFormulaClasses = (Set<Class<?>>) reflections.getSubTypesOf(clazz);
+
+        for(Class<?> formulaClass : allFormulaClasses) {
             try {
-                result.addAll(getFormulaRepositoryGeneric(formulaClass.getConstructor().newInstance()).findAll());
+                result.addAll(getFormulaRepositoryGeneric((Formula<?, ?>) formulaClass.getConstructor().newInstance()).findAll());
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
 
             }
