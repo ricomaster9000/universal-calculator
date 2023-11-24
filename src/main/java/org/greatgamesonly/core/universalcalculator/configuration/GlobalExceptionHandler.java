@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,6 +20,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    public static final String VALIDATION_ERROR_CODE = "VALIDATION_400";
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -42,17 +45,34 @@ public class GlobalExceptionHandler {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Validation failed", errors);
+        ValidationError validationError = new ValidationError(
+                VALIDATION_ERROR_CODE,
+                HttpStatus.BAD_REQUEST.value(),
+                "Validation failed",
+                errors
+        );
 
         logger.error("Validation error: {}", validationError.getErrors());
 
         return new ResponseEntity<>(validationError, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<CustomError> handlePayloadNotSetException(HttpMessageNotReadableException ex) {
+        String responseMsg = ex.getMessage().substring(0,ex.getMessage().indexOf(":"));
+
+        ValidationError validationError = new ValidationError(
+                VALIDATION_ERROR_CODE,
+                HttpStatus.BAD_REQUEST.value(),
+                responseMsg
+        );
+        logger.error("An error occurred: {}", validationError.getErrors());
+        return new ResponseEntity<>(validationError, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleException(Exception ex) {
         logger.error("An unexpected error occurred: {}", ex.getMessage(), ex);
-        // Return a generic error response
         return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
