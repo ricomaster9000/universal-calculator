@@ -45,29 +45,6 @@ public class FormulaService {
                 .orElseThrow(() -> new FormulaException(FORMULA_NOT_FOUND));
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void cacheFormulaSubTypeClasses() throws ClassNotFoundException {
-        Reflections reflections = new Reflections();
-
-        /*
-         I tried pinpointing the Reflections object instance to target the web app package name, but
-         then it does not find the Formula subclasses, I have a feeling Spring is behind this, but
-         if I set the Reflections to scan everything it will find but it is very slow
-         */
-        CACHED_FORMULA_SUBCLASSES.addAll(reflections.getSubTypesOf(Class.forName(Formula.class.getName())));
-
-        for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
-            try {
-                CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.put(
-                        formulaClass,
-                        getFormulaRepositoryGeneric((Formula<?, ?>) formulaClass.getConstructor().newInstance())
-                );
-            } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-
-            }
-        }
-    }
-
     @Transactional(readOnly = true)
     public List<Formula<?,?>> getAllFormulas() {
         List<Formula<?,?>> result = new ArrayList<>();
@@ -114,10 +91,6 @@ public class FormulaService {
             throw new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND,e);
         }
         return result;
-    }
-
-    private BaseFormulaRepository<? extends Formula<?,?>> getFormulaRepositoryGeneric(Formula<?,?> formula) {
-        return applicationContext.getBean(formula.getFormulaRepositoryClass());
     }
 
     private <T extends Formula<?,?>> BaseFormulaRepository<T> getFormulaRepository(T formula) {

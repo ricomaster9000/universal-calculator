@@ -19,12 +19,7 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 @MappedSuperclass
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "formulaTypeName")
-@JsonSubTypes({
-		@JsonSubTypes.Type(value = ConversionFormula.class, name = FormulaType.CONVERSION_FORMULA_TYPE_NAME)
-		// Add other formula types here
-		// TODO find a better way to add support for custom formula types added by users
-})
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="formulaTypeLinkedFormulaSubClassName")
 public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
@@ -61,18 +56,6 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 			inverseJoinColumns = @JoinColumn(name = "possible_formula_param_id")
 	)
 	protected List<T> possibleFormulaParameters;
-
-	@PrePersist
-	public void prePersist() {
-		if (formulaType == null) {
-			// Set the formulaType based on the subclass's formulaType
-			formulaType = getFormulaType();
-		}
-	}
-
-	public FormulaType getFormulaType() {
-		return formulaType;
-	}
 
 	@JsonIgnore
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
@@ -152,6 +135,14 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getFormulaTypeLinkedFormulaSubClassName() {
+		return getFormulaType().getLinkedFormulaSubClassName();
+	}
+
+	public FormulaType getFormulaType() {
+		return formulaType;
 	}
 
 	public void setFormulaType(FormulaType formulaType) {

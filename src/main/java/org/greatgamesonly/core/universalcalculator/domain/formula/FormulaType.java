@@ -26,8 +26,7 @@ public class FormulaType extends BaseEntity {
     @Size(min = 3, max = STANDARD_DB_STRING_MAX_CHAR_SIZE)
     private String name;
 
-    @JsonIgnore
-    @Column(name = "formula_subclass_lass_name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    @Column(name = "formula_subclass_class_name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
     @Size(min = 3, max = SHORT_DB_TEXT_MAX_CHAR_SIZE)
     private String linkedFormulaSubClassName;
