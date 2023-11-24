@@ -26,15 +26,6 @@ public class CalculationService {
     private ApplicationContext applicationContext;
 
     @Transactional()
-    public Calculation createCalculation(Calculation calculation) throws CalculationException {
-        FormulaCalculator formulaCalculator =
-                syncFormulaWithCorrectFormulaSubclass(calculation.getFormula()).getFormulaCalculator(applicationContext);
-
-        Calculation performedCalculation = formulaCalculator.calculate(calculation);
-        return calculationRepository.save(performedCalculation);
-    }
-
-    @Transactional()
     public List<Calculation> createCalculations(CalculateRequest calculateRequest) {
         FormulaCalculator formulaCalculator =
                 syncFormulaWithCorrectFormulaSubclass(calculateRequest.getLinkedFormula()).getFormulaCalculator(applicationContext);

@@ -21,15 +21,15 @@ public class FormulaType extends BaseEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
-    @NotNull
-    @Size(min = 3, max = STANDARD_DB_STRING_MAX_CHAR_SIZE)
-    private String name;
-
     @Column(name = "formula_subclass_class_name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
     @Size(min = 3, max = SHORT_DB_TEXT_MAX_CHAR_SIZE)
     private String linkedFormulaSubClassName;
+
+    @Column(name = "name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    @NotNull
+    @Size(min = 3, max = STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    private String name;
 
     public FormulaType() {}
 
@@ -47,19 +47,19 @@ public class FormulaType extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLinkedFormulaSubClassName() {
         return linkedFormulaSubClassName;
     }
 
     public void setLinkedFormulaSubClassName(String linkedFormulaSubClassName) {
         this.linkedFormulaSubClassName = linkedFormulaSubClassName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,6 +1,7 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.domain.formula.base.FormulaRequest;
 import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
 import org.greatgamesonly.core.universalcalculator.service.FormulaService;
 import jakarta.validation.Valid;
@@ -19,8 +20,8 @@ public class FormulaController {
     private FormulaService formulaService;
 
     @PostMapping
-    public ResponseEntity<Formula<?,?>> createConversionFormula(@Valid @RequestBody Formula<?,?> formula) {
-        Formula<?,?> createdFormula = formulaService.createFormula(formula);
+    public ResponseEntity<? extends Formula<?,?>> createConversionFormula(@Valid @RequestBody FormulaRequest formula) {
+        Formula<?,?> createdFormula = formulaService.createFormula(formula.getFormula());
         return new ResponseEntity<>(createdFormula, HttpStatus.CREATED);
     }
 
@@ -37,8 +38,8 @@ public class FormulaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Formula<?,?>> updateConversionFormula(@PathVariable Long id, @Valid @RequestBody Formula<?,?> formula) {
-        Formula<?,?> updatedFormula = formulaService.updateFormula(id, formula);
+    public ResponseEntity<Formula<?,?>> updateConversionFormula(@PathVariable Long id, @Valid @RequestBody FormulaRequest formula) {
+        Formula<?,?> updatedFormula = formulaService.updateFormula(id, formula.getFormula());
         return ResponseEntity.ok(updatedFormula);
     }
 
