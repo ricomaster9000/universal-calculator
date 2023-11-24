@@ -8,8 +8,8 @@
 		<version>3.0.8</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.kingprice.insurance</groupId>
-	<artifactId>spring.work.assessment</artifactId>
+	<groupId>org.greatgamesonly.core</groupId>
+	<artifactId>universalcalculator</artifactId>
 	<version>1.0.0</version>
 	<name>spring-work-assessment</name>
 	<description>Assessment Project using hibernate, spring boot 3 and apache derby</description>
