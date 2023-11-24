@@ -31,4 +31,4 @@ jobs:
           environment_name: "King-price-insurance-back-end-env-1"
           version_label: "deploy-${{ github.sha }}"
           region: "eu-west-1"
-          deployment_package: "target/spring.work.assessment-1.0.0.zip"
+          deployment_package: "target/universalcalculator-1.0.0.zip"
