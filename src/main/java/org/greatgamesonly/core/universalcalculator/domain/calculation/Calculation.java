@@ -31,15 +31,13 @@ public class Calculation extends BaseEntity {
     @NotNull
     private String description = "NO_DESCRIPTION";
 
-    @Transient // too many complications arise from ensuring bi-directional relationship, all I need it for is to do the appropriate
-    private Formula<?,?> formula;
-
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "calculation_to_calculation_input_params",
             joinColumns = @JoinColumn(name = "calculation_id"),
             inverseJoinColumns = @JoinColumn(name = "calculation_input_param_id")
     )
+    @NotNull
     private List<CalculationInputParam> calculationInputParams;
 
     @Column(name="output_value")
@@ -69,14 +67,6 @@ public class Calculation extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Formula<?,?> getFormula() {
-        return formula;
-    }
-
-    public void setFormula(Formula<?,?> formula) {
-        this.formula = formula;
     }
 
     public List<CalculationInputParam> getCalculationInputParams() {

@@ -27,7 +27,7 @@ public abstract class PossibleFormulaParameter extends BaseEntity implements Ser
     @NotNull
     private String description;
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn(name = "number_input_param_specification_id")
     @NotNull
     private InputParamSpecification inputParamSpecification;

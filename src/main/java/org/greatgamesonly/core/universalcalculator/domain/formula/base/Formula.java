@@ -3,7 +3,9 @@ package org.greatgamesonly.core.universalcalculator.domain.formula.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
+import org.greatgamesonly.core.universalcalculator.configuration.FormulaDeserializer;
 import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.domain.formula.FormulaParameterInputSpecification;
 import org.greatgamesonly.core.universalcalculator.domain.formula.FormulaType;
@@ -19,7 +21,6 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 @MappedSuperclass
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="formulaTypeLinkedFormulaSubClassName")
 public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
@@ -135,10 +136,6 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getFormulaTypeLinkedFormulaSubClassName() {
-		return getFormulaType().getLinkedFormulaSubClassName();
 	}
 
 	public FormulaType getFormulaType() {
