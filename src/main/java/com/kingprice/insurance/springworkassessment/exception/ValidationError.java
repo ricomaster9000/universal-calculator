@@ -8,8 +8,12 @@ public class ValidationError extends CustomError {
 
     private Map<String, String> errors;
 
-    public ValidationError(int httpStatusCode, String message, Map<String, String> errors) {
-        super(null, message, httpStatusCode);
+    public ValidationError(String errorCode, int httpStatusCode, String message) {
+        super(errorCode, message, httpStatusCode);
+    }
+
+    public ValidationError(String errorCode, int httpStatusCode, String message, Map<String, String> errors) {
+        super(errorCode, message, httpStatusCode);
         this.errors = errors;
     }
 
