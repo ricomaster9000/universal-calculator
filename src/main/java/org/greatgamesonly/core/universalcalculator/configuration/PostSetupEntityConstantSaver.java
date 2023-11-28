@@ -2,6 +2,7 @@ package org.greatgamesonly.core.universalcalculator.configuration;
 
 import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
 import org.reflections.Reflections;
@@ -81,9 +82,9 @@ public class PostSetupEntityConstantSaver {
         if (constantEntityValue.getClass().isAnnotationPresent(LinkedRepository.class)) {
             LinkedRepository linkedRepository = constantEntityValue.getClass().getAnnotation(LinkedRepository.class);
             Object repoBean = ctx.getBean(linkedRepository.value());
-            Method saveAllMethod = linkedRepository.value().getMethod("saveAllEntitiesImmediately", Iterable.class);
+            Method saveAllMethod = linkedRepository.value().getMethod("saveEntityImmediately", Object.class);
             logger.info("found a constant entity field to persist to database");
-            saveAllMethod.invoke(repoBean, new ArrayList<>(List.of(constantEntityValue)));
+            ((BaseEntity) constantEntityValue).setId(((BaseEntity)saveAllMethod.invoke(repoBean, constantEntityValue)).getId());
         }
     }
 
