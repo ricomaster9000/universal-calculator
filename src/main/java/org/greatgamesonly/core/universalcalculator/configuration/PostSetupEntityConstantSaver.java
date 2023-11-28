@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.configuration;
 
+import jakarta.persistence.Entity;
 import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
 import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
@@ -22,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CACHED_FORMULA_SUBCLASSES;
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES;
@@ -48,17 +50,19 @@ public class PostSetupEntityConstantSaver {
             throw new RuntimeException(e);
         }
 
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(false),new ResourcesScanner())
-                .addUrls(ClasspathHelper.forJavaClassPath())
-                .filterInputsBy(new FilterBuilder()));
+        Reflections reflections = new Reflections("org.greatgamesonly.core");
 
         /*
          I tried pinpointing the Reflections object instance to target the web app package name, but
          then it does not find the Formula subclasses, I have a feeling Spring is behind this, but
          if I set the Reflections to scan everything it will find but it is very slow
          */
-        CACHED_FORMULA_SUBCLASSES.addAll(reflections.getSubTypesOf(Class.forName(Formula.class.getName())));
+        Set<Class<? extends Formula>> possibleFormulaSubClasses = reflections.getSubTypesOf(Formula.class);
+        for(Class<?> possibleFormulaSubClass : possibleFormulaSubClasses) {
+            if(Formula.class.isAssignableFrom(possibleFormulaSubClass)) {
+                CACHED_FORMULA_SUBCLASSES.add(possibleFormulaSubClass);
+            }
+        }
 
         for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
             try {
@@ -67,7 +71,7 @@ public class PostSetupEntityConstantSaver {
                         getFormulaRepositoryGeneric(ctx,(Formula<?, ?>) formulaClass.getConstructor().newInstance())
                 );
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-
+                throw new RuntimeException(e.getMessage(),e);
             }
         }
 
