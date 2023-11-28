@@ -1,11 +1,13 @@
 package org.greatgamesonly.core.universalcalculator.configuration;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
 import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
 import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
+import org.hibernate.LockMode;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -14,6 +16,7 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -88,7 +91,8 @@ public class PostSetupEntityConstantSaver {
             Object repoBean = ctx.getBean(linkedRepository.value());
             Method saveAllMethod = linkedRepository.value().getMethod("saveEntityImmediately", Object.class);
             logger.info("found a constant entity field to persist to database");
-            ((BaseEntity) constantEntityValue).setId(((BaseEntity)saveAllMethod.invoke(repoBean, constantEntityValue)).getId());
+            BaseEntity createdEntity = ((BaseEntity)saveAllMethod.invoke(repoBean, constantEntityValue));
+            ((BaseEntity) constantEntityValue).setId(createdEntity.getId());
         }
     }
 

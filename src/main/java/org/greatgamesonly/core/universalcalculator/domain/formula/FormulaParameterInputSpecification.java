@@ -16,7 +16,7 @@ public class FormulaParameterInputSpecification extends BaseEntity implements Se
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "parameter_placeholder_name")
