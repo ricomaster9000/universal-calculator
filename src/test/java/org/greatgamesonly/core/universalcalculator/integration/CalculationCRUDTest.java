@@ -107,7 +107,6 @@ public class CalculationCRUDTest {
 
     private CalculateRequest createTestCalculation() {
         Calculation calculation = new Calculation();
-        calculation.setId(PREDEFINED_CALCULATION_ID);
         calculation.setName(PREDEFINED_CALCULATION_NAME);
         calculation.setDescription(PREDEFINED_CALCULATION_DESCRIPTION);
 

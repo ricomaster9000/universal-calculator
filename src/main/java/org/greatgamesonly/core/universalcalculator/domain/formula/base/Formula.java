@@ -42,7 +42,7 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 	@NotNull
 	private FormulaType formulaType;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.REFRESH}, fetch=FetchType.EAGER)
 	@JoinTable(
 			name = "formula_to_formula_param_usage_info",
 			joinColumns = @JoinColumn(name = "formula_id"),
@@ -82,6 +82,11 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		this.name = name;
 		this.description = description;
 		this.formulaType = formulaType;
+	}
+
+	public TYPE withId(Long id) {
+		this.id = id;
+		return (TYPE) this;
 	}
 
 	public TYPE withName(String name) {
