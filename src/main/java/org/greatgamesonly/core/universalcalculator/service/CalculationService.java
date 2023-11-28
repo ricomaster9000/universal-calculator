@@ -65,7 +65,8 @@ public class CalculationService {
             result = CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName()))
                     .findById(formula.getId())
                     .orElseThrow(() -> new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND));
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | FormulaException e) {
+            System.out.println(e.getMessage());
             throw new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND,e);
         }
         return result;
