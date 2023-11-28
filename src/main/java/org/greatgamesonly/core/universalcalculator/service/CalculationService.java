@@ -62,6 +62,8 @@ public class CalculationService {
     private Formula<?,?> syncFormulaWithCorrectFormulaSubclass(Formula<?,?> formula) {
         Formula<?,?> result;
         try {
+            CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.forEach((key, value) -> System.out.println(key + " " + value));
+            Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName());
             result = CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName()))
                     .findById(formula.getId())
                     .orElseThrow(() -> new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND));
