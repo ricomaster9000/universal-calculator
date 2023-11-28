@@ -48,10 +48,7 @@ public class PostSetupEntityConstantSaver {
             throw new RuntimeException(e);
         }
 
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(false),new ResourcesScanner())
-                .addUrls(ClasspathHelper.forJavaClassPath())
-                .filterInputsBy(new FilterBuilder()));
+        Reflections reflections = new Reflections();
 
         /*
          I tried pinpointing the Reflections object instance to target the web app package name, but
@@ -67,7 +64,7 @@ public class PostSetupEntityConstantSaver {
                         getFormulaRepositoryGeneric(ctx,(Formula<?, ?>) formulaClass.getConstructor().newInstance())
                 );
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-
+                throw new RuntimeException(e.getMessage(),e);
             }
         }
 
