@@ -10,6 +10,11 @@ import java.util.List;
 public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 
     @Transactional
+    default T saveEntityImmediately(T entity) {
+        return saveAllEntitiesImmediately(List.of(entity)).get(0);
+    }
+
+    @Transactional
     default List<T> saveAllEntitiesImmediately(Iterable<T> entities) {
         List<T> savedEntities = saveAll(entities);
         flush(); // Flush to persist immediately to the database.
