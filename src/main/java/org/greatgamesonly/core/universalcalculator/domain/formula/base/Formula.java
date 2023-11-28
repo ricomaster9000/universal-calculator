@@ -37,12 +37,12 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 	@NotNull
 	private String description;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH}, fetch=FetchType.EAGER)
 	@JoinColumn(name = "formula_type_id")
 	@NotNull
 	private FormulaType formulaType;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinTable(
 			name = "formula_to_formula_param_usage_info",
 			joinColumns = @JoinColumn(name = "formula_id"),
@@ -50,7 +50,7 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 	)
 	protected List<FormulaParameterInputSpecification> formulaParameterUsageInfo;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinTable(
 			name = "formula_to_possible_formula_params",
 			joinColumns = @JoinColumn(name = "formula_id"),
@@ -82,11 +82,6 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		this.name = name;
 		this.description = description;
 		this.formulaType = formulaType;
-	}
-
-	public TYPE withId(Long id) {
-		this.id = id;
-		return (TYPE) this;
 	}
 
 	public TYPE withName(String name) {
