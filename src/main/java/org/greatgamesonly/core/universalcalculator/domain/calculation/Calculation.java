@@ -37,8 +37,7 @@ public class Calculation extends BaseEntity {
             joinColumns = @JoinColumn(name = "calculation_id"),
             inverseJoinColumns = @JoinColumn(name = "calculation_input_param_id")
     )
-    @NotNull
-    private List<CalculationInputParam> calculationInputParams;
+    private List<@NotNull CalculationInputParam> calculationInputParams;
 
     @Column(name="output_value")
     private BigDecimal output;
