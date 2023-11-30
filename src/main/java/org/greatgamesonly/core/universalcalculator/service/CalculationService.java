@@ -1,6 +1,7 @@
 package org.greatgamesonly.core.universalcalculator.service;
 
 import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequestQuick;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.exception.CalculationException;
@@ -25,12 +26,30 @@ public class CalculationService {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Transactional()
-    public List<Calculation> createCalculations(CalculateRequest calculateRequest) {
-        FormulaCalculator formulaCalculator =
-                syncFormulaWithCorrectFormulaSubclass(calculateRequest.getLinkedFormula()).getFormulaCalculator(applicationContext);
+    @Autowired
+    private FormulaService formulaService;
 
-        List<Calculation> performedCalculations = formulaCalculator.calculate(calculateRequest.getCalculationsToPerform());
+
+    public List<Calculation> createCalculations(CalculateRequest calculateRequest) {
+        return createCalculations(calculateRequest.getLinkedFormula(),calculateRequest.getCalculationsToPerform());
+    }
+
+    public List<Calculation> createCalculationQuick(CalculateRequestQuick calculateRequest) {
+        return createCalculations(
+                formulaService.getFormulaByIdAndTypeId(
+                        calculateRequest.getLinkedFormulaTypeId(),
+                        calculateRequest.getLinkedFormulaTypeId()
+                ),
+                List.of(calculateRequest.getCalculationToPerform())
+        );
+    }
+
+    @Transactional()
+    public List<Calculation> createCalculations(Formula<?,?> formula, List<Calculation> calculationsToPerform) {
+        FormulaCalculator formulaCalculator =
+                syncFormulaWithCorrectFormulaSubclass(formula).getFormulaCalculator(applicationContext);
+
+        List<Calculation> performedCalculations = formulaCalculator.calculate(calculationsToPerform);
         return calculationRepository.saveAll(performedCalculations);
     }
 
