@@ -27,7 +27,7 @@ public class FormulaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Formula<?,?>> getConversionFormulaById(@PathVariable Long id, @RequestParam("formulaTypeId") Long formulaTypeId) {
-        ConversionFormula formula = formulaService.getFormulaById(id,formulaTypeId);
+        ConversionFormula formula = formulaService.getFormulaByIdAndTypeId(id,formulaTypeId);
         return ResponseEntity.ok(formula);
     }
 

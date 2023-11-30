@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.service.CalculationService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/calculation")
@@ -18,6 +20,12 @@ public class CalculationController {
 
     @PostMapping
     public List<Calculation> createCalculation(@Valid @RequestBody CalculateRequest calculateRequest) {
+        return calculationService.createCalculations(calculateRequest);
+    }
+
+    @PostMapping
+    public List<Calculation> createCalculationQuick(HttpServletRequest request) {
+        Map<String, String[]> queryParams = request.getParameterMap();
         return calculationService.createCalculations(calculateRequest);
     }
 

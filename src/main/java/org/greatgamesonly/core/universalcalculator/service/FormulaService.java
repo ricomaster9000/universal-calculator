@@ -6,15 +6,12 @@ import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
 import org.greatgamesonly.core.universalcalculator.repository.FormulaTypeRepository;
 import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
-import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +34,8 @@ public class FormulaService {
     }
 
     @Transactional(readOnly = true)
-    public <T extends Formula<?,?>> T getFormulaById(Long id, Long formulaTypeId) {
+    @Cacheable(value = "formulaCache")
+    public <T extends Formula<?,?>> T getFormulaByIdAndTypeId(Long id, Long formulaTypeId) {
         FormulaType formulaType = formulaTypeRepository.findById(formulaTypeId)
                 .orElseThrow(() -> new FormulaException(FORMULA_TYPE_NOT_FOUND));
 
