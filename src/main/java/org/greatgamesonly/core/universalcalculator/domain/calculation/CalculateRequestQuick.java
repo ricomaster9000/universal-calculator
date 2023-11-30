@@ -17,8 +17,9 @@ public class CalculateRequestQuick implements Serializable {
 
     public CalculateRequestQuick() {}
 
-    public CalculateRequestQuick(Long linkedFormulaId, Calculation calculationToPerform) {
+    public CalculateRequestQuick(Long linkedFormulaId, Long linkedFormulaTypeId, Calculation calculationToPerform) {
         this.linkedFormulaId = linkedFormulaId;
+        this.linkedFormulaTypeId = linkedFormulaTypeId;
         this.calculationToPerform = calculationToPerform;
     }
 

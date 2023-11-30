@@ -2,12 +2,16 @@ package org.greatgamesonly.core.universalcalculator.controller.v1;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequestQuick;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
+import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculationInputParam;
 import org.greatgamesonly.core.universalcalculator.service.CalculationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,15 +22,36 @@ public class CalculationController {
     @Autowired
     private CalculationService calculationService;
 
-    @PostMapping
+    @PostMapping()
     public List<Calculation> createCalculation(@Valid @RequestBody CalculateRequest calculateRequest) {
         return calculationService.createCalculations(calculateRequest);
     }
 
-    @PostMapping
+    @GetMapping("/quick")
     public List<Calculation> createCalculationQuick(HttpServletRequest request) {
         Map<String, String[]> queryParams = request.getParameterMap();
-        return calculationService.createCalculations(calculateRequest);
+
+        Calculation calculation = new Calculation();
+        calculation.setName("QUICK_CALCULATION");
+
+        Long formulaId = Long.parseLong(queryParams.get("formulaId")[0]);
+        Long formulaTypeId = Long.parseLong(queryParams.get("formulaTypeId")[0]);
+
+        List<String> calculationInputParamNamesToConsider = new ArrayList<>(Arrays.asList(queryParams.get("paramName")));
+        List<CalculationInputParam> calculationInputParams = new ArrayList<>();
+
+        calculationInputParamNamesToConsider.forEach((value) -> {
+            String[] possibleFormulaParameterName = queryParams.getOrDefault(value+"_ParamValType",new String[]{null});
+            String[] numericalInputValue = queryParams.getOrDefault(value+"_value",new String[]{null});
+
+            calculationInputParams.add(new CalculationInputParam(
+                    possibleFormulaParameterName[0],
+                    value,
+                    numericalInputValue[0] != null ? Double.parseDouble(numericalInputValue[0]) : null
+            ));
+        });
+        calculation.setCalculationInputParams(calculationInputParams);
+        return calculationService.createCalculationQuick(new CalculateRequestQuick(formulaId,formulaTypeId,calculation));
     }
 
     @GetMapping("/{id}")
