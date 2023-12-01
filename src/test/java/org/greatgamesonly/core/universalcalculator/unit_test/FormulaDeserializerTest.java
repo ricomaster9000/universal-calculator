@@ -1,9 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.unit_test;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.configuration.FormulaDeserializer;
 import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
@@ -11,11 +8,9 @@ import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -34,7 +29,7 @@ public class FormulaDeserializerTest {
         JsonParser jsonParser = objectMapper.createParser(json);
 
         FormulaDeserializer deserializer = new FormulaDeserializer();
-        Formula<?, ?> formula = deserializer.deserialize(jsonParser, objectMapper.getDeserializationContext());
+        Formula<?> formula = deserializer.deserialize(jsonParser, objectMapper.getDeserializationContext());
 
         // Perform assertions
         assertNotNull(formula);

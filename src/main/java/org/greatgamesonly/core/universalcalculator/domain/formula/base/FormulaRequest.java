@@ -6,19 +6,19 @@ import org.greatgamesonly.core.universalcalculator.configuration.FormulaDeserial
 public class FormulaRequest {
 
     @JsonDeserialize(using = FormulaDeserializer.class)
-    private Formula<?,?> formula;
+    private Formula<?> formula;
 
     public FormulaRequest() {}
 
-    public FormulaRequest(Formula<?,?> formula) {
+    public FormulaRequest(Formula<?> formula) {
         this.formula = formula;
     }
 
-    public Formula<?, ?> getFormula() {
+    public Formula<?> getFormula() {
         return formula;
     }
 
-    public void setFormula(Formula<?, ?> formula) {
+    public void setFormula(Formula<?> formula) {
         this.formula = formula;
     }
 }

@@ -1,7 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.domain.formula.conversion;
 
 import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.domain.formula.MeasurementUnit;
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.repository.ConversionFormulaRepository;
 import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
@@ -10,7 +9,7 @@ import jakarta.persistence.Entity;
 
 @Entity(name = "conversion_formula")
 @LinkedRepository(ConversionFormulaRepository.class)
-public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula> {
+public class ConversionFormula extends Formula<ConversionFormula> {
 
     public ConversionFormula() {}
 
@@ -20,7 +19,7 @@ public class ConversionFormula extends Formula<MeasurementUnit,ConversionFormula
     }
 
     @Override
-    public Class<? extends BaseFormulaRepository<? extends Formula<?, ?>>> getFormulaRepositoryClass() {
+    public Class<? extends BaseFormulaRepository<? extends Formula<?>>> getFormulaRepositoryClass() {
         return ConversionFormulaRepository.class;
     }
 }

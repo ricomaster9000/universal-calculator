@@ -29,13 +29,13 @@ public class FormulaService {
     private FormulaTypeRepository formulaTypeRepository;
 
     @Transactional()
-    public <T extends Formula<?,?>> T createFormula(T formula) {
+    public <T extends Formula<?>> T createFormula(T formula) {
         return getFormulaRepository(formula).save(formula);
     }
 
     @Transactional(readOnly = true)
     @Cacheable(value = "formulaCache")
-    public <T extends Formula<?,?>> T getFormulaByIdAndTypeId(Long id, Long formulaTypeId) {
+    public <T extends Formula<?>> T getFormulaByIdAndTypeId(Long id, Long formulaTypeId) {
         FormulaType formulaType = formulaTypeRepository.findById(formulaTypeId)
                 .orElseThrow(() -> new FormulaException(FORMULA_TYPE_NOT_FOUND));
 
@@ -44,8 +44,8 @@ public class FormulaService {
     }
 
     @Transactional(readOnly = true)
-    public List<Formula<?,?>> getAllFormulas() {
-        List<Formula<?,?>> result = new ArrayList<>();
+    public List<Formula<?>> getAllFormulas() {
+        List<Formula<?>> result = new ArrayList<>();
 
         for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
             result.addAll(CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(formulaClass).findAll());
@@ -55,7 +55,7 @@ public class FormulaService {
     }
 
     @Transactional()
-    public <T extends Formula<?,?>> T updateFormula(Long id, T formula) {
+    public <T extends Formula<?>> T updateFormula(Long id, T formula) {
         if (!getFormulaRepository(formula).existsById(id)) {
             throw new FormulaException(FORMULA_NOT_FOUND);
         }
@@ -76,7 +76,7 @@ public class FormulaService {
         formulaRepository.deleteById(id);
     }
 
-    private <T extends Formula<?,?>> BaseFormulaRepository<T> getFormulaRepositoryByFormulaType(FormulaType formulaType) {
+    private <T extends Formula<?>> BaseFormulaRepository<T> getFormulaRepositoryByFormulaType(FormulaType formulaType) {
         BaseFormulaRepository<T> result;
         try {
             Class<?> formulaClass = Class.forName(formulaType.getLinkedFormulaSubClassName());
@@ -91,7 +91,7 @@ public class FormulaService {
         return result;
     }
 
-    private <T extends Formula<?,?>> BaseFormulaRepository<T> getFormulaRepository(T formula) {
+    private <T extends Formula<?>> BaseFormulaRepository<T> getFormulaRepository(T formula) {
         return (BaseFormulaRepository<T>) applicationContext.getBean(formula.getFormulaRepositoryClass());
     }
 }

@@ -16,5 +16,5 @@ public class GlobalConstants {
 
     public static final Set<Class<?>> CACHED_FORMULA_SUBCLASSES = new HashSet<Class<?>>();
 
-    public static final Map<Class<?>, BaseFormulaRepository<? extends Formula<?,?>>> CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES = new HashMap<>();
+    public static final Map<Class<?>, BaseFormulaRepository<? extends Formula<?>>> CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES = new HashMap<>();
 }

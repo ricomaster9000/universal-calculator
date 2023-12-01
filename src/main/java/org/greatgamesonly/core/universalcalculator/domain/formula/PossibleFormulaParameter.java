@@ -9,7 +9,9 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 
-@MappedSuperclass
+@Entity(name="possible_formula_parameter")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "formula_parameter_type")
 public abstract class PossibleFormulaParameter extends BaseEntity implements Serializable {
 
     @Id
@@ -21,6 +23,11 @@ public abstract class PossibleFormulaParameter extends BaseEntity implements Ser
     @Size(min = 2, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
     private String name;
+
+    @Column(name = "formula_parameter_type")
+    @Size(min = 2, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    @NotNull
+    private String formulaParameterType;
 
     @Column(name = "description")
     @Size(max = GlobalConstants.SHORT_DB_TEXT_MAX_CHAR_SIZE)
@@ -60,6 +67,14 @@ public abstract class PossibleFormulaParameter extends BaseEntity implements Ser
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFormulaParameterType() {
+        return formulaParameterType;
+    }
+
+    public void setFormulaParameterType(String formulaParameterType) {
+        this.formulaParameterType = formulaParameterType;
     }
 
     public String getDescription() {

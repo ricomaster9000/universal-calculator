@@ -5,5 +5,5 @@ import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRe
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FormulaRepository extends BaseFormulaRepository<Formula<?,?>> {
+public interface FormulaRepository extends BaseFormulaRepository<Formula<?>> {
 }

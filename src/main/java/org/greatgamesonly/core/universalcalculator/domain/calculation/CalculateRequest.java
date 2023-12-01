@@ -12,23 +12,23 @@ public class CalculateRequest implements Serializable {
 
     @NotNull
     @JsonDeserialize(using = FormulaDeserializer.class)
-    private Formula<?,?> linkedFormula;
+    private Formula<?> linkedFormula;
 
     @NotNull
     private List<Calculation> calculationsToPerform;
 
     public CalculateRequest() {}
 
-    public CalculateRequest(Formula<?,?> linkedFormula, List<Calculation> calculationsToPerform) {
+    public CalculateRequest(Formula<?> linkedFormula, List<Calculation> calculationsToPerform) {
         this.linkedFormula = linkedFormula;
         this.calculationsToPerform = calculationsToPerform;
     }
 
-    public Formula<?,?> getLinkedFormula() {
+    public Formula<?> getLinkedFormula() {
         return linkedFormula;
     }
 
-    public void setLinkedFormula(Formula<?,?> linkedFormula) {
+    public void setLinkedFormula(Formula<?> linkedFormula) {
         this.linkedFormula = linkedFormula;
     }
 

@@ -20,26 +20,26 @@ public class FormulaController {
     private FormulaService formulaService;
 
     @PostMapping
-    public ResponseEntity<? extends Formula<?,?>> createConversionFormula(@Valid @RequestBody FormulaRequest formula) {
-        Formula<?,?> createdFormula = formulaService.createFormula(formula.getFormula());
+    public ResponseEntity<? extends Formula<?>> createConversionFormula(@Valid @RequestBody FormulaRequest formula) {
+        Formula<?> createdFormula = formulaService.createFormula(formula.getFormula());
         return new ResponseEntity<>(createdFormula, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Formula<?,?>> getConversionFormulaById(@PathVariable Long id, @RequestParam("formulaTypeId") Long formulaTypeId) {
+    public ResponseEntity<Formula<?>> getConversionFormulaById(@PathVariable Long id, @RequestParam("formulaTypeId") Long formulaTypeId) {
         ConversionFormula formula = formulaService.getFormulaByIdAndTypeId(id,formulaTypeId);
         return ResponseEntity.ok(formula);
     }
 
     @GetMapping
-    public ResponseEntity<List<Formula<?,?>>> getAllConversionFormulas() {
-        List<Formula<?,?>> formulas = formulaService.getAllFormulas();
+    public ResponseEntity<List<Formula<?>>> getAllConversionFormulas() {
+        List<Formula<?>> formulas = formulaService.getAllFormulas();
         return ResponseEntity.ok(formulas);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Formula<?,?>> updateConversionFormula(@PathVariable Long id, @Valid @RequestBody FormulaRequest formula) {
-        Formula<?,?> updatedFormula = formulaService.updateFormula(id, formula.getFormula());
+    public ResponseEntity<Formula<?>> updateConversionFormula(@PathVariable Long id, @Valid @RequestBody FormulaRequest formula) {
+        Formula<?> updatedFormula = formulaService.updateFormula(id, formula.getFormula());
         return ResponseEntity.ok(updatedFormula);
     }
 

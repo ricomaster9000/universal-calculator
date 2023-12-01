@@ -14,13 +14,13 @@ import java.util.List;
 @Component
 public abstract class FormulaCalculator {
 
-    private Formula<?,?> linkedFormula;
+    private Formula<?> linkedFormula;
 
-    public Formula<?,?> getLinkedFormula() {
+    public Formula<?> getLinkedFormula() {
         return linkedFormula;
     }
 
-    public void setLinkedFormula(Formula<?,?> linkedFormula) {
+    public void setLinkedFormula(Formula<?> linkedFormula) {
         this.linkedFormula = linkedFormula;
     }
 

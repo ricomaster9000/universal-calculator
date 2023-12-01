@@ -1,16 +1,11 @@
 package org.greatgamesonly.core.universalcalculator.domain.formula.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
-import org.greatgamesonly.core.universalcalculator.configuration.FormulaDeserializer;
 import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.domain.formula.FormulaParameterInputSpecification;
 import org.greatgamesonly.core.universalcalculator.domain.formula.FormulaType;
 import org.greatgamesonly.core.universalcalculator.domain.formula.PossibleFormulaParameter;
-import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
 import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
 import org.greatgamesonly.core.universalcalculator.service.calculation.FormulaCalculator;
 import jakarta.persistence.*;
@@ -21,7 +16,7 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 @MappedSuperclass
-public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends Formula<T,TYPE>> extends BaseEntity {
+public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,13 +51,13 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 			joinColumns = @JoinColumn(name = "formula_id"),
 			inverseJoinColumns = @JoinColumn(name = "possible_formula_param_id")
 	)
-	protected List<T> possibleFormulaParameters;
+	protected List<PossibleFormulaParameter> possibleFormulaParameters;
 
 	@JsonIgnore
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
 
 	@JsonIgnore
-	public abstract Class<? extends BaseFormulaRepository<? extends Formula<?,?>>> getFormulaRepositoryClass();
+	public abstract Class<? extends BaseFormulaRepository<? extends Formula<?>>> getFormulaRepositoryClass();
 
 	public FormulaCalculator getFormulaCalculator(ApplicationContext applicationContext) {
 		FormulaCalculator result = applicationContext.getBean(getFormulaCalculatorClass());
@@ -109,7 +104,7 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		return (TYPE) this;
 	}
 
-	public TYPE withPossibleFormulaParams(List<T> possibleFormulaParameters) {
+	public TYPE withPossibleFormulaParams(List<PossibleFormulaParameter> possibleFormulaParameters) {
 		this.possibleFormulaParameters = possibleFormulaParameters;
 		return (TYPE) this;
 	}
@@ -154,11 +149,11 @@ public abstract class Formula<T extends PossibleFormulaParameter, TYPE extends F
 		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
 	}
 
-	public List<T> getPossibleFormulaParameters() {
+	public List<PossibleFormulaParameter> getPossibleFormulaParameters() {
 		return possibleFormulaParameters;
 	}
 
-	public void setPossibleFormulaParameters(List<T> possibleFormulaParameters) {
+	public void setPossibleFormulaParameters(List<PossibleFormulaParameter> possibleFormulaParameters) {
 		this.possibleFormulaParameters = possibleFormulaParameters;
 	}
 }

@@ -70,7 +70,7 @@ public class PostSetupEntityConstantSaver {
                 System.out.println("syncing formula sub class " + formulaClass.getName() + " with its relevant formula");
                 CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.put(
                         formulaClass,
-                        getFormulaRepositoryGeneric(ctx,(Formula<?, ?>) formulaClass.getConstructor().newInstance())
+                        getFormulaRepositoryGeneric(ctx,(Formula<?>) formulaClass.getConstructor().newInstance())
                 );
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
                 throw new RuntimeException(e.getMessage(),e);
@@ -78,7 +78,7 @@ public class PostSetupEntityConstantSaver {
         }
     }
 
-    private BaseFormulaRepository<? extends Formula<?,?>> getFormulaRepositoryGeneric(ApplicationContext ctx, Formula<?,?> formula) {
+    private BaseFormulaRepository<? extends Formula<?>> getFormulaRepositoryGeneric(ApplicationContext ctx, Formula<?> formula) {
         return ctx.getBean(formula.getFormulaRepositoryClass());
     }
 

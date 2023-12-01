@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.domain.formula;
 
+import jakarta.persistence.DiscriminatorValue;
 import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.domain.shared.InputParamSpecification;
 import org.greatgamesonly.core.universalcalculator.repository.MeasurementUnitRepository;
@@ -9,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity(name = "measurement_unit")
 @LinkedRepository(MeasurementUnitRepository.class)
+@DiscriminatorValue("measurement_unit")
 public class MeasurementUnit extends PossibleFormulaParameter {
 
     @ManyToOne

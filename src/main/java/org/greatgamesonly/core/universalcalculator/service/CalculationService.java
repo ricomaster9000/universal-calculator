@@ -4,7 +4,6 @@ import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateR
 import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequestQuick;
 import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.exception.CalculationException;
 import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
 import org.greatgamesonly.core.universalcalculator.repository.CalculationRepository;
 import org.greatgamesonly.core.universalcalculator.service.calculation.FormulaCalculator;
@@ -45,7 +44,7 @@ public class CalculationService {
     }
 
     @Transactional()
-    public List<Calculation> createCalculations(Formula<?,?> formula, List<Calculation> calculationsToPerform) {
+    public List<Calculation> createCalculations(Formula<?> formula, List<Calculation> calculationsToPerform) {
         FormulaCalculator formulaCalculator =
                 syncFormulaWithCorrectFormulaSubclass(formula).getFormulaCalculator(applicationContext);
 
@@ -78,8 +77,8 @@ public class CalculationService {
         calculationRepository.delete(existingCalculation);
     }
 
-    private Formula<?,?> syncFormulaWithCorrectFormulaSubclass(Formula<?,?> formula) {
-        Formula<?,?> result;
+    private Formula<?> syncFormulaWithCorrectFormulaSubclass(Formula<?> formula) {
+        Formula<?> result;
         try {
             CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.forEach((key, value) -> System.out.println(key + " " + value));
             Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName());

@@ -33,6 +33,10 @@ public class ConversionFormulaCalculator extends FormulaCalculator {
                     CONVERSION_TO_PARAM_INPUT_SPEC.getParameterPlaceholderName()
             );
 
+            System.out.println("from parameter name - " + convertFromCalcInput.getPossibleFormulaParameterName());
+            System.out.println("to parameter name - " + convertToCalcInput.getPossibleFormulaParameterName());
+
+
             Double conversionFactor = measurementToMeasurementConversionFactRepo.findByFromMeasurementUnitNameAndToMeasurementUnitName(
                     convertFromCalcInput.getPossibleFormulaParameterName(),
                     convertToCalcInput.getPossibleFormulaParameterName()
