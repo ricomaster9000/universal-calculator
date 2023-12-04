@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.domain;
 
+import org.greatgamesonly.core.universalcalculator.domain.data.DataSizeInfoType;
 import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
 import org.greatgamesonly.core.universalcalculator.domain.shared.InputParamSpecification;
 import org.greatgamesonly.core.universalcalculator.domain.formula.*;
@@ -8,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConstantEntities {
+
+    public static final DataSizeInfoType DATA_SIZE_FROM_ID_TO_ID_TYPE = new DataSizeInfoType(1L,"FROM_ID_TO_ID");
+    public static final DataSizeInfoType DATA_SIZE_FROM_DATE_TO_DATE_TYPE = new DataSizeInfoType(2L,"FROM_DATE_TO_DATE");
+    public static final DataSizeInfoType DATA_SIZE_SPECIFIC_ID_LIST_TYPE = new DataSizeInfoType(3L,"SPECIFIC_ID_LIST");
+
     public static final FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
             1L,
             "CONVERSION_FROM",
