@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity(name="data_size_info")
-public class DataSizeInfo {
+public class DataReferenceInfo {
 
     @Id
     @Column(name = "id")
@@ -36,5 +36,5 @@ public class DataSizeInfo {
     @Convert(converter = DataSpecificIdsListConverter.class)
     private List<Long> specificIdList;
 
-    public DataSizeInfo() {}
+    public DataReferenceInfo() {}
 }

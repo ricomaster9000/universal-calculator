@@ -2,7 +2,9 @@ package org.greatgamesonly.core.universalcalculator.domain.data.base;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import org.greatgamesonly.core.universalcalculator.domain.data.DataSizeInfo;
+import org.greatgamesonly.core.universalcalculator.domain.data.DataReferenceInfo;
+
+import java.util.List;
 
 @Entity(name = "data_reference")
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
@@ -15,9 +17,9 @@ public abstract class DataReference {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "data_size_info_id")
+    @JoinColumn(name = "data_reference_info_id")
     @NotNull
-    private DataSizeInfo dataSizeInfo;
+    private DataReferenceInfo dataReferenceInfo;
 
     @OneToMany(fetch=FetchType.LAZY)
     @JoinTable(
