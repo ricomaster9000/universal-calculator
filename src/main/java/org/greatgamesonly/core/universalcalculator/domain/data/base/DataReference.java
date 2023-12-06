@@ -19,8 +19,12 @@ public abstract class DataReference {
     @NotNull
     private DataSizeInfo dataSizeInfo;
 
-
-
-    // formula -> DataReference -> DataRecord
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinTable(
+            name = "data_reference_to_data_records",
+            joinColumns = @JoinColumn(name = "data_reference_id"),
+            inverseJoinColumns = @JoinColumn(name = "data_record_id")
+    )
+    private List<DataRecord>
 
 }
