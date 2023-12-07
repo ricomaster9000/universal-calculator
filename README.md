@@ -14,6 +14,7 @@ make sure maven is installed on your local machine make sure JAVA_HOME path has 
 ## to test&run locally, run the following commands in console:
 - run: mvn clean install
 - run: mvn spring-boot:run
+- install Postman to send requests locally to web app, postman collection that contains a collection of requests one can send to the available endpoints - https://api.postman.com/collections/2864126-5044291c-23bc-4f04-a587-cf140413415e?access_key=PMAT-01HFXSKV12D8YTPB9QFZ8T2PVM
 ## to compile and run from jar (the compiled jar is likely what will be deployed to a server)
 - run: mvn clean install
 - run: cd target
