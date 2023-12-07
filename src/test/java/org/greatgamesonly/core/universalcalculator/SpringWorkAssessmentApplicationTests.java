@@ -11,7 +11,7 @@ class SpringWorkAssessmentApplicationTests {
 
 	@Test
 	void contextLoad() {
-		// the context will be loaded which is always done when a spring app starts up, any breaking errors happenign there will not cause this test to fail
+		// the context will be loaded which is always done when a spring app starts up, any breaking errors happening there will likely cause this test to fail
 	}
 
 }
