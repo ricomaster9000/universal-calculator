@@ -10,12 +10,16 @@ import org.hibernate.event.spi.EventType;
 import org.hibernate.event.spi.PreInsertEvent;
 import org.hibernate.event.spi.PreInsertEventListener;
 import org.hibernate.internal.SessionFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomPreInsertListener implements PreInsertEventListener
 {
+
+    Logger logger = LoggerFactory.getLogger(CustomPreInsertListener.class);
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
@@ -34,7 +38,7 @@ public class CustomPreInsertListener implements PreInsertEventListener
     public boolean onPreInsert(PreInsertEvent event) {
 
         if(((BaseEntity)event.getEntity()).getId() != null || isDirty(event)) {
-            System.out.println("merge back detached entity");
+            logger.info("merge back detached entity");
             event.getSession().merge(event.getEntity());
             event.getSession().update(event.getEntity());
             //event.getSession().lock(event.getEntity(), LockMode.NONE);
