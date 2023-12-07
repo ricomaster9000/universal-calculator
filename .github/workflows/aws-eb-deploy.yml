@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven
+      - name: Build with Maven and Run All Tests
         run: mvn clean package
 
       - name: Deploy to AWS Elastic Beanstalk
