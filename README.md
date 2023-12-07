@@ -1,5 +1,5 @@
 # universal-calculator
-Dynamic Modular Extendable Universally usable calculator app (SOLID design)
+Dynamic Modular Extendable Universally usable calculator app (MVC design pattern with strong emphasis on SOLID design)
 
 For Java 17+ (will migrate to Java 21 once AWS officially starts supporting Java 21)
 
