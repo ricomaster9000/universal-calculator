@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 
 @SpringBootTestWrapper
-public class CalculationServiceIntegrationTest {
+public class ConversionCalculationsTest {
 
     @Autowired
     private MockMvc mockMvc;

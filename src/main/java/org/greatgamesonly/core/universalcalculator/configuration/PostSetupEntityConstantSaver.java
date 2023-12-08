@@ -64,10 +64,10 @@ public class PostSetupEntityConstantSaver {
             }
         }
 
-        System.out.println("formula sub classes to sync: " + CACHED_FORMULA_SUBCLASSES.size());
+        logger.info("formula sub classes to sync: " + CACHED_FORMULA_SUBCLASSES.size());
         for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
             try {
-                System.out.println("syncing formula sub class " + formulaClass.getName() + " with its relevant formula");
+                logger.info("syncing formula sub class " + formulaClass.getName() + " with its relevant formula");
                 CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.put(
                         formulaClass,
                         getFormulaRepositoryGeneric(ctx,(Formula<?>) formulaClass.getConstructor().newInstance())
