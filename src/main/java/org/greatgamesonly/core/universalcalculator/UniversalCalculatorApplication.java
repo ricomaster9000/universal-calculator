@@ -14,10 +14,10 @@ import org.springframework.context.annotation.ComponentScan;
 		"org.greatgamesonly.core.universalcalculator.configuration",
 		"org.greatgamesonly.core.universalcalculator.annotation"
 })
-public class SpringWorkAssessmentApplication {
+public class UniversalCalculatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringWorkAssessmentApplication.class, args);
+		SpringApplication.run(UniversalCalculatorApplication.class, args);
 	}
 
 }
