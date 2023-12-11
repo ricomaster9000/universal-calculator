@@ -2,10 +2,8 @@ package org.greatgamesonly.core.universalcalculator.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.FormulaRequest;
-import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.FormulaRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.domain.ConstantEntities.*;
+import static org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities.*;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
