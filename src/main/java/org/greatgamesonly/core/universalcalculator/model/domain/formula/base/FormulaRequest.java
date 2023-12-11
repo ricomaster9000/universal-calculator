@@ -1,1 +1,0 @@
-package org.greatgamesonly.core.universalcalculator.model.domain.formula.base;

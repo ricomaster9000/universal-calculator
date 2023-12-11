@@ -52,19 +52,19 @@ public class ConstantEntities {
             1L,
             "ALL_MEASUREMENT_UNITS",
             "Allow all measurement units to be used in formula",
-            EITHER_OR_BOTH,
-            GENERIC_NUMBER_DECIMAL_INPUT_PARAM
+            GENERIC_NUMBER_DECIMAL_INPUT_PARAM,
+            EITHER_OR_BOTH
     );
 
-    public static final MeasurementUnit MILLIMETER = new MeasurementUnit(2L,"MILLIMETER", "Millimeter", METRIC_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit CENTIMETER = new MeasurementUnit(3L,"CENTIMETER", "Centimeters", METRIC_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit METER = new MeasurementUnit(4L,"METER", "Meters", METRIC_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit KILOMETER = new MeasurementUnit(5L,"KILOMETER", "Kilometer", METRIC_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
+    public static final MeasurementUnit MILLIMETER = new MeasurementUnit(2L,"MILLIMETER", "Millimeter", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
+    public static final MeasurementUnit CENTIMETER = new MeasurementUnit(3L,"CENTIMETER", "Centimeters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
+    public static final MeasurementUnit METER = new MeasurementUnit(4L,"METER", "Meters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
+    public static final MeasurementUnit KILOMETER = new MeasurementUnit(5L,"KILOMETER", "Kilometer", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
 
-    public static final MeasurementUnit INCH = new MeasurementUnit(6L,"INCH", "Inches", IMPERIAL_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit FOOT = new MeasurementUnit(7L,"FOOT", "Feet", IMPERIAL_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit YARD = new MeasurementUnit(8L,"YARD", "Yards", IMPERIAL_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
-    public static final MeasurementUnit MILE = new MeasurementUnit(9L,"MILE", "Miles", IMPERIAL_SYSTEM, GENERIC_NUMBER_DECIMAL_INPUT_PARAM);
+    public static final MeasurementUnit INCH = new MeasurementUnit(6L,"INCH", "Inches", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit FOOT = new MeasurementUnit(7L,"FOOT", "Feet", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit YARD = new MeasurementUnit(8L,"YARD", "Yards", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit MILE = new MeasurementUnit(9L,"MILE", "Miles", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
 
 
     public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
