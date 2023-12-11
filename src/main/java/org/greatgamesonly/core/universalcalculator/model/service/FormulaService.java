@@ -1,12 +1,8 @@
 package org.greatgamesonly.core.universalcalculator.model.service;
 
-import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaType;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.model.repository.FormulaRepository;
-import org.greatgamesonly.core.universalcalculator.model.repository.FormulaTypeRepository;
 import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,12 +10,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CACHED_FORMULA_SUBCLASSES;
-import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES;
-import static org.greatgamesonly.core.universalcalculator.exception.FormulaException.FormulaError.*;
+import static org.greatgamesonly.core.universalcalculator.exception.FormulaException.FormulaError.FORMULA_NOT_FOUND;
 
 @Service
 public class FormulaService {
@@ -37,13 +30,7 @@ public class FormulaService {
 
     @Transactional(readOnly = true)
     public List<Formula<?>> getAllFormulas() {
-        List<Formula<?>> result = new ArrayList<>();
-
-        for(Class<?> formulaClass : CACHED_FORMULA_SUBCLASSES) {
-            result.addAll(CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(formulaClass).findAll());
-        }
-
-        return result;
+        return formulaRepository.findAll();
     }
 
     @Cacheable(value = "formulaCache")

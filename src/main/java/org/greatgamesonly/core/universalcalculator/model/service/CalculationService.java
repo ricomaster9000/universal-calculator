@@ -4,10 +4,8 @@ import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calc
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequestQuick;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
 import org.greatgamesonly.core.universalcalculator.model.repository.CalculationRepository;
 import org.greatgamesonly.core.universalcalculator.model.repository.FormulaRepository;
-import org.greatgamesonly.core.universalcalculator.model.repository.FormulaTypeRepository;
 import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -15,9 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES;
-import static org.greatgamesonly.core.universalcalculator.exception.FormulaException.FormulaError.FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND;
 
 @Service
 public class CalculationService {
