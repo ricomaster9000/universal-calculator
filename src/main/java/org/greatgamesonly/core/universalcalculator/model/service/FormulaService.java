@@ -1,9 +1,11 @@
 package org.greatgamesonly.core.universalcalculator.model.service;
 
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaType;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
+import org.greatgamesonly.core.universalcalculator.model.repository.FormulaRepository;
 import org.greatgamesonly.core.universalcalculator.model.repository.FormulaTypeRepository;
 import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +28,11 @@ public class FormulaService {
     private ApplicationContext applicationContext;
 
     @Autowired
-    private FormulaTypeRepository formulaTypeRepository;
+    private FormulaRepository formulaRepository;
 
     @Transactional()
     public <T extends Formula<?>> T createFormula(T formula) {
         return getFormulaRepository(formula).save(formula);
-    }
-
-    @Transactional(readOnly = true)
-    @Cacheable(value = "formulaCache")
-    public <T extends Formula<?>> T getFormulaByIdAndTypeId(Long id, Long formulaTypeId) {
-        FormulaType formulaType = formulaTypeRepository.findById(formulaTypeId)
-                .orElseThrow(() -> new FormulaException(FORMULA_TYPE_NOT_FOUND));
-
-        return (T) getFormulaRepositoryByFormulaType(formulaType).findById(id)
-                .orElseThrow(() -> new FormulaException(FORMULA_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
@@ -54,6 +46,13 @@ public class FormulaService {
         return result;
     }
 
+    @Cacheable(value = "formulaCache")
+    @Transactional(readOnly = true)
+    public Formula<?> getFormulaById(Long id) {
+        return formulaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Calculation not found"));
+    }
+
     @Transactional()
     public <T extends Formula<?>> T updateFormula(Long id, T formula) {
         if (!getFormulaRepository(formula).existsById(id)) {
@@ -64,31 +63,11 @@ public class FormulaService {
     }
 
     @Transactional()
-    public void deleteFormula(Long id, Long formulaTypeId) throws FormulaException {
-        FormulaType formulaType = formulaTypeRepository.findById(formulaTypeId)
-                .orElseThrow(() -> new FormulaException(FORMULA_TYPE_NOT_FOUND));
+    public void deleteFormula(Long id) throws FormulaException {
+        Formula<?> formula = formulaRepository.findById(id)
+                .orElseThrow(() -> new FormulaException(FORMULA_NOT_FOUND));
 
-        BaseFormulaRepository<?> formulaRepository = getFormulaRepositoryByFormulaType(formulaType);
-
-        if (!formulaRepository.existsById(id)) {
-            throw new FormulaException(FORMULA_NOT_FOUND);
-        }
         formulaRepository.deleteById(id);
-    }
-
-    private <T extends Formula<?>> BaseFormulaRepository<T> getFormulaRepositoryByFormulaType(FormulaType formulaType) {
-        BaseFormulaRepository<T> result;
-        try {
-            Class<?> formulaClass = Class.forName(formulaType.getLinkedFormulaSubClassName());
-            if(!formulaClass.isAnnotationPresent(LinkedRepository.class)) {
-                throw new FormulaException(FORMULA_LINKED_REPOSITORY_NOT_FOUND);
-            }
-
-            result = (BaseFormulaRepository<T>) applicationContext.getBean(formulaClass.getAnnotation(LinkedRepository.class).value());
-        } catch (ClassNotFoundException e) {
-            throw new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND,e);
-        }
-        return result;
     }
 
     private <T extends Formula<?>> BaseFormulaRepository<T> getFormulaRepository(T formula) {

@@ -138,15 +138,12 @@ public class ConstantEntities {
             .withFromMeasurementUnit(FOOT)
             .withToMeasurementUnit(CENTIMETER)
             .withConversionFactor(30.48D);
-    public static final FormulaType CONVERSION_FORMULA_TYPE = new FormulaType(1L, FormulaType.CONVERSION_FORMULA_TYPE_NAME, ConversionFormula.class.getName());
-
     public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
             .withId(1L)
             .withName("Generic Simple Conversion Formula")
             .withDescription("Takes a CONVERSION_FROM measurement unit input param and " +
                     "a CONVERSION_TO measurement unit input param, " +
                     "then gets the relevant conversion ratio and applies it.")
-            .withFormulaType(CONVERSION_FORMULA_TYPE)
             .withFormulaParameterUsageInfo(new ArrayList<>(List.of(
                     CONVERSION_FROM_PARAM_INPUT_SPEC,
                     CONVERSION_TO_PARAM_INPUT_SPEC
