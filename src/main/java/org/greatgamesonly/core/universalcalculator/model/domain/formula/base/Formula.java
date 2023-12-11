@@ -1,18 +1,16 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.greatgamesonly.core.universalcalculator.GlobalConstants;
-import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaParameterInputSpecification;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaType;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.PossibleFormulaParameter;
-import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
-import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.greatgamesonly.core.universalcalculator.GlobalConstants;
+import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaParameterInputSpecification;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.PossibleFormulaParameter;
+import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
 import org.springframework.context.ApplicationContext;
 
 import java.util.List;

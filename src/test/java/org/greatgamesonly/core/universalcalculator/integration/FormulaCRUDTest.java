@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @SpringBootTestWrapper
 @TestMethodOrder(MethodOrderer.MethodName.class)
-public class ConversionFormulaCRUDTest {
+public class FormulaCRUDTest {
 
     public static final ConversionFormula TEST_CONVERSION_FORMULA = new ConversionFormula()
             .withName("TEST Conversion Formula")

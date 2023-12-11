@@ -10,16 +10,12 @@ public class CalculateRequestQuick implements Serializable {
     private Long linkedFormulaId;
 
     @NotNull
-    private Long linkedFormulaTypeId;
-
-    @NotNull
     private Calculation calculationToPerform;
 
     public CalculateRequestQuick() {}
 
-    public CalculateRequestQuick(Long linkedFormulaId, Long linkedFormulaTypeId, Calculation calculationToPerform) {
+    public CalculateRequestQuick(Long linkedFormulaId, Calculation calculationToPerform) {
         this.linkedFormulaId = linkedFormulaId;
-        this.linkedFormulaTypeId = linkedFormulaTypeId;
         this.calculationToPerform = calculationToPerform;
     }
 
@@ -29,14 +25,6 @@ public class CalculateRequestQuick implements Serializable {
 
     public void setLinkedFormulaId(Long linkedFormulaId) {
         this.linkedFormulaId = linkedFormulaId;
-    }
-
-    public Long getLinkedFormulaTypeId() {
-        return linkedFormulaTypeId;
-    }
-
-    public void setLinkedFormulaTypeId(Long linkedFormulaTypeId) {
-        this.linkedFormulaTypeId = linkedFormulaTypeId;
     }
 
     public Calculation getCalculationToPerform() {
