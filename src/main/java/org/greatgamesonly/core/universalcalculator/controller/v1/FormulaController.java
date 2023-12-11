@@ -47,31 +47,4 @@ public class FormulaController {
         formulaService.deleteFormula(id);
         return ResponseEntity.noContent().build();
     }
-
-    /*@GetMapping("/{id}/calculation/quick/")
-    public List<Calculation> createCalculationQuick(HttpServletRequest request) {
-        Map<String, String[]> queryParams = request.getParameterMap();
-
-        Calculation calculation = new Calculation();
-        calculation.setName("QUICK_CALCULATION");
-
-        Long formulaId = Long.parseLong(queryParams.get("formulaId")[0]);
-        Long formulaTypeId = Long.parseLong(queryParams.get("formulaTypeId")[0]);
-
-        List<String> calculationInputParamNamesToConsider = new ArrayList<>(Arrays.asList(queryParams.get("paramName")));
-        List<CalculationInputParam> calculationInputParams = new ArrayList<>();
-
-        calculationInputParamNamesToConsider.forEach((value) -> {
-            String[] possibleFormulaParameterName = queryParams.getOrDefault(value+"_ParamValType",new String[]{null});
-            String[] numericalInputValue = queryParams.getOrDefault(value+"_value",new String[]{null});
-
-            calculationInputParams.add(new CalculationInputParam(
-                    possibleFormulaParameterName[0],
-                    value,
-                    numericalInputValue[0] != null ? Double.parseDouble(numericalInputValue[0]) : null
-            ));
-        });
-        calculation.setCalculationInputParams(calculationInputParams);
-        return calculationService.createCalculationQuick(new CalculateRequestQuick(formulaId,formulaTypeId,calculation));
-    }*/
 }

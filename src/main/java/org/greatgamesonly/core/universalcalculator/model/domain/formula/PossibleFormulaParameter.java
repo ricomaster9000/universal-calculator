@@ -1,6 +1,9 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import jakarta.validation.constraints.Pattern;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.domain.shared.InputParamSpecification;
@@ -13,7 +16,10 @@ import java.io.Serializable;
 @Entity(name="possible_formula_parameter")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "formula_parameter_type")
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "formulaParameterType")
+@JsonTypeName("generic")
 public class PossibleFormulaParameter extends BaseEntity implements Serializable {
 
     @Id
@@ -24,6 +30,7 @@ public class PossibleFormulaParameter extends BaseEntity implements Serializable
     @Column(name = "name")
     @Size(min = 2, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
+    @Pattern(regexp = "^[^-]*$", message = "The name must not contain hyphens (-)")
     private String name;
 
     @Column(name = "description")
@@ -48,6 +55,10 @@ public class PossibleFormulaParameter extends BaseEntity implements Serializable
         this.name = name;
         this.description = description;
         this.inputParamSpecification = inputParamSpecification;
+    }
+
+    public String getFormulaParameterType() {
+        return "generic";
     }
 
     public Long getId() {

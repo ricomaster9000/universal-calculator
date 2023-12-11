@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.DiscriminatorValue;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.shared.InputParamSpecification;
@@ -8,9 +9,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import static org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula.TYPE;
+
 @Entity(name = "measurement_unit")
 @LinkedRepository(MeasurementUnitRepository.class)
 @DiscriminatorValue("measurement_unit")
+@JsonTypeName("measurement_unit")
 public class MeasurementUnit extends PossibleFormulaParameter {
 
     @ManyToOne
@@ -19,7 +23,7 @@ public class MeasurementUnit extends PossibleFormulaParameter {
 
     public MeasurementUnit() {}
 
-    public MeasurementUnit(Long id, String name, String description, MeasurementUnitSystem measurementSystem, InputParamSpecification inputParamSpecification) {
+    public MeasurementUnit(Long id, String name, String description, InputParamSpecification inputParamSpecification, MeasurementUnitSystem measurementSystem) {
         super(id,name,description, inputParamSpecification);
         this.measurementSystem = measurementSystem;
     }
@@ -30,5 +34,10 @@ public class MeasurementUnit extends PossibleFormulaParameter {
 
     public void setMeasurementSystem(MeasurementUnitSystem measurementSystem) {
         this.measurementSystem = measurementSystem;
+    }
+
+    @Override
+    public String getFormulaParameterType() {
+        return "measurement_unit";
     }
 }
