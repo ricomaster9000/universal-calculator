@@ -6,6 +6,8 @@ import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calc
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.exception.FormulaException;
 import org.greatgamesonly.core.universalcalculator.model.repository.CalculationRepository;
+import org.greatgamesonly.core.universalcalculator.model.repository.FormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.repository.FormulaTypeRepository;
 import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +30,9 @@ public class CalculationService {
     @Autowired
     private FormulaService formulaService;
 
+    @Autowired
+    private FormulaRepository formulaRepository;
+
 
     public List<Calculation> createCalculations(CalculateRequest calculateRequest) {
         return createCalculations(calculateRequest.getLinkedFormula(),calculateRequest.getCalculationsToPerform());
@@ -35,9 +40,8 @@ public class CalculationService {
 
     public List<Calculation> createCalculationQuick(CalculateRequestQuick calculateRequest) {
         return createCalculations(
-                formulaService.getFormulaByIdAndTypeId(
-                        calculateRequest.getLinkedFormulaTypeId(),
-                        calculateRequest.getLinkedFormulaTypeId()
+                formulaService.getFormulaById(
+                        calculateRequest.getLinkedFormulaId()
                 ),
                 List.of(calculateRequest.getCalculationToPerform())
         );
@@ -45,9 +49,7 @@ public class CalculationService {
 
     @Transactional()
     public List<Calculation> createCalculations(Formula<?> formula, List<Calculation> calculationsToPerform) {
-        FormulaCalculator formulaCalculator =
-                syncFormulaWithCorrectFormulaSubclass(formula).getFormulaCalculator(applicationContext);
-
+        FormulaCalculator formulaCalculator = formulaService.getFormulaById(formula.getId()).getFormulaCalculator(applicationContext);
         List<Calculation> performedCalculations = formulaCalculator.calculate(calculationsToPerform);
         return calculationRepository.saveAll(performedCalculations);
     }
@@ -75,20 +77,5 @@ public class CalculationService {
     public void deleteCalculation(Long id) {
         Calculation existingCalculation = getCalculationById(id);
         calculationRepository.delete(existingCalculation);
-    }
-
-    private Formula<?> syncFormulaWithCorrectFormulaSubclass(Formula<?> formula) {
-        Formula<?> result;
-        try {
-            CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.forEach((key, value) -> System.out.println(key + " " + value));
-            Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName());
-            result = CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.get(Class.forName(formula.getFormulaType().getLinkedFormulaSubClassName()))
-                    .findById(formula.getId())
-                    .orElseThrow(() -> new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND));
-        } catch (ClassNotFoundException | FormulaException e) {
-            System.out.println(e.getMessage());
-            throw new FormulaException(FORMULA_TYPE_LINKED_FORMULA_NOT_FOUND,e);
-        }
-        return result;
     }
 }
