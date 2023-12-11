@@ -1,8 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.calculation;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotNull;
-import org.greatgamesonly.core.universalcalculator.configuration.FormulaDeserializer;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 
 import java.io.Serializable;
@@ -11,7 +9,6 @@ import java.util.List;
 public class CalculateRequest implements Serializable {
 
     @NotNull
-    @JsonDeserialize(using = FormulaDeserializer.class)
     private Formula<?> linkedFormula;
 
     @NotNull

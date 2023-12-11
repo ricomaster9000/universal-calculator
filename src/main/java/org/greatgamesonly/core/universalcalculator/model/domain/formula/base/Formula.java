@@ -1,6 +1,8 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaParameterInputSpecification;
@@ -15,7 +17,12 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
-@MappedSuperclass
+@Entity(name="formula")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "formula_type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS,
+		include = JsonTypeInfo.As.PROPERTY,
+		property = "formulaType")
 public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 	@Id
 	@Column(name = "id")
@@ -32,11 +39,6 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 	@NotNull
 	private String description;
 
-	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH}, fetch=FetchType.EAGER)
-	@JoinColumn(name = "formula_type_id")
-	@NotNull
-	private FormulaType formulaType;
-
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.REFRESH}, fetch=FetchType.EAGER)
 	@JoinTable(
 			name = "formula_to_formula_param_usage_info",
@@ -52,6 +54,8 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 			inverseJoinColumns = @JoinColumn(name = "possible_formula_param_id")
 	)
 	protected List<PossibleFormulaParameter> possibleFormulaParameters;
+
+	public abstract String getFormulaType();
 
 	@JsonIgnore
 	public abstract Class<? extends FormulaCalculator> getFormulaCalculatorClass();
@@ -70,13 +74,11 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 
 	public Formula(Long id,
 				   String name,
-				   String description,
-				   FormulaType formulaType
+				   String description
 	) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.formulaType = formulaType;
 	}
 
 	public TYPE withId(Long id) {
@@ -91,11 +93,6 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 
 	public TYPE withDescription(String description) {
 		this.description = description;
-		return (TYPE) this;
-	}
-
-	public TYPE withFormulaType(FormulaType formulaType) {
-		this.formulaType = formulaType;
 		return (TYPE) this;
 	}
 
@@ -131,14 +128,6 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public FormulaType getFormulaType() {
-		return formulaType;
-	}
-
-	public void setFormulaType(FormulaType formulaType) {
-		this.formulaType = formulaType;
 	}
 
 	public List<FormulaParameterInputSpecification> getFormulaParameterUsageInfo() {
