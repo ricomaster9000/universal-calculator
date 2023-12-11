@@ -1,7 +1,7 @@
 package org.greatgamesonly.core.universalcalculator;
 
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 
 import java.util.HashMap;
 import java.util.HashSet;

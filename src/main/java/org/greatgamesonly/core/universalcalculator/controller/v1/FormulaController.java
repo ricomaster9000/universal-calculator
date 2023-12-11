@@ -1,9 +1,9 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.FormulaRequest;
-import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
-import org.greatgamesonly.core.universalcalculator.service.FormulaService;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.FormulaRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula;
+import org.greatgamesonly.core.universalcalculator.model.service.FormulaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

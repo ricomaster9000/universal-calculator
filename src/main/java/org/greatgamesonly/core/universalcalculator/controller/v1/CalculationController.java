@@ -1,11 +1,11 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequestQuick;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.service.CalculationService;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequestQuick;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
+import org.greatgamesonly.core.universalcalculator.model.service.CalculationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

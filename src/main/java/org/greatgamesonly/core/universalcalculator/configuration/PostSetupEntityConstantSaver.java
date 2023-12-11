@@ -1,10 +1,10 @@
 package org.greatgamesonly.core.universalcalculator.configuration;
 
-import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
-import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
 import org.greatgamesonly.core.universalcalculator.utility.ClassCache;
 
 import java.io.IOException;
