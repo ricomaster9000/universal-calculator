@@ -1,7 +1,7 @@
 package org.greatgamesonly.core.universalcalculator;
 
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,5 +16,5 @@ public class GlobalConstants {
 
     public static final Set<Class<?>> CACHED_FORMULA_SUBCLASSES = new HashSet<Class<?>>();
 
-    public static final Map<Class<?>, BaseFormulaRepository<? extends Formula<?,?>>> CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES = new HashMap<>();
+    public static final Map<Class<?>, BaseFormulaRepository<? extends Formula<?>>> CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES = new HashMap<>();
 }

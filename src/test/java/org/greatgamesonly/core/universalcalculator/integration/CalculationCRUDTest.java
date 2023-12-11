@@ -2,10 +2,10 @@ package org.greatgamesonly.core.universalcalculator.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
+import org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;

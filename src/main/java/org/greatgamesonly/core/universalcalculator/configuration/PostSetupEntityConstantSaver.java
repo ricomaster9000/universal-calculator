@@ -1,10 +1,10 @@
 package org.greatgamesonly.core.universalcalculator.configuration;
 
-import org.greatgamesonly.core.universalcalculator.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
-import org.greatgamesonly.core.universalcalculator.domain.base.BaseEntity;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.repository.base.BaseFormulaRepository;
+import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +70,7 @@ public class PostSetupEntityConstantSaver {
                 logger.info("syncing formula sub class " + formulaClass.getName() + " with its relevant formula");
                 CACHED_FORMULA_SUBCLASS_TO_REPOSITORY_CLASSES.put(
                         formulaClass,
-                        getFormulaRepositoryGeneric(ctx,(Formula<?, ?>) formulaClass.getConstructor().newInstance())
+                        getFormulaRepositoryGeneric(ctx,(Formula<?>) formulaClass.getConstructor().newInstance())
                 );
             } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
                 throw new RuntimeException(e.getMessage(),e);
@@ -78,7 +78,7 @@ public class PostSetupEntityConstantSaver {
         }
     }
 
-    private BaseFormulaRepository<? extends Formula<?,?>> getFormulaRepositoryGeneric(ApplicationContext ctx, Formula<?,?> formula) {
+    private BaseFormulaRepository<? extends Formula<?>> getFormulaRepositoryGeneric(ApplicationContext ctx, Formula<?> formula) {
         return ctx.getBean(formula.getFormulaRepositoryClass());
     }
 
