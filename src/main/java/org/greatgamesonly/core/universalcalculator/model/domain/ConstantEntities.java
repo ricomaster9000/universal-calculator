@@ -3,7 +3,6 @@ package org.greatgamesonly.core.universalcalculator.model.domain;
 import org.greatgamesonly.core.universalcalculator.model.domain.data.DataSizeInfoType;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula;
 import org.greatgamesonly.core.universalcalculator.model.domain.shared.InputParamSpecification;
-import org.greatgamesonly.core.universalcalculator.domain.formula.*;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.*;
 
 import java.util.ArrayList;

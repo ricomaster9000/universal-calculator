@@ -21,10 +21,6 @@ public abstract class DataReference<DATA_RECORD_TYPE extends DataRecord> {
     @NotNull
     private DataReferenceInfo dataReferenceInfo;
 
-    @Column(name = "data_reference_type")
-    @NotNull
-    private String dataReferenceType;
-
     public DataReference() {}
 
     public abstract void setDataRecords(List<DATA_RECORD_TYPE> dataRecords);
@@ -44,13 +40,5 @@ public abstract class DataReference<DATA_RECORD_TYPE extends DataRecord> {
 
     public void setDataReferenceInfo(DataReferenceInfo dataReferenceInfo) {
         this.dataReferenceInfo = dataReferenceInfo;
-    }
-
-    public String getDataReferenceType() {
-        return dataReferenceType;
-    }
-
-    public void setDataReferenceType(String dataReferenceType) {
-        this.dataReferenceType = dataReferenceType;
     }
 }

@@ -6,13 +6,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication()
 @ComponentScan({
-		"org.greatgamesonly.core.universalcalculator.domain",
 		"org.greatgamesonly.core.universalcalculator.exception",
-		"org.greatgamesonly.core.universalcalculator.repository",
-		"org.greatgamesonly.core.universalcalculator.service",
 		"org.greatgamesonly.core.universalcalculator.controller",
 		"org.greatgamesonly.core.universalcalculator.configuration",
-		"org.greatgamesonly.core.universalcalculator.annotation"
+		"org.greatgamesonly.core.universalcalculator.model.domain",
+		"org.greatgamesonly.core.universalcalculator.model.repository",
+		"org.greatgamesonly.core.universalcalculator.model.service",
+		"org.greatgamesonly.core.universalcalculator.model.annotation"
 })
 public class UniversalCalculatorApplication {
 
