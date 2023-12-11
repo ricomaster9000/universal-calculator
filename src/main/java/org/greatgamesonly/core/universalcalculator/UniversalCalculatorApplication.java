@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class UniversalCalculatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringWorkAssessmentApplication.class, args);
+		SpringApplication.run(UniversalCalculatorApplication.class, args);
 	}
 
 }
