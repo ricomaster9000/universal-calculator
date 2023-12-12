@@ -141,10 +141,21 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.ricomaster9000</groupId>
+			<artifactId>ResourceUtils</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+
 
 	</dependencies>
 
@@ -183,6 +194,39 @@
 						<phase>package</phase> <!-- bind to the packaging phase -->
 						<goals>
 							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.basedir}/src/main/resources/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc">
+									<fileset dir="${project.build.directory}/apidocs"/>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
