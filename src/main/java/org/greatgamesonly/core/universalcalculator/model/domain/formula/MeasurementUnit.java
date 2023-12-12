@@ -23,8 +23,12 @@ public class MeasurementUnit extends PossibleFormulaParameter {
 
     public MeasurementUnit() {}
 
+    public MeasurementUnit(Long id, String name, String description, InputParamSpecification inputParamSpecification) {
+        super(id,name,description,inputParamSpecification);
+    }
+
     public MeasurementUnit(Long id, String name, String description, InputParamSpecification inputParamSpecification, MeasurementUnitSystem measurementSystem) {
-        super(id,name,description, inputParamSpecification);
+        super(id,name,description,inputParamSpecification);
         this.measurementSystem = measurementSystem;
     }
 

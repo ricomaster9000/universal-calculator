@@ -30,11 +30,11 @@ public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity
     @NotNull
     private MeasurementUnit toMeasurementUnit;
 
-    @Column(name = "conversion_factor")
+    @Column(name = "conversion_factor", columnDefinition="")
     @NotNull
     @Min(0L)
-    @Max(Long.MAX_VALUE)
-    private Double conversionFactor;
+    @Max(Double.MAX_VALUE)
+    private Double conversionFactor = 1.7976931348623157E308;
 
 
     public MeasurementUnitToMeasurementUnitConversionFactor() {}

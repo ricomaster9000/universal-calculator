@@ -44,7 +44,7 @@ public class ConstantEntities {
             .withMaxValueAllowed(0.00D)
             .withStepSizeAllowed(1.00D);
 
-    public static final MeasurementUnitSystem EITHER_OR_BOTH = new MeasurementUnitSystem(1L,"EITHER_OR_BOTH");
+    public static final MeasurementUnitSystem TIME = new MeasurementUnitSystem(1L,"TIME");
     public static final MeasurementUnitSystem IMPERIAL_SYSTEM = new MeasurementUnitSystem(2L,"IMPERIAL_SYSTEM");
     public static final MeasurementUnitSystem METRIC_SYSTEM = new MeasurementUnitSystem(3L,"METRIC_SYSTEM");
 
@@ -52,19 +52,24 @@ public class ConstantEntities {
             1L,
             "ALL_MEASUREMENT_UNITS",
             "Allow all measurement units to be used in formula",
-            GENERIC_NUMBER_DECIMAL_INPUT_PARAM,
-            EITHER_OR_BOTH
+            GENERIC_NUMBER_DECIMAL_INPUT_PARAM
     );
 
+    // METRIC
     public static final MeasurementUnit MILLIMETER = new MeasurementUnit(2L,"MILLIMETER", "Millimeter", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
     public static final MeasurementUnit CENTIMETER = new MeasurementUnit(3L,"CENTIMETER", "Centimeters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
     public static final MeasurementUnit METER = new MeasurementUnit(4L,"METER", "Meters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
     public static final MeasurementUnit KILOMETER = new MeasurementUnit(5L,"KILOMETER", "Kilometer", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
 
+    // IMPERIAL
     public static final MeasurementUnit INCH = new MeasurementUnit(6L,"INCH", "Inches", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
     public static final MeasurementUnit FOOT = new MeasurementUnit(7L,"FOOT", "Feet", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
     public static final MeasurementUnit YARD = new MeasurementUnit(8L,"YARD", "Yards", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
     public static final MeasurementUnit MILE = new MeasurementUnit(9L,"MILE", "Miles", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+
+    // TIME
+    public static final MeasurementUnit FEMTOSECOND = new MeasurementUnit(10L,"FEMTOSECOND", "Femtosecond", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
+    public static final MeasurementUnit CALENDAR_YEAR = new MeasurementUnit(11L,"CALENDAR_YEAR", "Calendar Year", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
 
 
     public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
@@ -138,6 +143,19 @@ public class ConstantEntities {
             .withFromMeasurementUnit(FOOT)
             .withToMeasurementUnit(CENTIMETER)
             .withConversionFactor(30.48D);
+
+    public static final MeasurementUnitToMeasurementUnitConversionFactor CALENDAR_YEAR_TO_FEMTOSECOND = new MeasurementUnitToMeasurementUnitConversionFactor()
+            .withId(13L)
+            .withFromMeasurementUnit(CALENDAR_YEAR)
+            .withToMeasurementUnit(FEMTOSECOND)
+            .withConversionFactor(31540000000000000000000.0D);
+
+    public static final MeasurementUnitToMeasurementUnitConversionFactor FEMTOSECOND_TO_CALENDAR_YEAR = new MeasurementUnitToMeasurementUnitConversionFactor()
+            .withId(13L)
+            .withFromMeasurementUnit(FEMTOSECOND)
+            .withToMeasurementUnit(CALENDAR_YEAR)
+            .withConversionFactor(0.00000000000000000000003171D);
+
     public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
             .withId(1L)
             .withName("Generic Simple Conversion Formula")
