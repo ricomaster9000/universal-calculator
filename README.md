@@ -26,3 +26,8 @@ make sure maven is installed on your local machine make sure JAVA_HOME path has 
 - the db folder is dbDirectory inside the project directory, use that
 - use the username and password set in the application.properties
 - MAKE SURE NOTHING ELSE IS INTERACTING WITH THE DB WHEN TRYING TO CONNECT, so web app cannot run if you want to connect to db**
+
+amazon-linux-extras install epel -y
+yum update -y --skip-broken
+yum install -y certbot
+sudo yum install certbot-nginx
