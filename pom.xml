@@ -227,6 +227,9 @@
 								<copy todir="${project.basedir}/src/main/resources/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc">
 									<fileset dir="${project.build.directory}/apidocs"/>
 								</copy>
+								<copy todir="${project.basedir}/target/classes/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc">
+									<fileset dir="${project.build.directory}/apidocs"/>
+								</copy>
 							</target>
 						</configuration>
 						<goals>
