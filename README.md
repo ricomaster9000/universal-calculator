@@ -1,7 +1,7 @@
 # universal-calculator
 Dynamic Modular Extendable Universally usable calculator app (MVC design pattern with strong emphasis on SOLID design)
 
-For Java 17+ (will migrate to Java 21 once AWS officially starts supporting Java 21)
+For Java 17+ (will migrate to Java 21 once AWS officially starts supporting Java 21) - 2 years max from now
 
 A serious personal project of mine to create a powerful universally usable java web app that can perform basic to advanced to cpu-intensive calculations accurrately and nearly on par with C++ C level performance using the Java Foreign Function and Memory API.
 
