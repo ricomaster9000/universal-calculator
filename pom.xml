@@ -10,10 +10,10 @@
 	</parent>
 	<groupId>org.greatgamesonly.core</groupId>
 	<artifactId>universalcalculator</artifactId>
-	<version>1.0.0</version>
-	<name>spring-work-assessment</name>
-	<description>Assessment Project using hibernate, spring boot 3 and apache derby</description>
-	<url>https://github.com/ricomaster9000/king-price-insurance-assessment</url>
+	<version>0.4.0</version>
+	<name>universal-calculator</name>
+	<description>The Universal Calculator</description>
+	<url>https://github.com/ricomaster9000/universal-calculator</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -139,6 +139,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 
 	</dependencies>
