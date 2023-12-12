@@ -220,10 +220,10 @@
 						<phase>prepare-package</phase>
 						<configuration>
 							<target>
-								<copy todir="${project.basedir}/src/main/resources/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc">
+								<copy todir="${project.basedir}/src/main/resources/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m-brtf6TPZrySw45nc8rK9kkNg5wca9ZTF-jvMPA7a9c8X9FkQbydk6qUHpsg4Zd2Yy/javadoc">
 									<fileset dir="${project.build.directory}/apidocs"/>
 								</copy>
-								<copy todir="${project.basedir}/target/classes/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc">
+								<copy todir="${project.basedir}/target/classes/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m-brtf6TPZrySw45nc8rK9kkNg5wca9ZTF-jvMPA7a9c8X9FkQbydk6qUHpsg4Zd2Yy/javadoc">
 									<fileset dir="${project.build.directory}/apidocs"/>
 								</copy>
 							</target>
