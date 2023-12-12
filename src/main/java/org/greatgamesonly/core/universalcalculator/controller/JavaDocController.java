@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class JavaDocController {
 
 
-    @GetMapping("/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/swagger-ui")
+    @GetMapping("static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m/javadoc/index")
     private String serveJavaDoc() {
         return "index";
     }

@@ -17,28 +17,28 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         // css
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.css").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/**.css").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
 
         // js
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.js").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/**.js").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
 
         // png
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
-        registry.addResourceHandler("/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/*/**.png").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler("resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:META-INF/resources/static/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
+        registry.addResourceHandler(""+JAVADOCS_SPECIAL_KEY+"/javadoc/**.png").addResourceLocations("classpath:META-INF/"+JAVADOCS_SPECIAL_KEY+"/javadoc/");
     }
 
     @Bean
