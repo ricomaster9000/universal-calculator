@@ -151,6 +151,16 @@ public class ConversionCalculationTest {
         performInvalidConversionTest(null, -1.0, "CALENDAR_YEAR");
     }
 
+    @Test
+    public void testCalendarYearToFemtosecondConversion() throws Exception {
+        performConversionTest("CALENDAR_YEAR", 1.0, "FEMTOSECOND", 3.154e+22);
+    }
+
+    @Test
+    public void testInvalidCalendarYearToFemtosecondConversion() throws Exception {
+        performInvalidConversionTest("CALENDAR_YEAR", -1.0, "");
+    }
+
     private void performConversionTest(String fromUnit, double fromValue, String toUnit, double expectedValue) throws Exception {
         CalculationInputParam fromParam = new CalculationInputParam(fromUnit, "CONVERSION_FROM", fromValue);
         CalculationInputParam toParam = new CalculationInputParam(toUnit, "CONVERSION_TO");
