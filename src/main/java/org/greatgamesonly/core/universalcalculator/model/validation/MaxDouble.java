@@ -2,6 +2,10 @@ package org.greatgamesonly.core.universalcalculator.model.validation;
 
 import jakarta.validation.Payload;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
 public @interface MaxDouble {
 
     String message() default "The value must be less than or equal to {value}";
