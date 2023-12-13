@@ -13,9 +13,11 @@ import static org.greatgamesonly.core.universalcalculator.model.domain.formula.c
 
 @Entity(name = "measurement_unit")
 @LinkedRepository(MeasurementUnitRepository.class)
-@DiscriminatorValue("measurement_unit")
-@JsonTypeName("measurement_unit")
+@DiscriminatorValue(TYPE)
+@JsonTypeName(TYPE)
 public class MeasurementUnit extends PossibleFormulaParameter {
+
+    public final static String TYPE = "measurementUnit";
 
     @ManyToOne
     @JoinColumn(name = "measurement_system_id")
@@ -42,6 +44,6 @@ public class MeasurementUnit extends PossibleFormulaParameter {
 
     @Override
     public String getFormulaParameterType() {
-        return "measurement_unit";
+        return TYPE;
     }
 }

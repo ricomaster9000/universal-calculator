@@ -1,19 +1,17 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
-import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
-import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementToMeasurementConversionFactRepo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-
-import java.io.Serializable;
+import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
+import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
+import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementToMeasurementConversionFactRepo;
 
 
 @Entity(name = "measurement_unit_to_measurement_unit_conv_factor")
 @LinkedRepository(MeasurementToMeasurementConversionFactRepo.class)
-public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity implements Serializable {
+public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity {
 
     @Column(name="id")
     @Id
