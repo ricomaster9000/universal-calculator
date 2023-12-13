@@ -11,7 +11,7 @@ import jakarta.persistence.Entity;
 
 import static org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula.TYPE;
 
-@Entity()
+@Entity(name = "conversion_formula")
 @LinkedRepository(ConversionFormulaRepository.class)
 @DiscriminatorValue(TYPE)
 @JsonTypeName(TYPE)
