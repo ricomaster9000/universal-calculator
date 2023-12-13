@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE_COLUMN_DEFINITION;
+
 @Entity(name = "calculation")
 @LinkedRepository(CalculationRepository.class)
 public class Calculation extends BaseEntity {
@@ -38,7 +40,7 @@ public class Calculation extends BaseEntity {
     )
     private List<@NotNull CalculationInputParam> calculationInputParams;
 
-    @Column(name="output_value")
+    @Column(name="output_value", columnDefinition=SQL_MAX_DOUBLE_COLUMN_DEFINITION)
     private BigDecimal output;
 
     public Calculation() {}

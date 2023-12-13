@@ -1,5 +1,6 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.shared;
 
+import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.NumberInputParamSpecRepository;
@@ -7,8 +8,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.greatgamesonly.core.universalcalculator.model.validation.MaxDouble;
 
 import java.io.Serializable;
+
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE;
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE_COLUMN_DEFINITION;
 
 @Entity(name="numerical_input_param_specification")
 @LinkedRepository(NumberInputParamSpecRepository.class)
@@ -24,10 +29,10 @@ public class InputParamSpecification extends BaseEntity implements Serializable 
     @NotNull
     private Double minValueAllowed = 0.0D;
 
-    @Column(name="max_value")
-    @Max(Long.MAX_VALUE)
+    @Column(name="max_value", columnDefinition=SQL_MAX_DOUBLE_COLUMN_DEFINITION)
+    @MaxDouble(SQL_MAX_DOUBLE)
     @NotNull
-    private Double maxValueAllowed = (double) Long.MAX_VALUE;
+    private Double maxValueAllowed = GlobalConstants.SQL_MAX_DOUBLE;
 
     @Column(name="step_size_allowed")
     @Min(0L)

@@ -7,6 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementToMeasurementConversionFactRepo;
+import org.greatgamesonly.core.universalcalculator.model.validation.MaxDouble;
+
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE;
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE_COLUMN_DEFINITION;
 
 
 @Entity(name = "measurement_unit_to_measurement_unit_conv_factor")
@@ -28,10 +32,10 @@ public class MeasurementUnitToMeasurementUnitConversionFactor extends BaseEntity
     @NotNull
     private MeasurementUnit toMeasurementUnit;
 
-    @Column(name = "conversion_factor")
-    @NotNull
+    @Column(name = "conversion_factor", columnDefinition=SQL_MAX_DOUBLE_COLUMN_DEFINITION)
+    @MaxDouble(SQL_MAX_DOUBLE)
     @Min(0L)
-    @Max(Long.MAX_VALUE)
+    @NotNull
     private Double conversionFactor;
 
 
