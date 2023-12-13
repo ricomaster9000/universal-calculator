@@ -25,7 +25,10 @@ public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
 
         Components components = openApi.getComponents();
         if (components != null) {
-            List<? extends Class<?>> allTypes = reflections.getAllTypes().stream().map(ReflectionUtils::getClassByName).toList();
+            List<? extends Class<?>> allTypes = reflections.getAllTypes().stream()
+                    .map(ReflectionUtils::getClassByName)
+                    .filter(clazz -> clazz.getPackageName().startsWith("org.greatgamesonly.core.universalcalculator"))
+                    .toList();
             for(Class<?> clazz : allTypes) {
                 for (Field field : ReflectionUtils.getClassFields(clazz)) {
                     MaxDouble maxDoubleAnnotation = field.getAnnotation(MaxDouble.class);
