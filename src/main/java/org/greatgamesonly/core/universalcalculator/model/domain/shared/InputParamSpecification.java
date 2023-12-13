@@ -36,6 +36,7 @@ public class InputParamSpecification extends BaseEntity implements Serializable 
 
     @Column(name="step_size_allowed")
     @Min(0L)
+    @Max(Short.MAX_VALUE)
     @NotNull
     private Double stepSizeAllowed = 1.00D; /*input param values must increase or decrease between the min and
                                               max value where this value can divide in with no remainder
