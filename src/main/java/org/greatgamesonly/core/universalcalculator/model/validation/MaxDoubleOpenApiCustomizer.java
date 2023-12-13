@@ -27,7 +27,7 @@ public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
         if (components != null) {
             List<? extends Class<?>> allTypes = reflections.getAllTypes().stream()
                     .map(ReflectionUtils::getClassByName)
-                    .filter(clazz -> clazz.getPackageName().startsWith("org.greatgamesonly.core.universalcalculator"))
+                    .filter(clazz -> clazz != null && clazz.getPackageName().startsWith("org.greatgamesonly.core.universalcalculator"))
                     .toList();
             for(Class<?> clazz : allTypes) {
                 for (Field field : ReflectionUtils.getClassFields(clazz)) {
