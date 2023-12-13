@@ -12,7 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 		"org.greatgamesonly.core.universalcalculator.model.domain",
 		"org.greatgamesonly.core.universalcalculator.model.repository",
 		"org.greatgamesonly.core.universalcalculator.model.service",
-		"org.greatgamesonly.core.universalcalculator.model.annotation"
+		"org.greatgamesonly.core.universalcalculator.model.annotation",
+		"org.greatgamesonly.core.universalcalculator.model.validation"
 })
 public class UniversalCalculatorApplication {
 
