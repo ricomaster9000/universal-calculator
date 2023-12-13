@@ -15,11 +15,6 @@ public class DataReferenceInfo {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "data_size_info_type_id")
-    @NotNull
-    private DataSizeInfoType dataSizeInfoType;
-
     @Column(name = "from_row_id")
     private Long fromRowId;
 

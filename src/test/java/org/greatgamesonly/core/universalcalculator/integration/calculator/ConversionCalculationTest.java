@@ -141,6 +141,16 @@ public class ConversionCalculationTest {
         performInvalidConversionTest(null, -1.0, "METER");
     }
 
+    @Test
+    public void testFemtosecondToCalendarYearConversion() throws Exception {
+        performConversionTest("FEMTOSECOND", 1.0, "CALENDAR_YEAR", 3.171e-23D);
+    }
+
+    @Test
+    public void testInvalidFemtosecondToCalendarYearConversion() throws Exception {
+        performInvalidConversionTest(null, -1.0, "CALENDAR_YEAR");
+    }
+
     private void performConversionTest(String fromUnit, double fromValue, String toUnit, double expectedValue) throws Exception {
         CalculationInputParam fromParam = new CalculationInputParam(fromUnit, "CONVERSION_FROM", fromValue);
         CalculationInputParam toParam = new CalculationInputParam(toUnit, "CONVERSION_TO");
