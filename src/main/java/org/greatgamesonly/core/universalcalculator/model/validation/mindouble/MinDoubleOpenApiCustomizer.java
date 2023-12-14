@@ -3,6 +3,7 @@ package org.greatgamesonly.core.universalcalculator.model.validation.mindouble;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Schema;
+import org.greatgamesonly.core.universalcalculator.model.validation.base.CustomOpenApiCustomizer;
 import org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.ALL_INTERNAL_FULL_CLASS_NAMES;
 
 @Component
-public class MinDoubleOpenApiCustomizer implements OpenApiCustomizer {
+public class MinDoubleOpenApiCustomizer extends CustomOpenApiCustomizer {
 
     @Override
     public void customise(OpenAPI openApi) {
@@ -29,9 +30,7 @@ public class MinDoubleOpenApiCustomizer implements OpenApiCustomizer {
                 for (Field field : ReflectionUtils.getClassFields(clazz)) {
                     MinDouble minDoubleAnnotation = field.getAnnotation(MinDouble.class);
                     if(minDoubleAnnotation != null) {
-                        Schema<?> schema = components.getSchemas().get(field.getDeclaringClass().getSimpleName());
-                        schema = schema == null ? components.getSchemas().get(field.getDeclaringClass().getSimpleName() + "Object") : schema;
-                        Schema<?> propertySchema = schema != null ? (Schema<?>) schema.getProperties().get(field.getName()) : null;
+                        Schema<?> propertySchema = getSchemaBasedOnField(components, field);
                         if (propertySchema != null) {
                             propertySchema.setMinimum(BigDecimal.valueOf(minDoubleAnnotation.value()));
                         }
