@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.greatgamesonly.core</groupId>
 	<artifactId>universalcalculator</artifactId>
-	<version>0.4.3</version>
+	<version>0.4.4</version>
 	<name>universal-calculator</name>
 	<description>The Universal Calculator</description>
 	<url>https://github.com/ricomaster9000/universal-calculator</url>

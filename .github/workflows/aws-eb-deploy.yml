@@ -31,4 +31,4 @@ jobs:
           environment_name: "Universal-calculator-back-end-env"
           version_label: "deploy-${{ github.sha }}"
           region: "eu-west-1"
-          deployment_package: "target/universalcalculator-0.4.3.zip"
+          deployment_package: "target/universalcalculator-0.4.4.zip"

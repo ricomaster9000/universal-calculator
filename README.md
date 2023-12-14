@@ -18,7 +18,7 @@ make sure maven is installed on your local machine make sure JAVA_HOME path has 
 ## to compile and run from jar (the compiled jar is likely what will be deployed to a server)
 - run: mvn clean install
 - run: cd target
-- run: java -jar universalcalculator-0.4.3.jar
+- run: java -jar universalcalculator-0.4.4.jar
 ## post-run info
 ### to access embedded derby db via a db client
 - install DBeaver
