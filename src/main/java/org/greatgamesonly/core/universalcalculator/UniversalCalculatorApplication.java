@@ -8,6 +8,7 @@ import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CORE_P
 
 @SpringBootApplication()
 @ComponentScan({
+		CORE_PACKAGE_NAME,
 		CORE_PACKAGE_NAME+".exception",
 		CORE_PACKAGE_NAME+".controller",
 		CORE_PACKAGE_NAME+".configuration",
