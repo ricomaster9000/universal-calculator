@@ -1,14 +1,14 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.calculation;
 
+import jakarta.validation.constraints.Min;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.CalculationInputParamRepository;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.greatgamesonly.core.universalcalculator.model.validation.MaxDouble;
+import org.greatgamesonly.core.universalcalculator.model.validation.maxdouble.MaxDouble;
 
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.*;
 
@@ -31,6 +31,7 @@ public class CalculationInputParam extends BaseEntity {
     private String placeholderName;
 
     @Column(name = "numerical_input_value", columnDefinition=SQL_MAX_DOUBLE_COLUMN_DEFINITION)
+    @Min(-Long.MAX_VALUE)
     @MaxDouble(GlobalConstants.SQL_MAX_DOUBLE)
     private Double numericalInputValue;
 

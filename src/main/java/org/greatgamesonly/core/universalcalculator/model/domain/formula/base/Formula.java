@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaParameterInputSpecification;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.FormulaParameterUsageInfo;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.PossibleFormulaParameter;
 import org.greatgamesonly.core.universalcalculator.model.repository.base.BaseFormulaRepository;
 import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
@@ -27,7 +27,7 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", unique=true)
 	@Size(min = 3, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
 	@NotNull
 	private String name;
@@ -43,7 +43,7 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 			joinColumns = @JoinColumn(name = "formula_id"),
 			inverseJoinColumns = @JoinColumn(name = "formula_param_usage_id")
 	)
-	protected List<FormulaParameterInputSpecification> formulaParameterUsageInfo;
+	protected List<FormulaParameterUsageInfo> formulaParameterUsageInfo;
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -94,7 +94,7 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 		return (TYPE) this;
 	}
 
-	public TYPE withFormulaParameterUsageInfo(List<FormulaParameterInputSpecification> formulaParameterUsageInfo) {
+	public TYPE withFormulaParameterUsageInfo(List<FormulaParameterUsageInfo> formulaParameterUsageInfo) {
 		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
 		return (TYPE) this;
 	}
@@ -128,11 +128,11 @@ public abstract class Formula<TYPE extends Formula<TYPE>> extends BaseEntity {
 		this.description = description;
 	}
 
-	public List<FormulaParameterInputSpecification> getFormulaParameterUsageInfo() {
+	public List<FormulaParameterUsageInfo> getFormulaParameterUsageInfo() {
 		return formulaParameterUsageInfo;
 	}
 
-	public void setFormulaParameterUsageInfo(List<FormulaParameterInputSpecification> formulaParameterUsageInfo) {
+	public void setFormulaParameterUsageInfo(List<FormulaParameterUsageInfo> formulaParameterUsageInfo) {
 		this.formulaParameterUsageInfo = formulaParameterUsageInfo;
 	}
 
