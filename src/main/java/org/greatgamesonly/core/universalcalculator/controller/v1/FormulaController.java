@@ -1,10 +1,9 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.domain.formula.base.FormulaRequest;
-import org.greatgamesonly.core.universalcalculator.domain.formula.conversion.ConversionFormula;
-import org.greatgamesonly.core.universalcalculator.service.FormulaService;
+
 import jakarta.validation.Valid;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
+import org.greatgamesonly.core.universalcalculator.model.service.FormulaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +19,32 @@ public class FormulaController {
     private FormulaService formulaService;
 
     @PostMapping
-    public ResponseEntity<? extends Formula<?,?>> createConversionFormula(@Valid @RequestBody FormulaRequest formula) {
-        Formula<?,?> createdFormula = formulaService.createFormula(formula.getFormula());
+    public ResponseEntity<? extends Formula<?>> createFormula(@Valid @RequestBody Formula<?> formula) {
+        Formula<?> createdFormula = formulaService.createFormula(formula);
         return new ResponseEntity<>(createdFormula, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Formula<?,?>> getConversionFormulaById(@PathVariable Long id, @RequestParam("formulaTypeId") Long formulaTypeId) {
-        ConversionFormula formula = formulaService.getFormulaByIdAndTypeId(id,formulaTypeId);
+    public ResponseEntity<Formula<?>> getFormulaById(@PathVariable Long id) {
+        Formula<?> formula = formulaService.getFormulaById(id);
         return ResponseEntity.ok(formula);
     }
 
     @GetMapping
-    public ResponseEntity<List<Formula<?,?>>> getAllConversionFormulas() {
-        List<Formula<?,?>> formulas = formulaService.getAllFormulas();
+    public ResponseEntity<List<Formula<?>>> getAllFormulas() {
+        List<Formula<?>> formulas = formulaService.getAllFormulas();
         return ResponseEntity.ok(formulas);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Formula<?,?>> updateConversionFormula(@PathVariable Long id, @Valid @RequestBody FormulaRequest formula) {
-        Formula<?,?> updatedFormula = formulaService.updateFormula(id, formula.getFormula());
+    public ResponseEntity<Formula<?>> updateFormula(@PathVariable Long id, @Valid @RequestBody Formula<?> formula) {
+        Formula<?> updatedFormula = formulaService.updateFormula(id, formula);
         return ResponseEntity.ok(updatedFormula);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteConversionFormula(@PathVariable Long id, @RequestParam("formulaTypeId") Long formulaTypeId) {
-        formulaService.deleteFormula(id,formulaTypeId);
+    public ResponseEntity<Void> deleteFormula(@PathVariable Long id) {
+        formulaService.deleteFormula(id);
         return ResponseEntity.noContent().build();
     }
 }

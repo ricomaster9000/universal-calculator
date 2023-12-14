@@ -10,10 +10,10 @@
 	</parent>
 	<groupId>org.greatgamesonly.core</groupId>
 	<artifactId>universalcalculator</artifactId>
-	<version>1.0.0</version>
-	<name>spring-work-assessment</name>
-	<description>Assessment Project using hibernate, spring boot 3 and apache derby</description>
-	<url>https://github.com/ricomaster9000/king-price-insurance-assessment</url>
+	<version>0.4.4</version>
+	<name>universal-calculator</name>
+	<description>The Universal Calculator</description>
+	<url>https://github.com/ricomaster9000/universal-calculator</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -140,6 +140,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ricomaster9000</groupId>
+			<artifactId>ResourceUtils</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+
 
 	</dependencies>
 
@@ -178,6 +194,42 @@
 						<phase>package</phase> <!-- bind to the packaging phase -->
 						<goals>
 							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.basedir}/src/main/resources/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m-brtf6TPZrySw45nc8rK9kkNg5wca9ZTF-jvMPA7a9c8X9FkQbydk6qUHpsg4Zd2Yy/javadoc">
+									<fileset dir="${project.build.directory}/apidocs"/>
+								</copy>
+								<copy todir="${project.basedir}/target/classes/static/2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m-brtf6TPZrySw45nc8rK9kkNg5wca9ZTF-jvMPA7a9c8X9FkQbydk6qUHpsg4Zd2Yy/javadoc">
+									<fileset dir="${project.build.directory}/apidocs"/>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>

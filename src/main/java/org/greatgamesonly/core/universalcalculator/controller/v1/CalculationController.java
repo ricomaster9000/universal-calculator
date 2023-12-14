@@ -1,11 +1,11 @@
 package org.greatgamesonly.core.universalcalculator.controller.v1;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequestQuick;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.service.CalculationService;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequestQuick;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
+import org.greatgamesonly.core.universalcalculator.model.service.CalculationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +27,27 @@ public class CalculationController {
         return calculationService.createCalculations(calculateRequest);
     }
 
+    @GetMapping("/quick/{formulaParams}")
+    public List<Calculation> createCalculationQuickAlt(@PathVariable("formulaParams") String formulaParams, @RequestParam("formulaId") Long formulaId) {
+        Calculation calculation = new Calculation();
+        calculation.setName("QUICK_CALCULATION_ALT");
+        List<CalculationInputParam> calculationInputParams = new ArrayList<>();
+
+        String[] formulaParamsSplitted = formulaParams.split("-");
+        for(int i = 0, remaining = formulaParamsSplitted.length-1; i < formulaParamsSplitted.length; i+=3,remaining-=3) {
+            String placeholderName = formulaParamsSplitted[i];
+            String possibleFormulaParameterName = formulaParamsSplitted[i+1];
+            String numericalInput = (remaining > 2) ? formulaParamsSplitted[i + 2] : null;
+            calculationInputParams.add(new CalculationInputParam(
+                    possibleFormulaParameterName,
+                    placeholderName,
+                    numericalInput != null ? Double.parseDouble(numericalInput) : null
+            ));
+        }
+        calculation.setCalculationInputParams(calculationInputParams);
+        return calculationService.createCalculationQuick(new CalculateRequestQuick(formulaId,calculation));
+    }
+
     @GetMapping("/quick")
     public List<Calculation> createCalculationQuick(HttpServletRequest request) {
         Map<String, String[]> queryParams = request.getParameterMap();
@@ -35,7 +56,6 @@ public class CalculationController {
         calculation.setName("QUICK_CALCULATION");
 
         Long formulaId = Long.parseLong(queryParams.get("formulaId")[0]);
-        Long formulaTypeId = Long.parseLong(queryParams.get("formulaTypeId")[0]);
 
         List<String> calculationInputParamNamesToConsider = new ArrayList<>(Arrays.asList(queryParams.get("paramName")));
         List<CalculationInputParam> calculationInputParams = new ArrayList<>();
@@ -51,7 +71,7 @@ public class CalculationController {
             ));
         });
         calculation.setCalculationInputParams(calculationInputParams);
-        return calculationService.createCalculationQuick(new CalculateRequestQuick(formulaId,formulaTypeId,calculation));
+        return calculationService.createCalculationQuick(new CalculateRequestQuick(formulaId,calculation));
     }
 
     @GetMapping("/{id}")

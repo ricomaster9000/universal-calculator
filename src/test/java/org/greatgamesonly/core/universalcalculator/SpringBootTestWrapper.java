@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = SpringWorkAssessmentApplication.class,
+        classes = UniversalCalculatorApplication.class,
         properties = {
                 "spring.datasource.url=jdbc:derby:memory:local;create=true",
                 "spring.datasource.driver-class-name=org.apache.derby.jdbc.EmbeddedDriver",

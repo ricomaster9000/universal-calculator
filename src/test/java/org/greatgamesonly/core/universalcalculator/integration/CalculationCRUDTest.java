@@ -2,10 +2,11 @@ package org.greatgamesonly.core.universalcalculator.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculateRequest;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.Calculation;
-import org.greatgamesonly.core.universalcalculator.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequest;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
+import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
+import org.greatgamesonly.core.universalcalculator.model.domain.constant.ConversionFormulaConstants;
+import org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -111,16 +112,16 @@ public class CalculationCRUDTest {
         calculation.setDescription(PREDEFINED_CALCULATION_DESCRIPTION);
 
         CalculationInputParam inputParamFrom = new CalculationInputParam(
-                ConstantEntities.METER.getName(), "CONVERSION_FROM", 1.0
+                MeasurementUnitConstants.METER.getName(), "CONVERSION_FROM", 1.0
         );
         CalculationInputParam inputParamTo = new CalculationInputParam(
-                ConstantEntities.FOOT.getName(), "CONVERSION_TO"
+                MeasurementUnitConstants.FOOT.getName(), "CONVERSION_TO"
         );
         calculation.setCalculationInputParams(Arrays.asList(inputParamFrom, inputParamTo));
 
         calculation.setOutput(BigDecimal.valueOf(3.28084));
 
-        return new CalculateRequest(ConstantEntities.GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
+        return new CalculateRequest(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
     }
 
     private Calculation createAndPostTestCalculation() throws Exception {

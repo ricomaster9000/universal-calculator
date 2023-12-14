@@ -28,6 +28,14 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/static</directory>
+            <outputDirectory>./static</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
         <fileSet>
             <directory>${project.basedir}/.platform</directory>
             <outputDirectory>./.platform</outputDirectory>

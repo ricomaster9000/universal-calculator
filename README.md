@@ -1,7 +1,7 @@
 # universal-calculator
-Dynamic Modular Extendable Universally usable calculator app (SOLID design)
+Dynamic Modular Extendable Universally usable calculator app (MVC design pattern with strong emphasis on SOLID design)
 
-For Java 17+ (will migrate to Java 21 once AWS officially starts supporting Java 21)
+For Java 17+ (will migrate to Java 21 once AWS officially starts supporting Java 21) - 2 years max from now
 
 A serious personal project of mine to create a powerful universally usable java web app that can perform basic to advanced to cpu-intensive calculations accurrately and nearly on par with C++ C level performance using the Java Foreign Function and Memory API.
 
@@ -18,7 +18,7 @@ make sure maven is installed on your local machine make sure JAVA_HOME path has 
 ## to compile and run from jar (the compiled jar is likely what will be deployed to a server)
 - run: mvn clean install
 - run: cd target
-- run: java -jar spring.work.assessment-1.0.0.jar
+- run: java -jar universalcalculator-0.4.4.jar
 ## post-run info
 ### to access embedded derby db via a db client
 - install DBeaver
@@ -26,3 +26,8 @@ make sure maven is installed on your local machine make sure JAVA_HOME path has 
 - the db folder is dbDirectory inside the project directory, use that
 - use the username and password set in the application.properties
 - MAKE SURE NOTHING ELSE IS INTERACTING WITH THE DB WHEN TRYING TO CONNECT, so web app cannot run if you want to connect to db**
+
+amazon-linux-extras install epel -y
+yum update -y --skip-broken
+yum install -y certbot
+sudo yum install certbot-nginx
