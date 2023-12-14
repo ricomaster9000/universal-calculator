@@ -9,9 +9,9 @@ import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedReposi
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.FormulaParameterInputSpecificationRepo;
 
-@Entity(name = "formula_parameter_input_specification")
+@Entity(name = "formula_parameter_usage_info")
 @LinkedRepository(FormulaParameterInputSpecificationRepo.class)
-public class FormulaParameterInputSpecification extends BaseEntity {
+public class FormulaParameterUsageInfo extends BaseEntity {
 
     @Id
     @Column(name = "id")
@@ -29,9 +29,9 @@ public class FormulaParameterInputSpecification extends BaseEntity {
     @NotNull
     private String description;
 
-    public FormulaParameterInputSpecification() {}
+    public FormulaParameterUsageInfo() {}
 
-    public FormulaParameterInputSpecification(
+    public FormulaParameterUsageInfo(
             Long id,
             String parameterPlaceholderName,
             String description

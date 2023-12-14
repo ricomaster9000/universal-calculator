@@ -26,7 +26,7 @@ public class PostSetupEntityConstantSaver {
 
         try {
             List<Object> constantEntities = getAllConstantValuesInClass(InputParamSpecificationConstants.class);
-            constantEntities.addAll(getAllConstantValuesInClass(FormulaParameterInputSpecificationConstants.class));
+            constantEntities.addAll(getAllConstantValuesInClass(FormulaParameterUsageInfoConstants.class));
             constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitSystemConstants.class));
             constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitConstants.class));
             constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitToMeasurementUnitConversionFactorConstants.class));

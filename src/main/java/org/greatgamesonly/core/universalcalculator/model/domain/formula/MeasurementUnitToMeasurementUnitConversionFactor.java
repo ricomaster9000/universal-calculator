@@ -1,13 +1,12 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementToMeasurementConversionFactRepo;
-import org.greatgamesonly.core.universalcalculator.model.validation.MaxDouble;
+import org.greatgamesonly.core.universalcalculator.model.validation.maxdouble.MaxDouble;
 
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE;
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE_COLUMN_DEFINITION;

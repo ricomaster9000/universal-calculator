@@ -5,8 +5,8 @@ import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversi
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_FROM_PARAM_INPUT_SPEC;
-import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_TO_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterUsageInfoConstants.CONVERSION_FROM_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterUsageInfoConstants.CONVERSION_TO_PARAM_INPUT_SPEC;
 import static org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants.ALL_MEASUREMENT_UNITS;
 
 public class ConversionFormulaConstants {
