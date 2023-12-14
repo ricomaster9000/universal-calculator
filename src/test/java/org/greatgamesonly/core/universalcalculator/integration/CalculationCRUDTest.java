@@ -121,7 +121,7 @@ public class CalculationCRUDTest {
 
         calculation.setOutput(BigDecimal.valueOf(3.28084));
 
-        return new CalculateRequest(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
+        return new CalculateRequest(ConversionFormulaConstants.SIMPLE_CONVERSION_FORMULA, new ArrayList<>(List.of(calculation)));
     }
 
     private Calculation createAndPostTestCalculation() throws Exception {

@@ -3,7 +3,7 @@ package org.greatgamesonly.core.universalcalculator.integration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.base.Formula;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.SimpleConversionFormula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class FormulaCRUDTest {
 
-    public static final ConversionFormula TEST_CONVERSION_FORMULA = new ConversionFormula()
+    public static final SimpleConversionFormula TEST_CONVERSION_FORMULA = new SimpleConversionFormula()
             .withName("TEST Conversion Formula")
             .withDescription("Takes a CONVERSION_FROM measurement unit input param and " +
                     "a CONVERSION_TO measurement unit input param, " +
@@ -70,7 +70,7 @@ public class FormulaCRUDTest {
                 .andExpect(jsonPath("$.name", is(newFormula.getName())))
                 .andReturn();
 
-        TEST_CONVERSION_FORMULA.setId(objectMapper.readValue(result.getResponse().getContentAsString(), ConversionFormula.class).getId());
+        TEST_CONVERSION_FORMULA.setId(objectMapper.readValue(result.getResponse().getContentAsString(), SimpleConversionFormula.class).getId());
     }
 
     @Test

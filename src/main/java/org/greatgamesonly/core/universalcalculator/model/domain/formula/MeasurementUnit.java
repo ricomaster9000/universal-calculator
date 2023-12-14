@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import static org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula.TYPE;
+import static org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.SimpleConversionFormula.TYPE;
 
 @Entity(name = "measurement_unit")
 @LinkedRepository(MeasurementUnitRepository.class)

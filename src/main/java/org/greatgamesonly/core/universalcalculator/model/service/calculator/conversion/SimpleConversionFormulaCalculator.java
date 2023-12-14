@@ -1,4 +1,4 @@
-package org.greatgamesonly.core.universalcalculator.model.service.calculator;
+package org.greatgamesonly.core.universalcalculator.model.service.calculator.conversion;
 
 import org.greatgamesonly.core.universalcalculator.exception.CalculationException;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
@@ -17,7 +17,7 @@ import static org.greatgamesonly.core.universalcalculator.model.domain.constant.
 import static org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants.ALL_MEASUREMENT_UNITS;
 
 @Component
-public class ConversionFormulaCalculator extends FormulaCalculator {
+public class SimpleConversionFormulaCalculator extends FormulaCalculator {
 
     @Autowired
     MeasurementToMeasurementConversionFactRepo measurementToMeasurementConversionFactRepo;

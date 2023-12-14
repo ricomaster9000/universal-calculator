@@ -188,7 +188,7 @@ public class ConversionCalculationTest {
         calculation.setCalculationInputParams(Arrays.asList(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(ConversionFormulaConstants.SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(Arrays.asList(calculation));
 
         MvcResult mvcResult = mockMvc.perform(post("/api/v1/calculation").
@@ -210,7 +210,7 @@ public class ConversionCalculationTest {
         calculation.setCalculationInputParams(List.of(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(ConversionFormulaConstants.SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(List.of(calculation));
 
         String calculateRequestJson = objectMapper.writeValueAsString(calculateRequest);

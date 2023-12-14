@@ -74,8 +74,13 @@ public class Calculation extends BaseEntity {
     }
 
     public CalculationInputParam getCalculationInputParamByPlaceholderName(String placeholderName) {
+        return getCalculationInputParamByPlaceholderName(placeholderName, 0);
+    }
+
+    public CalculationInputParam getCalculationInputParamByPlaceholderName(String placeholderName, int index) {
         return getCalculationInputParams().stream()
                 .filter(calcInput -> calcInput.getPlaceholderName().equals(placeholderName))
+                .skip(index)
                 .findFirst()
                 .orElse(null);
     }
