@@ -29,7 +29,7 @@ public class UniqueOpenApiCustomizer implements OpenApiCustomizer {
             for(Class<?> clazz : allTypes) {
                 for (Field field : ReflectionUtils.getClassFields(clazz)) {
                     Column uniqueAnnotation = field.getAnnotation(Column.class);
-                    if(uniqueAnnotation != null) {
+                    if(uniqueAnnotation != null && field.getType().equals(String.class)) {
                         Schema<?> schema = components.getSchemas().get(field.getDeclaringClass().getSimpleName());
                         schema = schema == null ? components.getSchemas().get(field.getDeclaringClass().getSimpleName() + "Object") : schema;
                         Schema<?> propertySchema = schema != null ? (Schema<?>) schema.getProperties().get(field.getName()) : null;
