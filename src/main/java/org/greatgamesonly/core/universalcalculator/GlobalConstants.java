@@ -1,5 +1,9 @@
 package org.greatgamesonly.core.universalcalculator;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class GlobalConstants {
 
     public static final int STANDARD_DB_STRING_MAX_CHAR_SIZE = 255;
@@ -10,4 +14,6 @@ public class GlobalConstants {
     public static final double SQL_MAX_DOUBLE = 99999999999999999999999999999999999999999999999999999999.99999999D;
 
     public static final String JAVADOCS_SPECIAL_KEY = "2y19F09NuVw3vgMvVq1dWx0xQu9-7WVhUJJz0sUrcNMtB6toF5lV3l7m-brtf6TPZrySw45nc8rK9kkNg5wca9ZTF-jvMPA7a9c8X9FkQbydk6qUHpsg4Zd2Yy";
+
+    public static final Set<String> ALL_INTERNAL_FULL_CLASS_NAMES = new HashSet<>();
 }

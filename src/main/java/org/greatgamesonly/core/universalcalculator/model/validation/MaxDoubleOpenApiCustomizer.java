@@ -4,7 +4,6 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Schema;
 import org.greatgamesonly.opensource.utils.reflectionutils.ReflectionUtils;
-import org.reflections.Reflections;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.stereotype.Component;
 
@@ -13,22 +12,17 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
+
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.ALL_INTERNAL_FULL_CLASS_NAMES;
 
 @Component
 public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
 
     @Override
     public void customise(OpenAPI openApi) {
-        Reflections reflections = new Reflections("org.greatgamesonly.core.universalcalculator");
-        if(reflections.getAllTypes().size() <= 0) {
-            reflections.merge(new Reflections());
-        }
-
         Components components = openApi.getComponents();
         if (components != null) {
-            List<? extends Class<?>> allTypes = reflections.getAllTypes().stream()
-                    .filter(className -> className != null && className.startsWith("org.greatgamesonly.core.universalcalculator"))
+            List<? extends Class<?>> allTypes = ALL_INTERNAL_FULL_CLASS_NAMES.stream()
                     .map(ReflectionUtils::getClassByName)
                     .filter(Objects::nonNull)
                     .toList();
