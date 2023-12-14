@@ -24,7 +24,7 @@ public class PossibleFormulaParameter extends BaseEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique=true)
     @Size(min = 2, max = GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE)
     @NotNull
     @Pattern(regexp = "^[^-]*$", message = "The name must not contain hyphens (-)")

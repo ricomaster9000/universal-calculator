@@ -43,6 +43,7 @@ public class PossibleFormulaParameterCRUDTest {
 
     @Test
     public void A_testCreate() throws Exception {
+        possibleFormulaParameterTest.setName("MILE_2"); // names must be unique
         possibleFormulaParameterTest.setId(999999L);
         String jsonRequest = objectMapper.writeValueAsString(possibleFormulaParameterTest);
 

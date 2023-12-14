@@ -17,7 +17,7 @@ public class MeasurementUnitSystem extends BaseEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE)
+    @Column(name = "name", length=STANDARD_DB_STRING_MAX_CHAR_SIZE, unique=true)
     @NotNull
     @Length(min = 3, max = STANDARD_DB_STRING_MAX_CHAR_SIZE)
     private String name;
