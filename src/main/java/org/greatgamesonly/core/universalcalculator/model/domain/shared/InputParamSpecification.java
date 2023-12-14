@@ -9,6 +9,7 @@ import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedReposi
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.NumberInputParamSpecRepository;
 import org.greatgamesonly.core.universalcalculator.model.validation.maxdouble.MaxDouble;
+import org.greatgamesonly.core.universalcalculator.model.validation.mindouble.MinDouble;
 
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE;
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.SQL_MAX_DOUBLE_COLUMN_DEFINITION;
@@ -35,7 +36,7 @@ public class InputParamSpecification extends BaseEntity {
     private Double maxValueAllowed = GlobalConstants.SQL_MAX_DOUBLE;
 
     @Column(name="step_size_allowed")
-    @Min(0L)
+    @MinDouble(0.000001D)
     @Max(Short.MAX_VALUE)
     @NotNull
     private Double stepSizeAllowed = 1.00D; /*input param values must increase or decrease between the min and
