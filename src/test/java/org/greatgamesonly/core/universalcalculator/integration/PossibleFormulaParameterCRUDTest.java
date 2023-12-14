@@ -2,6 +2,7 @@ package org.greatgamesonly.core.universalcalculator.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
+import org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.MeasurementUnit;
 import org.greatgamesonly.core.universalcalculator.model.domain.formula.PossibleFormulaParameter;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities.*;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,7 +34,7 @@ public class PossibleFormulaParameterCRUDTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    private final MeasurementUnit possibleFormulaParameterTest = MILE;
+    private final MeasurementUnit possibleFormulaParameterTest = MeasurementUnitConstants.MILE;
 
     @BeforeEach
     public void setup() {

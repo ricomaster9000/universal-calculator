@@ -17,7 +17,9 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities.*;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_FROM_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_TO_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants.ALL_MEASUREMENT_UNITS;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

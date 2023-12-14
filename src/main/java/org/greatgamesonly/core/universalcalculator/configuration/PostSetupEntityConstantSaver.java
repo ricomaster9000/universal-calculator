@@ -1,8 +1,8 @@
 package org.greatgamesonly.core.universalcalculator.configuration;
 
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
-import org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
+import org.greatgamesonly.core.universalcalculator.model.domain.constant.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +25,12 @@ public class PostSetupEntityConstantSaver {
         ApplicationContext ctx = event.getApplicationContext();
 
         try {
-            List<Object> constantEntities = getAllConstantValuesInClass(ConstantEntities.class);
+            List<Object> constantEntities = getAllConstantValuesInClass(InputParamSpecificationConstants.class);
+            constantEntities.addAll(getAllConstantValuesInClass(FormulaParameterInputSpecificationConstants.class));
+            constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitSystemConstants.class));
+            constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitConstants.class));
+            constantEntities.addAll(getAllConstantValuesInClass(MeasurementUnitToMeasurementUnitConversionFactorConstants.class));
+            constantEntities.addAll(getAllConstantValuesInClass(ConversionFormulaConstants.class));
 
             for (Object constantVal : constantEntities) {
                 if (constantVal != null) {

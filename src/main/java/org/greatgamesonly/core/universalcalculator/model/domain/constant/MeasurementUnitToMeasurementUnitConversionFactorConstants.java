@@ -1,72 +1,10 @@
-package org.greatgamesonly.core.universalcalculator.model.domain;
+package org.greatgamesonly.core.universalcalculator.model.domain.constant;
 
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.conversion.ConversionFormula;
-import org.greatgamesonly.core.universalcalculator.model.domain.shared.InputParamSpecification;
-import org.greatgamesonly.core.universalcalculator.model.domain.formula.*;
+import org.greatgamesonly.core.universalcalculator.model.domain.formula.MeasurementUnitToMeasurementUnitConversionFactor;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants.*;
 
-public class ConstantEntities {
-
-    public static final FormulaParameterInputSpecification CONVERSION_FROM_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
-            1L,
-            "CONVERSION_FROM",
-            "the measurement unit to convert from"
-    );
-
-    public static final FormulaParameterInputSpecification CONVERSION_TO_PARAM_INPUT_SPEC = new FormulaParameterInputSpecification(
-            2L,
-            "CONVERSION_TO",
-            "the measurement unit to convert to"
-    );
-
-    public static final InputParamSpecification GENERIC_NUMBER_DECIMAL_INPUT_PARAM = new InputParamSpecification()
-            .withId(1L)
-            .withStepSizeAllowed(0.00000000001D);
-
-    public static final InputParamSpecification GENERIC_INTEGER_INPUT_PARAM = new InputParamSpecification()
-            .withId(2L)
-            .withStepSizeAllowed(1.00D);
-
-    public static final InputParamSpecification INTEGER_POSITIVE_INPUT_PARAM = new InputParamSpecification()
-            .withId(3L)
-            .withMinValueAllowed(0.00D)
-            .withStepSizeAllowed(1.00D);
-
-    public static final InputParamSpecification INTEGER_NEGATIVE_INPUT_PARAM = new InputParamSpecification()
-            .withId(4L)
-            .withMaxValueAllowed(0.00D)
-            .withStepSizeAllowed(1.00D);
-
-    public static final MeasurementUnitSystem TIME = new MeasurementUnitSystem(1L,"TIME");
-    public static final MeasurementUnitSystem IMPERIAL_SYSTEM = new MeasurementUnitSystem(2L,"IMPERIAL_SYSTEM");
-    public static final MeasurementUnitSystem METRIC_SYSTEM = new MeasurementUnitSystem(3L,"METRIC_SYSTEM");
-
-    public static final MeasurementUnit ALL_MEASUREMENT_UNITS = new MeasurementUnit(
-            1L,
-            "ALL_MEASUREMENT_UNITS",
-            "Allow all measurement units to be used in formula",
-            GENERIC_NUMBER_DECIMAL_INPUT_PARAM
-    );
-
-    // METRIC
-    public static final MeasurementUnit MILLIMETER = new MeasurementUnit(2L,"MILLIMETER", "Millimeter", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
-    public static final MeasurementUnit CENTIMETER = new MeasurementUnit(3L,"CENTIMETER", "Centimeters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
-    public static final MeasurementUnit METER = new MeasurementUnit(4L,"METER", "Meters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
-    public static final MeasurementUnit KILOMETER = new MeasurementUnit(5L,"KILOMETER", "Kilometer", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
-    public static final MeasurementUnit PLANCK_LENGTH = new MeasurementUnit(6L,"PLANCK_LENGTH", "Planck Length", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
-
-    // IMPERIAL
-    public static final MeasurementUnit INCH = new MeasurementUnit(7L,"INCH", "Inches", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit FOOT = new MeasurementUnit(8L,"FOOT", "Feet", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit YARD = new MeasurementUnit(9L,"YARD", "Yards", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit MILE = new MeasurementUnit(10L,"MILE", "Miles", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-
-    // TIME
-    public static final MeasurementUnit FEMTOSECOND = new MeasurementUnit(11L,"FEMTOSECOND", "Femtosecond", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
-    public static final MeasurementUnit CALENDAR_YEAR = new MeasurementUnit(12L,"CALENDAR_YEAR", "Calendar Year", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
-
+public class MeasurementUnitToMeasurementUnitConversionFactorConstants {
 
     public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
             .withId(1L)
@@ -163,18 +101,4 @@ public class ConstantEntities {
             .withFromMeasurementUnit(PLANCK_LENGTH)
             .withToMeasurementUnit(KILOMETER)
             .withConversionFactor(1.6e-38);
-
-    public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
-            .withId(1L)
-            .withName("Generic Simple Conversion Formula")
-            .withDescription("Takes a CONVERSION_FROM measurement unit input param and " +
-                    "a CONVERSION_TO measurement unit input param, " +
-                    "then gets the relevant conversion ratio and applies it.")
-            .withFormulaParameterUsageInfo(new ArrayList<>(List.of(
-                    CONVERSION_FROM_PARAM_INPUT_SPEC,
-                    CONVERSION_TO_PARAM_INPUT_SPEC
-            )))
-            .withPossibleFormulaParams(new ArrayList<>(List.of(
-                    ALL_MEASUREMENT_UNITS
-            )));
 }
