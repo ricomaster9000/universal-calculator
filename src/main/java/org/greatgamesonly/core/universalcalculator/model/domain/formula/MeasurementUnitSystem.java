@@ -1,19 +1,17 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementUnitSystemRepository;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
-
-import java.io.Serializable;
 
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.STANDARD_DB_STRING_MAX_CHAR_SIZE;
 
 @Entity(name = "measurement_unit_system")
 @LinkedRepository(MeasurementUnitSystemRepository.class)
-public class MeasurementUnitSystem extends BaseEntity implements Serializable {
+public class MeasurementUnitSystem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -22,7 +22,7 @@ public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
     public void customise(OpenAPI openApi) {
         Components components = openApi.getComponents();
         if (components != null) {
-            List<? extends Class<?>> allTypes = ALL_INTERNAL_FULL_CLASS_NAMES.stream()
+            List<? extends Class<?>> allTypes = ALL_INTERNAL_FULL_CLASS_NAMES().stream()
                     .map(ReflectionUtils::getClassByName)
                     .filter(Objects::nonNull)
                     .toList();
