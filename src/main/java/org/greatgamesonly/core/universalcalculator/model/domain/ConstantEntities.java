@@ -55,16 +55,17 @@ public class ConstantEntities {
     public static final MeasurementUnit CENTIMETER = new MeasurementUnit(3L,"CENTIMETER", "Centimeters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
     public static final MeasurementUnit METER = new MeasurementUnit(4L,"METER", "Meters", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
     public static final MeasurementUnit KILOMETER = new MeasurementUnit(5L,"KILOMETER", "Kilometer", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
+    public static final MeasurementUnit PLANCK_LENGTH = new MeasurementUnit(6L,"PLANCK_LENGTH", "Planck Length", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, METRIC_SYSTEM);
 
     // IMPERIAL
-    public static final MeasurementUnit INCH = new MeasurementUnit(6L,"INCH", "Inches", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit FOOT = new MeasurementUnit(7L,"FOOT", "Feet", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit YARD = new MeasurementUnit(8L,"YARD", "Yards", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
-    public static final MeasurementUnit MILE = new MeasurementUnit(9L,"MILE", "Miles", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit INCH = new MeasurementUnit(7L,"INCH", "Inches", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit FOOT = new MeasurementUnit(8L,"FOOT", "Feet", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit YARD = new MeasurementUnit(9L,"YARD", "Yards", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
+    public static final MeasurementUnit MILE = new MeasurementUnit(10L,"MILE", "Miles", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, IMPERIAL_SYSTEM);
 
     // TIME
-    public static final MeasurementUnit FEMTOSECOND = new MeasurementUnit(10L,"FEMTOSECOND", "Femtosecond", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
-    public static final MeasurementUnit CALENDAR_YEAR = new MeasurementUnit(11L,"CALENDAR_YEAR", "Calendar Year", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
+    public static final MeasurementUnit FEMTOSECOND = new MeasurementUnit(11L,"FEMTOSECOND", "Femtosecond", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
+    public static final MeasurementUnit CALENDAR_YEAR = new MeasurementUnit(12L,"CALENDAR_YEAR", "Calendar Year", GENERIC_NUMBER_DECIMAL_INPUT_PARAM, TIME);
 
 
     public static final MeasurementUnitToMeasurementUnitConversionFactor METER_TO_FOOT = new MeasurementUnitToMeasurementUnitConversionFactor()
@@ -150,6 +151,18 @@ public class ConstantEntities {
             .withFromMeasurementUnit(FEMTOSECOND)
             .withToMeasurementUnit(CALENDAR_YEAR)
             .withConversionFactor(0.00000000000000000000003171D);
+
+    public static final MeasurementUnitToMeasurementUnitConversionFactor KILOMETER_TO_PLANCK_LENGTH = new MeasurementUnitToMeasurementUnitConversionFactor()
+            .withId(15L)
+            .withFromMeasurementUnit(KILOMETER)
+            .withToMeasurementUnit(PLANCK_LENGTH)
+            .withConversionFactor(6.25e+37);
+
+    public static final MeasurementUnitToMeasurementUnitConversionFactor PLANCK_LENGTH_TO_KILOMETER = new MeasurementUnitToMeasurementUnitConversionFactor()
+            .withId(16L)
+            .withFromMeasurementUnit(PLANCK_LENGTH)
+            .withToMeasurementUnit(KILOMETER)
+            .withConversionFactor(1.6e-38);
 
     public static final ConversionFormula GENERIC_SIMPLE_CONVERSION_FORMULA = new ConversionFormula()
             .withId(1L)
