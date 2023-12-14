@@ -23,9 +23,7 @@ public class CacheAllCacheNames {
         try {
             logger.info("Getting all internal full class names to populate ALL_INTERNAL_FULL_CLASS_NAMES");
             Reflections reflections = new Reflections("org.greatgamesonly.core.universalcalculator");
-            if(reflections.getAllTypes().size() <= 0) {
-                reflections.merge(new Reflections());
-            }
+            reflections.merge(new Reflections());
 
             List<String> allRelevantTypes = reflections.getAllTypes().stream()
                     .filter(className -> className != null && className.startsWith("org.greatgamesonly.core.universalcalculator"))
