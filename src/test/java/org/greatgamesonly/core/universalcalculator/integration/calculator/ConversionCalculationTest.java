@@ -161,6 +161,26 @@ public class ConversionCalculationTest {
         performInvalidConversionTest("CALENDAR_YEAR", -1.0, "");
     }
 
+    @Test
+    public void testPlanckLengthToKilometerConversion() throws Exception {
+        performConversionTest("PLANCK_LENGTH", 1.0, "KILOMETER", 1.6e-38D);
+    }
+
+    @Test
+    public void testInvalidPlanckLengthToKilometerConversion() throws Exception {
+        performInvalidConversionTest(null, -1.0, "KILOMETER");
+    }
+
+    @Test
+    public void testKilometerToPlanckLengthConversion() throws Exception {
+        performConversionTest("KILOMETER", 1.0, "PLANCK_LENGTH", 6.25e+37D);
+    }
+
+    @Test
+    public void testInvalidKilometerToPlanckLengthConversion() throws Exception {
+        performInvalidConversionTest("KILOMETER", -1.0, "PLANCK_LENGTHH");
+    }
+
     private void performConversionTest(String fromUnit, double fromValue, String toUnit, double expectedValue) throws Exception {
         CalculationInputParam fromParam = new CalculationInputParam(fromUnit, "CONVERSION_FROM", fromValue);
         CalculationInputParam toParam = new CalculationInputParam(toUnit, "CONVERSION_TO");
