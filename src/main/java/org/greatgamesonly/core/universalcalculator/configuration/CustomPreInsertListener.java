@@ -40,7 +40,6 @@ public class CustomPreInsertListener implements PreInsertEventListener
             logger.info("merge back detached entity");
             event.getSession().merge(event.getEntity());
             event.getSession().update(event.getEntity());
-            //event.getSession().lock(event.getEntity(), LockMode.NONE);
             event.getSession().persist(event.getEntity());
             return false;
         }

@@ -7,13 +7,17 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.ALL_INTERNAL_FULL_CLASS_NAMES;
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CORE_PACKAGE_NAME;
+
 @Configuration
 public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi(MaxDoubleOpenApiCustomizer maxDoubleCustomizer) {
+
         return GroupedOpenApi.builder()
                 .group("public-apis")
-                .packagesToScan("org.greatgamesonly.core.universalcalculator.controller") // specify the package containing your controllers
+                .packagesToScan(CORE_PACKAGE_NAME+".controller") // specify the package containing your controllers
                 .pathsToMatch("/api/**") // specify patterns to exclude
                 .addOpenApiCustomizer(maxDoubleCustomizer)
                 .build();

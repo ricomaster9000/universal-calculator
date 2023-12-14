@@ -5,11 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.utility.DateUtils;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 @MappedSuperclass
-public abstract class DataRecord extends BaseEntity implements Serializable {
+public abstract class DataRecord extends BaseEntity {
 
     @Id
     @Column(name = "id")
