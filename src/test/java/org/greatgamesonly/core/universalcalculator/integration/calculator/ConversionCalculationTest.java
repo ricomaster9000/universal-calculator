@@ -5,7 +5,7 @@ import org.greatgamesonly.core.universalcalculator.SpringBootTestWrapper;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculateRequest;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities;
+import org.greatgamesonly.core.universalcalculator.model.domain.constant.ConversionFormulaConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -188,7 +188,7 @@ public class ConversionCalculationTest {
         calculation.setCalculationInputParams(Arrays.asList(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConstantEntities.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(Arrays.asList(calculation));
 
         MvcResult mvcResult = mockMvc.perform(post("/api/v1/calculation").
@@ -210,7 +210,7 @@ public class ConversionCalculationTest {
         calculation.setCalculationInputParams(List.of(fromParam, toParam));
 
         CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setLinkedFormula(ConstantEntities.GENERIC_SIMPLE_CONVERSION_FORMULA);
+        calculateRequest.setLinkedFormula(ConversionFormulaConstants.GENERIC_SIMPLE_CONVERSION_FORMULA);
         calculateRequest.setCalculationsToPerform(List.of(calculation));
 
         String calculateRequestJson = objectMapper.writeValueAsString(calculateRequest);
