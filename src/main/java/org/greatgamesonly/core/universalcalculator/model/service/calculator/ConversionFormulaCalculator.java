@@ -1,8 +1,8 @@
 package org.greatgamesonly.core.universalcalculator.model.service.calculator;
 
+import org.greatgamesonly.core.universalcalculator.exception.CalculationException;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.Calculation;
 import org.greatgamesonly.core.universalcalculator.model.domain.calculation.CalculationInputParam;
-import org.greatgamesonly.core.universalcalculator.exception.CalculationException;
 import org.greatgamesonly.core.universalcalculator.model.repository.MeasurementToMeasurementConversionFactRepo;
 import org.greatgamesonly.core.universalcalculator.model.service.calculator.base.FormulaCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.model.domain.ConstantEntities.*;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_FROM_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.FormulaParameterInputSpecificationConstants.CONVERSION_TO_PARAM_INPUT_SPEC;
+import static org.greatgamesonly.core.universalcalculator.model.domain.constant.MeasurementUnitConstants.ALL_MEASUREMENT_UNITS;
 
 @Component
 public class ConversionFormulaCalculator extends FormulaCalculator {
