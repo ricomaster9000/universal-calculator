@@ -1,1 +1,1 @@
-web: java -jar universalcalculator-0.4.0.jar
+web: java -jar universalcalculator-0.4.1.jar
