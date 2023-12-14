@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static org.greatgamesonly.core.universalcalculator.GlobalConstants.ALL_INTERNAL_FULL_CLASS_NAMES;
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.*;
 
 @Component
 public class CacheAllCacheNames {
@@ -22,14 +22,15 @@ public class CacheAllCacheNames {
 
         try {
             logger.info("Getting all internal full class names to populate ALL_INTERNAL_FULL_CLASS_NAMES");
-            Reflections reflections = new Reflections("org.greatgamesonly.core.universalcalculator");
+            Reflections reflections = new Reflections(CORE_PACKAGE_NAME);
             reflections.merge(new Reflections());
 
             List<String> allRelevantTypes = reflections.getAllTypes().stream()
-                    .filter(className -> className != null && className.startsWith("org.greatgamesonly.core.universalcalculator"))
+                    .filter(className -> className != null && className.startsWith(CORE_PACKAGE_NAME))
                     .toList();
 
-            ALL_INTERNAL_FULL_CLASS_NAMES.addAll(allRelevantTypes);
+            logger.info("Adding " + allRelevantTypes.size() + " internal full class names to ALL_INTERNAL_FULL_CLASS_NAMES");
+            set_ALL_INTERNAL_FULL_CLASS_NAMES(allRelevantTypes);
 
         } catch (Exception e) {
             logger.error("unable to setup ALL_INTERNAL_FULL_CLASS_NAMES, " + e.getMessage(), e);

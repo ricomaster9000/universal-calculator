@@ -1,19 +1,17 @@
 package org.greatgamesonly.core.universalcalculator.model.domain.formula;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.greatgamesonly.core.universalcalculator.GlobalConstants;
 import org.greatgamesonly.core.universalcalculator.model.annotation.LinkedRepository;
 import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.repository.FormulaParameterInputSpecificationRepo;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-import java.io.Serializable;
 
 @Entity(name = "formula_parameter_input_specification")
 @LinkedRepository(FormulaParameterInputSpecificationRepo.class)
-public class FormulaParameterInputSpecification extends BaseEntity implements Serializable {
+public class FormulaParameterInputSpecification extends BaseEntity {
 
     @Id
     @Column(name = "id")

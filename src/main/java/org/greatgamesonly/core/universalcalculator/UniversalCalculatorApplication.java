@@ -4,16 +4,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import static org.greatgamesonly.core.universalcalculator.GlobalConstants.CORE_PACKAGE_NAME;
+
 @SpringBootApplication()
 @ComponentScan({
-		"org.greatgamesonly.core.universalcalculator.exception",
-		"org.greatgamesonly.core.universalcalculator.controller",
-		"org.greatgamesonly.core.universalcalculator.configuration",
-		"org.greatgamesonly.core.universalcalculator.model.domain",
-		"org.greatgamesonly.core.universalcalculator.model.repository",
-		"org.greatgamesonly.core.universalcalculator.model.service",
-		"org.greatgamesonly.core.universalcalculator.model.annotation",
-		"org.greatgamesonly.core.universalcalculator.model.validation"
+		CORE_PACKAGE_NAME+".exception",
+		CORE_PACKAGE_NAME+".controller",
+		CORE_PACKAGE_NAME+".configuration",
+		CORE_PACKAGE_NAME+".model.domain",
+		CORE_PACKAGE_NAME+".model.repository",
+		CORE_PACKAGE_NAME+".model.service",
+		CORE_PACKAGE_NAME+".model.annotation",
+		CORE_PACKAGE_NAME+".model.validation"
 })
 public class UniversalCalculatorApplication {
 

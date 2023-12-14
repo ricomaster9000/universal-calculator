@@ -2,6 +2,7 @@ package org.greatgamesonly.core.universalcalculator.model.domain.data.base;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.greatgamesonly.core.universalcalculator.model.domain.base.BaseEntity;
 import org.greatgamesonly.core.universalcalculator.model.domain.data.DataReferenceInfo;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Entity(name = "data_reference")
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="data_reference_type")
-public abstract class DataReference<DATA_RECORD_TYPE extends DataRecord> {
+public abstract class DataReference<DATA_RECORD_TYPE extends DataRecord> extends BaseEntity {
 
     @Id
     @Column(name = "id")
