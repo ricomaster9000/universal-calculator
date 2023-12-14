@@ -1,4 +1,4 @@
-package org.greatgamesonly.core.universalcalculator.model.validation.maxdouble;
+package org.greatgamesonly.core.universalcalculator.model.validation.mindouble;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -15,7 +15,7 @@ import java.util.Objects;
 import static org.greatgamesonly.core.universalcalculator.GlobalConstants.ALL_INTERNAL_FULL_CLASS_NAMES;
 
 @Component
-public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
+public class MinDoubleOpenApiCustomizer implements OpenApiCustomizer {
 
     @Override
     public void customise(OpenAPI openApi) {
@@ -27,13 +27,13 @@ public class MaxDoubleOpenApiCustomizer implements OpenApiCustomizer {
                     .toList();
             for(Class<?> clazz : allTypes) {
                 for (Field field : ReflectionUtils.getClassFields(clazz)) {
-                    MaxDouble maxDoubleAnnotation = field.getAnnotation(MaxDouble.class);
-                    if(maxDoubleAnnotation != null) {
+                    MinDouble minDoubleAnnotation = field.getAnnotation(MinDouble.class);
+                    if(minDoubleAnnotation != null) {
                         Schema<?> schema = components.getSchemas().get(field.getDeclaringClass().getSimpleName());
                         schema = schema == null ? components.getSchemas().get(field.getDeclaringClass().getSimpleName() + "Object") : schema;
                         Schema<?> propertySchema = schema != null ? (Schema<?>) schema.getProperties().get(field.getName()) : null;
                         if (propertySchema != null) {
-                            propertySchema.setMaximum(BigDecimal.valueOf(maxDoubleAnnotation.value()));
+                            propertySchema.setMinimum(BigDecimal.valueOf(minDoubleAnnotation.value()));
                         }
                     }
                 }

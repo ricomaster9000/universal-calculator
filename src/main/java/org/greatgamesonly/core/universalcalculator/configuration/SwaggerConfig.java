@@ -3,6 +3,7 @@ package org.greatgamesonly.core.universalcalculator.configuration;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
 import org.greatgamesonly.core.universalcalculator.model.validation.maxdouble.MaxDoubleOpenApiCustomizer;
+import org.greatgamesonly.core.universalcalculator.model.validation.mindouble.MinDoubleOpenApiCustomizer;
 import org.greatgamesonly.core.universalcalculator.model.validation.unique.UniqueOpenApiCustomizer;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi(
             MaxDoubleOpenApiCustomizer maxDoubleCustomizer,
+            MinDoubleOpenApiCustomizer minDoubleOpenApiCustomizer,
             UniqueOpenApiCustomizer uniqueOpenApiCustomizer
     ) {
 
@@ -24,6 +26,7 @@ public class SwaggerConfig {
                 .packagesToScan(CORE_PACKAGE_NAME+".controller") // specify the package containing your controllers
                 .pathsToMatch("/api/**") // specify patterns to exclude
                 .addOpenApiCustomizer(maxDoubleCustomizer)
+                .addOpenApiCustomizer(minDoubleOpenApiCustomizer)
                 .addOpenApiCustomizer(uniqueOpenApiCustomizer)
                 .build();
     }
