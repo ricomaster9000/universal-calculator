@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.greatgamesonly.core</groupId>
 	<artifactId>universalcalculator</artifactId>
-	<version>0.4.4</version>
+	<version>0.4.5</version>
 	<name>universal-calculator</name>
 	<description>The Universal Calculator</description>
 	<url>https://github.com/ricomaster9000/universal-calculator</url>
@@ -157,6 +157,7 @@
 		</dependency>
 
 
+
 	</dependencies>
 
 	<build>
@@ -233,6 +234,41 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.43.4</version>
+				<configuration>
+					<images>
+						<image>
+							<alias>service</alias>
+							<name>great-games-only/${project.name}</name>
+							<build>
+								<dockerFileDir>${project.basedir}</dockerFileDir>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+								<ports>
+									<port>5000:5000</port>
+								</ports>
+								<cmd>
+									<shell>java -jar /target/${project.artifactId}-${project.version}.jar</shell>
+								</cmd>
+								<tags>
+									<tag>latest</tag>
+									<tag>${project.version}</tag>
+								</tags>
+							</build>
+
+							<run>
+								<ports>
+									<port>5000:5000</port>
+								</ports>
+							</run>
+						</image>
+					</images>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
