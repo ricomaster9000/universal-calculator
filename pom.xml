@@ -187,6 +187,7 @@
 					<descriptors>
 						<descriptor>src/main/assembly/zip.xml</descriptor>
 					</descriptors>
+					<finalName>universalcalculator-AWS-EB-deploy</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
